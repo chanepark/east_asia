@@ -1,0 +1,4448 @@
+netcdf . {
+dimensions:
+	Time = UNLIMITED ; // (1460 currently)
+	DateStrLen = 19 ;
+	west_east = 419 ;
+	south_north = 219 ;
+	bottom_top = 26 ;
+	bottom_top_stag = 27 ;
+	soil_layers_stag = 4 ;
+	west_east_stag = 420 ;
+	south_north_stag = 220 ;
+variables:
+	char Times(Time, DateStrLen) ;
+	float XLAT(Time, south_north, west_east) ;
+		XLAT:FieldType = 104 ;
+		XLAT:MemoryOrder = "XY " ;
+		XLAT:description = "LATITUDE, SOUTH IS NEGATIVE" ;
+		XLAT:units = "degree_north" ;
+		XLAT:stagger = "" ;
+		XLAT:coordinates = "XLONG XLAT" ;
+	float XLONG(Time, south_north, west_east) ;
+		XLONG:FieldType = 104 ;
+		XLONG:MemoryOrder = "XY " ;
+		XLONG:description = "LONGITUDE, WEST IS NEGATIVE" ;
+		XLONG:units = "degree_east" ;
+		XLONG:stagger = "" ;
+		XLONG:coordinates = "XLONG XLAT" ;
+	float LU_INDEX(Time, south_north, west_east) ;
+		LU_INDEX:FieldType = 104 ;
+		LU_INDEX:MemoryOrder = "XY " ;
+		LU_INDEX:description = "LAND USE CATEGORY" ;
+		LU_INDEX:units = "" ;
+		LU_INDEX:stagger = "" ;
+		LU_INDEX:coordinates = "XLONG XLAT XTIME" ;
+	float ZNU(Time, bottom_top) ;
+		ZNU:FieldType = 104 ;
+		ZNU:MemoryOrder = "Z  " ;
+		ZNU:description = "eta values on half (mass) levels" ;
+		ZNU:units = "" ;
+		ZNU:stagger = "" ;
+	float ZNW(Time, bottom_top_stag) ;
+		ZNW:FieldType = 104 ;
+		ZNW:MemoryOrder = "Z  " ;
+		ZNW:description = "eta values on full (w) levels" ;
+		ZNW:units = "" ;
+		ZNW:stagger = "Z" ;
+	float ZS(Time, soil_layers_stag) ;
+		ZS:FieldType = 104 ;
+		ZS:MemoryOrder = "Z  " ;
+		ZS:description = "DEPTHS OF CENTERS OF SOIL LAYERS" ;
+		ZS:units = "m" ;
+		ZS:stagger = "Z" ;
+	float DZS(Time, soil_layers_stag) ;
+		DZS:FieldType = 104 ;
+		DZS:MemoryOrder = "Z  " ;
+		DZS:description = "THICKNESSES OF SOIL LAYERS" ;
+		DZS:units = "m" ;
+		DZS:stagger = "Z" ;
+	float VAR_SSO(Time, south_north, west_east) ;
+		VAR_SSO:FieldType = 104 ;
+		VAR_SSO:MemoryOrder = "XY " ;
+		VAR_SSO:description = "variance of subgrid-scale orography" ;
+		VAR_SSO:units = "m2" ;
+		VAR_SSO:stagger = "" ;
+		VAR_SSO:coordinates = "XLONG XLAT XTIME" ;
+	float LAP_HGT(Time, south_north, west_east) ;
+		LAP_HGT:FieldType = 104 ;
+		LAP_HGT:MemoryOrder = "XY " ;
+		LAP_HGT:description = "Laplacian of orography" ;
+		LAP_HGT:units = "m" ;
+		LAP_HGT:stagger = "" ;
+		LAP_HGT:coordinates = "XLONG XLAT XTIME" ;
+	float U(Time, bottom_top, south_north, west_east_stag) ;
+		U:FieldType = 104 ;
+		U:MemoryOrder = "XYZ" ;
+		U:description = "x-wind component" ;
+		U:units = "m s-1" ;
+		U:stagger = "X" ;
+		U:coordinates = "XLONG_U XLAT_U XTIME" ;
+	float V(Time, bottom_top, south_north_stag, west_east) ;
+		V:FieldType = 104 ;
+		V:MemoryOrder = "XYZ" ;
+		V:description = "y-wind component" ;
+		V:units = "m s-1" ;
+		V:stagger = "Y" ;
+		V:coordinates = "XLONG_V XLAT_V XTIME" ;
+	float W(Time, bottom_top_stag, south_north, west_east) ;
+		W:FieldType = 104 ;
+		W:MemoryOrder = "XYZ" ;
+		W:description = "z-wind component" ;
+		W:units = "m s-1" ;
+		W:stagger = "Z" ;
+		W:coordinates = "XLONG XLAT XTIME" ;
+	float PH(Time, bottom_top_stag, south_north, west_east) ;
+		PH:FieldType = 104 ;
+		PH:MemoryOrder = "XYZ" ;
+		PH:description = "perturbation geopotential" ;
+		PH:units = "m2 s-2" ;
+		PH:stagger = "Z" ;
+		PH:coordinates = "XLONG XLAT XTIME" ;
+	float PHB(Time, bottom_top_stag, south_north, west_east) ;
+		PHB:FieldType = 104 ;
+		PHB:MemoryOrder = "XYZ" ;
+		PHB:description = "base-state geopotential" ;
+		PHB:units = "m2 s-2" ;
+		PHB:stagger = "Z" ;
+		PHB:coordinates = "XLONG XLAT XTIME" ;
+	float T(Time, bottom_top, south_north, west_east) ;
+		T:FieldType = 104 ;
+		T:MemoryOrder = "XYZ" ;
+		T:description = "perturbation potential temperature (theta-t0)" ;
+		T:units = "K" ;
+		T:stagger = "" ;
+		T:coordinates = "XLONG XLAT XTIME" ;
+	float HFX_FORCE(Time) ;
+		HFX_FORCE:FieldType = 104 ;
+		HFX_FORCE:MemoryOrder = "0  " ;
+		HFX_FORCE:description = "SCM ideal surface sensible heat flux" ;
+		HFX_FORCE:units = "W m-2" ;
+		HFX_FORCE:stagger = "" ;
+	float LH_FORCE(Time) ;
+		LH_FORCE:FieldType = 104 ;
+		LH_FORCE:MemoryOrder = "0  " ;
+		LH_FORCE:description = "SCM ideal surface latent heat flux" ;
+		LH_FORCE:units = "W m-2" ;
+		LH_FORCE:stagger = "" ;
+	float TSK_FORCE(Time) ;
+		TSK_FORCE:FieldType = 104 ;
+		TSK_FORCE:MemoryOrder = "0  " ;
+		TSK_FORCE:description = "SCM ideal surface skin temperature" ;
+		TSK_FORCE:units = "W m-2" ;
+		TSK_FORCE:stagger = "" ;
+	float HFX_FORCE_TEND(Time) ;
+		HFX_FORCE_TEND:FieldType = 104 ;
+		HFX_FORCE_TEND:MemoryOrder = "0  " ;
+		HFX_FORCE_TEND:description = "SCM ideal surface sensible heat flux tendency" ;
+		HFX_FORCE_TEND:units = "W m-2 s-1" ;
+		HFX_FORCE_TEND:stagger = "" ;
+	float LH_FORCE_TEND(Time) ;
+		LH_FORCE_TEND:FieldType = 104 ;
+		LH_FORCE_TEND:MemoryOrder = "0  " ;
+		LH_FORCE_TEND:description = "SCM ideal surface latent heat flux tendency" ;
+		LH_FORCE_TEND:units = "W m-2 s-1" ;
+		LH_FORCE_TEND:stagger = "" ;
+	float TSK_FORCE_TEND(Time) ;
+		TSK_FORCE_TEND:FieldType = 104 ;
+		TSK_FORCE_TEND:MemoryOrder = "0  " ;
+		TSK_FORCE_TEND:description = "SCM ideal surface skin temperature tendency" ;
+		TSK_FORCE_TEND:units = "W m-2 s-1" ;
+		TSK_FORCE_TEND:stagger = "" ;
+	float MU(Time, south_north, west_east) ;
+		MU:FieldType = 104 ;
+		MU:MemoryOrder = "XY " ;
+		MU:description = "perturbation dry air mass in column" ;
+		MU:units = "Pa" ;
+		MU:stagger = "" ;
+		MU:coordinates = "XLONG XLAT XTIME" ;
+	float MUB(Time, south_north, west_east) ;
+		MUB:FieldType = 104 ;
+		MUB:MemoryOrder = "XY " ;
+		MUB:description = "base state dry air mass in column" ;
+		MUB:units = "Pa" ;
+		MUB:stagger = "" ;
+		MUB:coordinates = "XLONG XLAT XTIME" ;
+	float NEST_POS(Time, south_north, west_east) ;
+		NEST_POS:FieldType = 104 ;
+		NEST_POS:MemoryOrder = "XY " ;
+		NEST_POS:description = "-" ;
+		NEST_POS:units = "-" ;
+		NEST_POS:stagger = "" ;
+		NEST_POS:coordinates = "XLONG XLAT XTIME" ;
+	float P(Time, bottom_top, south_north, west_east) ;
+		P:FieldType = 104 ;
+		P:MemoryOrder = "XYZ" ;
+		P:description = "perturbation pressure" ;
+		P:units = "Pa" ;
+		P:stagger = "" ;
+		P:coordinates = "XLONG XLAT XTIME" ;
+	float PB(Time, bottom_top, south_north, west_east) ;
+		PB:FieldType = 104 ;
+		PB:MemoryOrder = "XYZ" ;
+		PB:description = "BASE STATE PRESSURE" ;
+		PB:units = "Pa" ;
+		PB:stagger = "" ;
+		PB:coordinates = "XLONG XLAT XTIME" ;
+	float FNM(Time, bottom_top) ;
+		FNM:FieldType = 104 ;
+		FNM:MemoryOrder = "Z  " ;
+		FNM:description = "upper weight for vertical stretching" ;
+		FNM:units = "" ;
+		FNM:stagger = "" ;
+	float FNP(Time, bottom_top) ;
+		FNP:FieldType = 104 ;
+		FNP:MemoryOrder = "Z  " ;
+		FNP:description = "lower weight for vertical stretching" ;
+		FNP:units = "" ;
+		FNP:stagger = "" ;
+	float RDNW(Time, bottom_top) ;
+		RDNW:FieldType = 104 ;
+		RDNW:MemoryOrder = "Z  " ;
+		RDNW:description = "inverse d(eta) values between full (w) levels" ;
+		RDNW:units = "" ;
+		RDNW:stagger = "" ;
+	float RDN(Time, bottom_top) ;
+		RDN:FieldType = 104 ;
+		RDN:MemoryOrder = "Z  " ;
+		RDN:description = "inverse d(eta) values between half (mass) levels" ;
+		RDN:units = "" ;
+		RDN:stagger = "" ;
+	float DNW(Time, bottom_top) ;
+		DNW:FieldType = 104 ;
+		DNW:MemoryOrder = "Z  " ;
+		DNW:description = "d(eta) values between full (w) levels" ;
+		DNW:units = "" ;
+		DNW:stagger = "" ;
+	float DN(Time, bottom_top) ;
+		DN:FieldType = 104 ;
+		DN:MemoryOrder = "Z  " ;
+		DN:description = "d(eta) values between half (mass) levels" ;
+		DN:units = "" ;
+		DN:stagger = "" ;
+	float CFN(Time) ;
+		CFN:FieldType = 104 ;
+		CFN:MemoryOrder = "0  " ;
+		CFN:description = "extrapolation constant" ;
+		CFN:units = "" ;
+		CFN:stagger = "" ;
+	float CFN1(Time) ;
+		CFN1:FieldType = 104 ;
+		CFN1:MemoryOrder = "0  " ;
+		CFN1:description = "extrapolation constant" ;
+		CFN1:units = "" ;
+		CFN1:stagger = "" ;
+	int THIS_IS_AN_IDEAL_RUN(Time) ;
+		THIS_IS_AN_IDEAL_RUN:FieldType = 106 ;
+		THIS_IS_AN_IDEAL_RUN:MemoryOrder = "0  " ;
+		THIS_IS_AN_IDEAL_RUN:description = "T/F flag: this is an ARW ideal simulation" ;
+		THIS_IS_AN_IDEAL_RUN:units = "-" ;
+		THIS_IS_AN_IDEAL_RUN:stagger = "" ;
+	float P_HYD(Time, bottom_top, south_north, west_east) ;
+		P_HYD:FieldType = 104 ;
+		P_HYD:MemoryOrder = "XYZ" ;
+		P_HYD:description = "hydrostatic pressure" ;
+		P_HYD:units = "Pa" ;
+		P_HYD:stagger = "" ;
+		P_HYD:coordinates = "XLONG XLAT XTIME" ;
+	float Q2(Time, south_north, west_east) ;
+		Q2:FieldType = 104 ;
+		Q2:MemoryOrder = "XY " ;
+		Q2:description = "QV at 2 M" ;
+		Q2:units = "kg kg-1" ;
+		Q2:stagger = "" ;
+		Q2:coordinates = "XLONG XLAT XTIME" ;
+	float T2(Time, south_north, west_east) ;
+		T2:FieldType = 104 ;
+		T2:MemoryOrder = "XY " ;
+		T2:description = "TEMP at 2 M" ;
+		T2:units = "K" ;
+		T2:stagger = "" ;
+		T2:coordinates = "XLONG XLAT XTIME" ;
+	float TH2(Time, south_north, west_east) ;
+		TH2:FieldType = 104 ;
+		TH2:MemoryOrder = "XY " ;
+		TH2:description = "POT TEMP at 2 M" ;
+		TH2:units = "K" ;
+		TH2:stagger = "" ;
+		TH2:coordinates = "XLONG XLAT XTIME" ;
+	float PSFC(Time, south_north, west_east) ;
+		PSFC:FieldType = 104 ;
+		PSFC:MemoryOrder = "XY " ;
+		PSFC:description = "SFC PRESSURE" ;
+		PSFC:units = "Pa" ;
+		PSFC:stagger = "" ;
+		PSFC:coordinates = "XLONG XLAT XTIME" ;
+	float U10(Time, south_north, west_east) ;
+		U10:FieldType = 104 ;
+		U10:MemoryOrder = "XY " ;
+		U10:description = "U at 10 M" ;
+		U10:units = "m s-1" ;
+		U10:stagger = "" ;
+		U10:coordinates = "XLONG XLAT XTIME" ;
+	float V10(Time, south_north, west_east) ;
+		V10:FieldType = 104 ;
+		V10:MemoryOrder = "XY " ;
+		V10:description = "V at 10 M" ;
+		V10:units = "m s-1" ;
+		V10:stagger = "" ;
+		V10:coordinates = "XLONG XLAT XTIME" ;
+	float RDX(Time) ;
+		RDX:FieldType = 104 ;
+		RDX:MemoryOrder = "0  " ;
+		RDX:description = "INVERSE X GRID LENGTH" ;
+		RDX:units = "" ;
+		RDX:stagger = "" ;
+	float RDY(Time) ;
+		RDY:FieldType = 104 ;
+		RDY:MemoryOrder = "0  " ;
+		RDY:description = "INVERSE Y GRID LENGTH" ;
+		RDY:units = "" ;
+		RDY:stagger = "" ;
+	float RESM(Time) ;
+		RESM:FieldType = 104 ;
+		RESM:MemoryOrder = "0  " ;
+		RESM:description = "TIME WEIGHT CONSTANT FOR SMALL STEPS" ;
+		RESM:units = "" ;
+		RESM:stagger = "" ;
+	float ZETATOP(Time) ;
+		ZETATOP:FieldType = 104 ;
+		ZETATOP:MemoryOrder = "0  " ;
+		ZETATOP:description = "ZETA AT MODEL TOP" ;
+		ZETATOP:units = "" ;
+		ZETATOP:stagger = "" ;
+	float CF1(Time) ;
+		CF1:FieldType = 104 ;
+		CF1:MemoryOrder = "0  " ;
+		CF1:description = "2nd order extrapolation constant" ;
+		CF1:units = "" ;
+		CF1:stagger = "" ;
+	float CF2(Time) ;
+		CF2:FieldType = 104 ;
+		CF2:MemoryOrder = "0  " ;
+		CF2:description = "2nd order extrapolation constant" ;
+		CF2:units = "" ;
+		CF2:stagger = "" ;
+	float CF3(Time) ;
+		CF3:FieldType = 104 ;
+		CF3:MemoryOrder = "0  " ;
+		CF3:description = "2nd order extrapolation constant" ;
+		CF3:units = "" ;
+		CF3:stagger = "" ;
+	int ITIMESTEP(Time) ;
+		ITIMESTEP:FieldType = 106 ;
+		ITIMESTEP:MemoryOrder = "0  " ;
+		ITIMESTEP:description = "" ;
+		ITIMESTEP:units = "" ;
+		ITIMESTEP:stagger = "" ;
+	float XTIME(Time) ;
+		XTIME:FieldType = 104 ;
+		XTIME:MemoryOrder = "0  " ;
+		XTIME:description = "minutes since 2006-01-01 00:00:00" ;
+		XTIME:units = "minutes since 2006-01-01 00:00:00" ;
+		XTIME:stagger = "" ;
+	float QVAPOR(Time, bottom_top, south_north, west_east) ;
+		QVAPOR:FieldType = 104 ;
+		QVAPOR:MemoryOrder = "XYZ" ;
+		QVAPOR:description = "Water vapor mixing ratio" ;
+		QVAPOR:units = "kg kg-1" ;
+		QVAPOR:stagger = "" ;
+		QVAPOR:coordinates = "XLONG XLAT XTIME" ;
+	float QCLOUD(Time, bottom_top, south_north, west_east) ;
+		QCLOUD:FieldType = 104 ;
+		QCLOUD:MemoryOrder = "XYZ" ;
+		QCLOUD:description = "Cloud water mixing ratio" ;
+		QCLOUD:units = "kg kg-1" ;
+		QCLOUD:stagger = "" ;
+		QCLOUD:coordinates = "XLONG XLAT XTIME" ;
+	float QRAIN(Time, bottom_top, south_north, west_east) ;
+		QRAIN:FieldType = 104 ;
+		QRAIN:MemoryOrder = "XYZ" ;
+		QRAIN:description = "Rain water mixing ratio" ;
+		QRAIN:units = "kg kg-1" ;
+		QRAIN:stagger = "" ;
+		QRAIN:coordinates = "XLONG XLAT XTIME" ;
+	float SHDMAX(Time, south_north, west_east) ;
+		SHDMAX:FieldType = 104 ;
+		SHDMAX:MemoryOrder = "XY " ;
+		SHDMAX:description = "ANNUAL MAX VEG FRACTION" ;
+		SHDMAX:units = "" ;
+		SHDMAX:stagger = "" ;
+		SHDMAX:coordinates = "XLONG XLAT XTIME" ;
+	float SHDMIN(Time, south_north, west_east) ;
+		SHDMIN:FieldType = 104 ;
+		SHDMIN:MemoryOrder = "XY " ;
+		SHDMIN:description = "ANNUAL MIN VEG FRACTION" ;
+		SHDMIN:units = "" ;
+		SHDMIN:stagger = "" ;
+		SHDMIN:coordinates = "XLONG XLAT XTIME" ;
+	float SNOALB(Time, south_north, west_east) ;
+		SNOALB:FieldType = 104 ;
+		SNOALB:MemoryOrder = "XY " ;
+		SNOALB:description = "ANNUAL MAX SNOW ALBEDO IN FRACTION" ;
+		SNOALB:units = "" ;
+		SNOALB:stagger = "" ;
+		SNOALB:coordinates = "XLONG XLAT XTIME" ;
+	float TSLB(Time, soil_layers_stag, south_north, west_east) ;
+		TSLB:FieldType = 104 ;
+		TSLB:MemoryOrder = "XYZ" ;
+		TSLB:description = "SOIL TEMPERATURE" ;
+		TSLB:units = "K" ;
+		TSLB:stagger = "Z" ;
+		TSLB:coordinates = "XLONG XLAT XTIME" ;
+	float SMOIS(Time, soil_layers_stag, south_north, west_east) ;
+		SMOIS:FieldType = 104 ;
+		SMOIS:MemoryOrder = "XYZ" ;
+		SMOIS:description = "SOIL MOISTURE" ;
+		SMOIS:units = "m3 m-3" ;
+		SMOIS:stagger = "Z" ;
+		SMOIS:coordinates = "XLONG XLAT XTIME" ;
+	float SH2O(Time, soil_layers_stag, south_north, west_east) ;
+		SH2O:FieldType = 104 ;
+		SH2O:MemoryOrder = "XYZ" ;
+		SH2O:description = "SOIL LIQUID WATER" ;
+		SH2O:units = "m3 m-3" ;
+		SH2O:stagger = "Z" ;
+		SH2O:coordinates = "XLONG XLAT XTIME" ;
+	float SMCREL(Time, soil_layers_stag, south_north, west_east) ;
+		SMCREL:FieldType = 104 ;
+		SMCREL:MemoryOrder = "XYZ" ;
+		SMCREL:description = "RELATIVE SOIL MOISTURE" ;
+		SMCREL:units = "" ;
+		SMCREL:stagger = "Z" ;
+		SMCREL:coordinates = "XLONG XLAT XTIME" ;
+	float SEAICE(Time, south_north, west_east) ;
+		SEAICE:FieldType = 104 ;
+		SEAICE:MemoryOrder = "XY " ;
+		SEAICE:description = "SEA ICE FLAG" ;
+		SEAICE:units = "" ;
+		SEAICE:stagger = "" ;
+		SEAICE:coordinates = "XLONG XLAT XTIME" ;
+	float XICEM(Time, south_north, west_east) ;
+		XICEM:FieldType = 104 ;
+		XICEM:MemoryOrder = "XY " ;
+		XICEM:description = "SEA ICE FLAG (PREVIOUS STEP)" ;
+		XICEM:units = "" ;
+		XICEM:stagger = "" ;
+		XICEM:coordinates = "XLONG XLAT XTIME" ;
+	float SFROFF(Time, south_north, west_east) ;
+		SFROFF:FieldType = 104 ;
+		SFROFF:MemoryOrder = "XY " ;
+		SFROFF:description = "SURFACE RUNOFF" ;
+		SFROFF:units = "mm" ;
+		SFROFF:stagger = "" ;
+		SFROFF:coordinates = "XLONG XLAT XTIME" ;
+	float UDROFF(Time, south_north, west_east) ;
+		UDROFF:FieldType = 104 ;
+		UDROFF:MemoryOrder = "XY " ;
+		UDROFF:description = "UNDERGROUND RUNOFF" ;
+		UDROFF:units = "mm" ;
+		UDROFF:stagger = "" ;
+		UDROFF:coordinates = "XLONG XLAT XTIME" ;
+	int IVGTYP(Time, south_north, west_east) ;
+		IVGTYP:FieldType = 106 ;
+		IVGTYP:MemoryOrder = "XY " ;
+		IVGTYP:description = "DOMINANT VEGETATION CATEGORY" ;
+		IVGTYP:units = "" ;
+		IVGTYP:stagger = "" ;
+		IVGTYP:coordinates = "XLONG XLAT XTIME" ;
+	int ISLTYP(Time, south_north, west_east) ;
+		ISLTYP:FieldType = 106 ;
+		ISLTYP:MemoryOrder = "XY " ;
+		ISLTYP:description = "DOMINANT SOIL CATEGORY" ;
+		ISLTYP:units = "" ;
+		ISLTYP:stagger = "" ;
+		ISLTYP:coordinates = "XLONG XLAT XTIME" ;
+	float VEGFRA(Time, south_north, west_east) ;
+		VEGFRA:FieldType = 104 ;
+		VEGFRA:MemoryOrder = "XY " ;
+		VEGFRA:description = "VEGETATION FRACTION" ;
+		VEGFRA:units = "" ;
+		VEGFRA:stagger = "" ;
+		VEGFRA:coordinates = "XLONG XLAT XTIME" ;
+	float GRDFLX(Time, south_north, west_east) ;
+		GRDFLX:FieldType = 104 ;
+		GRDFLX:MemoryOrder = "XY " ;
+		GRDFLX:description = "GROUND HEAT FLUX" ;
+		GRDFLX:units = "W m-2" ;
+		GRDFLX:stagger = "" ;
+		GRDFLX:coordinates = "XLONG XLAT XTIME" ;
+	float ACGRDFLX(Time, south_north, west_east) ;
+		ACGRDFLX:FieldType = 104 ;
+		ACGRDFLX:MemoryOrder = "XY " ;
+		ACGRDFLX:description = "ACCUMULATED GROUND HEAT FLUX" ;
+		ACGRDFLX:units = "J m-2" ;
+		ACGRDFLX:stagger = "" ;
+		ACGRDFLX:coordinates = "XLONG XLAT XTIME" ;
+	float ACSNOM(Time, south_north, west_east) ;
+		ACSNOM:FieldType = 104 ;
+		ACSNOM:MemoryOrder = "XY " ;
+		ACSNOM:description = "ACCUMULATED MELTED SNOW" ;
+		ACSNOM:units = "kg m-2" ;
+		ACSNOM:stagger = "" ;
+		ACSNOM:coordinates = "XLONG XLAT XTIME" ;
+	float SNOW(Time, south_north, west_east) ;
+		SNOW:FieldType = 104 ;
+		SNOW:MemoryOrder = "XY " ;
+		SNOW:description = "SNOW WATER EQUIVALENT" ;
+		SNOW:units = "kg m-2" ;
+		SNOW:stagger = "" ;
+		SNOW:coordinates = "XLONG XLAT XTIME" ;
+	float SNOWH(Time, south_north, west_east) ;
+		SNOWH:FieldType = 104 ;
+		SNOWH:MemoryOrder = "XY " ;
+		SNOWH:description = "PHYSICAL SNOW DEPTH" ;
+		SNOWH:units = "m" ;
+		SNOWH:stagger = "" ;
+		SNOWH:coordinates = "XLONG XLAT XTIME" ;
+	float CANWAT(Time, south_north, west_east) ;
+		CANWAT:FieldType = 104 ;
+		CANWAT:MemoryOrder = "XY " ;
+		CANWAT:description = "CANOPY WATER" ;
+		CANWAT:units = "kg m-2" ;
+		CANWAT:stagger = "" ;
+		CANWAT:coordinates = "XLONG XLAT XTIME" ;
+	float SSTSK(Time, south_north, west_east) ;
+		SSTSK:FieldType = 104 ;
+		SSTSK:MemoryOrder = "XY " ;
+		SSTSK:description = "SKIN SEA SURFACE TEMPERATURE" ;
+		SSTSK:units = "K" ;
+		SSTSK:stagger = "" ;
+		SSTSK:coordinates = "XLONG XLAT XTIME" ;
+	float COSZEN(Time, south_north, west_east) ;
+		COSZEN:FieldType = 104 ;
+		COSZEN:MemoryOrder = "XY " ;
+		COSZEN:description = "COS of SOLAR ZENITH ANGLE" ;
+		COSZEN:units = "dimensionless" ;
+		COSZEN:stagger = "" ;
+		COSZEN:coordinates = "XLONG XLAT XTIME" ;
+	float LAI(Time, south_north, west_east) ;
+		LAI:FieldType = 104 ;
+		LAI:MemoryOrder = "XY " ;
+		LAI:description = "LEAF AREA INDEX" ;
+		LAI:units = "m-2/m-2" ;
+		LAI:stagger = "" ;
+		LAI:coordinates = "XLONG XLAT XTIME" ;
+	float DTAUX3D(Time, bottom_top, south_north, west_east) ;
+		DTAUX3D:FieldType = 104 ;
+		DTAUX3D:MemoryOrder = "XYZ" ;
+		DTAUX3D:description = "LOCAL U GWDO STRESS" ;
+		DTAUX3D:units = "m s-1" ;
+		DTAUX3D:stagger = "" ;
+		DTAUX3D:coordinates = "XLONG XLAT XTIME" ;
+	float DTAUY3D(Time, bottom_top, south_north, west_east) ;
+		DTAUY3D:FieldType = 104 ;
+		DTAUY3D:MemoryOrder = "XYZ" ;
+		DTAUY3D:description = "LOCAL V GWDO STRESS" ;
+		DTAUY3D:units = "m s-1" ;
+		DTAUY3D:stagger = "" ;
+		DTAUY3D:coordinates = "XLONG XLAT XTIME" ;
+	float DUSFCG(Time, south_north, west_east) ;
+		DUSFCG:FieldType = 104 ;
+		DUSFCG:MemoryOrder = "XY " ;
+		DUSFCG:description = "COLUMN-INTEGRATED U GWDO STRESS" ;
+		DUSFCG:units = "Pa m s-1" ;
+		DUSFCG:stagger = "" ;
+		DUSFCG:coordinates = "XLONG XLAT XTIME" ;
+	float DVSFCG(Time, south_north, west_east) ;
+		DVSFCG:FieldType = 104 ;
+		DVSFCG:MemoryOrder = "XY " ;
+		DVSFCG:description = "COLUMN-INTEGRATED V GWDO STRESS" ;
+		DVSFCG:units = "Pa m s-1" ;
+		DVSFCG:stagger = "" ;
+		DVSFCG:coordinates = "XLONG XLAT XTIME" ;
+	float VAR(Time, south_north, west_east) ;
+		VAR:FieldType = 104 ;
+		VAR:MemoryOrder = "XY " ;
+		VAR:description = "OROGRAPHIC VARIANCE" ;
+		VAR:units = "" ;
+		VAR:stagger = "" ;
+		VAR:coordinates = "XLONG XLAT XTIME" ;
+	float CON(Time, south_north, west_east) ;
+		CON:FieldType = 104 ;
+		CON:MemoryOrder = "XY " ;
+		CON:description = "OROGRAPHIC CONVEXITY" ;
+		CON:units = "" ;
+		CON:stagger = "" ;
+		CON:coordinates = "XLONG XLAT XTIME" ;
+	float OA1(Time, south_north, west_east) ;
+		OA1:FieldType = 104 ;
+		OA1:MemoryOrder = "XY " ;
+		OA1:description = "OROGRAPHIC DIRECTION ASYMMETRY FUNCTION" ;
+		OA1:units = "" ;
+		OA1:stagger = "" ;
+		OA1:coordinates = "XLONG XLAT XTIME" ;
+	float OA2(Time, south_north, west_east) ;
+		OA2:FieldType = 104 ;
+		OA2:MemoryOrder = "XY " ;
+		OA2:description = "OROGRAPHIC DIRECTION ASYMMETRY FUNCTION" ;
+		OA2:units = "" ;
+		OA2:stagger = "" ;
+		OA2:coordinates = "XLONG XLAT XTIME" ;
+	float OA3(Time, south_north, west_east) ;
+		OA3:FieldType = 104 ;
+		OA3:MemoryOrder = "XY " ;
+		OA3:description = "OROGRAPHIC DIRECTION ASYMMETRY FUNCTION" ;
+		OA3:units = "" ;
+		OA3:stagger = "" ;
+		OA3:coordinates = "XLONG XLAT XTIME" ;
+	float OA4(Time, south_north, west_east) ;
+		OA4:FieldType = 104 ;
+		OA4:MemoryOrder = "XY " ;
+		OA4:description = "OROGRAPHIC DIRECTION ASYMMETRY FUNCTION" ;
+		OA4:units = "" ;
+		OA4:stagger = "" ;
+		OA4:coordinates = "XLONG XLAT XTIME" ;
+	float OL1(Time, south_north, west_east) ;
+		OL1:FieldType = 104 ;
+		OL1:MemoryOrder = "XY " ;
+		OL1:description = "OROGRAPHIC DIRECTION ASYMMETRY FUNCTION" ;
+		OL1:units = "" ;
+		OL1:stagger = "" ;
+		OL1:coordinates = "XLONG XLAT XTIME" ;
+	float OL2(Time, south_north, west_east) ;
+		OL2:FieldType = 104 ;
+		OL2:MemoryOrder = "XY " ;
+		OL2:description = "OROGRAPHIC DIRECTION ASYMMETRY FUNCTION" ;
+		OL2:units = "" ;
+		OL2:stagger = "" ;
+		OL2:coordinates = "XLONG XLAT XTIME" ;
+	float OL3(Time, south_north, west_east) ;
+		OL3:FieldType = 104 ;
+		OL3:MemoryOrder = "XY " ;
+		OL3:description = "OROGRAPHIC DIRECTION ASYMMETRY FUNCTION" ;
+		OL3:units = "" ;
+		OL3:stagger = "" ;
+		OL3:coordinates = "XLONG XLAT XTIME" ;
+	float OL4(Time, south_north, west_east) ;
+		OL4:FieldType = 104 ;
+		OL4:MemoryOrder = "XY " ;
+		OL4:description = "OROGRAPHIC DIRECTION ASYMMETRY FUNCTION" ;
+		OL4:units = "" ;
+		OL4:stagger = "" ;
+		OL4:coordinates = "XLONG XLAT XTIME" ;
+	float MAPFAC_M(Time, south_north, west_east) ;
+		MAPFAC_M:FieldType = 104 ;
+		MAPFAC_M:MemoryOrder = "XY " ;
+		MAPFAC_M:description = "Map scale factor on mass grid" ;
+		MAPFAC_M:units = "" ;
+		MAPFAC_M:stagger = "" ;
+		MAPFAC_M:coordinates = "XLONG XLAT XTIME" ;
+	float MAPFAC_U(Time, south_north, west_east_stag) ;
+		MAPFAC_U:FieldType = 104 ;
+		MAPFAC_U:MemoryOrder = "XY " ;
+		MAPFAC_U:description = "Map scale factor on u-grid" ;
+		MAPFAC_U:units = "" ;
+		MAPFAC_U:stagger = "X" ;
+		MAPFAC_U:coordinates = "XLONG_U XLAT_U XTIME" ;
+	float MAPFAC_V(Time, south_north_stag, west_east) ;
+		MAPFAC_V:FieldType = 104 ;
+		MAPFAC_V:MemoryOrder = "XY " ;
+		MAPFAC_V:description = "Map scale factor on v-grid" ;
+		MAPFAC_V:units = "" ;
+		MAPFAC_V:stagger = "Y" ;
+		MAPFAC_V:coordinates = "XLONG_V XLAT_V XTIME" ;
+	float MAPFAC_MX(Time, south_north, west_east) ;
+		MAPFAC_MX:FieldType = 104 ;
+		MAPFAC_MX:MemoryOrder = "XY " ;
+		MAPFAC_MX:description = "Map scale factor on mass grid, x direction" ;
+		MAPFAC_MX:units = "" ;
+		MAPFAC_MX:stagger = "" ;
+		MAPFAC_MX:coordinates = "XLONG XLAT XTIME" ;
+	float MAPFAC_MY(Time, south_north, west_east) ;
+		MAPFAC_MY:FieldType = 104 ;
+		MAPFAC_MY:MemoryOrder = "XY " ;
+		MAPFAC_MY:description = "Map scale factor on mass grid, y direction" ;
+		MAPFAC_MY:units = "" ;
+		MAPFAC_MY:stagger = "" ;
+		MAPFAC_MY:coordinates = "XLONG XLAT XTIME" ;
+	float MAPFAC_UX(Time, south_north, west_east_stag) ;
+		MAPFAC_UX:FieldType = 104 ;
+		MAPFAC_UX:MemoryOrder = "XY " ;
+		MAPFAC_UX:description = "Map scale factor on u-grid, x direction" ;
+		MAPFAC_UX:units = "" ;
+		MAPFAC_UX:stagger = "X" ;
+		MAPFAC_UX:coordinates = "XLONG_U XLAT_U XTIME" ;
+	float MAPFAC_UY(Time, south_north, west_east_stag) ;
+		MAPFAC_UY:FieldType = 104 ;
+		MAPFAC_UY:MemoryOrder = "XY " ;
+		MAPFAC_UY:description = "Map scale factor on u-grid, y direction" ;
+		MAPFAC_UY:units = "" ;
+		MAPFAC_UY:stagger = "X" ;
+		MAPFAC_UY:coordinates = "XLONG_U XLAT_U XTIME" ;
+	float MAPFAC_VX(Time, south_north_stag, west_east) ;
+		MAPFAC_VX:FieldType = 104 ;
+		MAPFAC_VX:MemoryOrder = "XY " ;
+		MAPFAC_VX:description = "Map scale factor on v-grid, x direction" ;
+		MAPFAC_VX:units = "" ;
+		MAPFAC_VX:stagger = "Y" ;
+		MAPFAC_VX:coordinates = "XLONG_V XLAT_V XTIME" ;
+	float MF_VX_INV(Time, south_north_stag, west_east) ;
+		MF_VX_INV:FieldType = 104 ;
+		MF_VX_INV:MemoryOrder = "XY " ;
+		MF_VX_INV:description = "Inverse map scale factor on v-grid, x direction" ;
+		MF_VX_INV:units = "" ;
+		MF_VX_INV:stagger = "Y" ;
+		MF_VX_INV:coordinates = "XLONG_V XLAT_V XTIME" ;
+	float MAPFAC_VY(Time, south_north_stag, west_east) ;
+		MAPFAC_VY:FieldType = 104 ;
+		MAPFAC_VY:MemoryOrder = "XY " ;
+		MAPFAC_VY:description = "Map scale factor on v-grid, y direction" ;
+		MAPFAC_VY:units = "" ;
+		MAPFAC_VY:stagger = "Y" ;
+		MAPFAC_VY:coordinates = "XLONG_V XLAT_V XTIME" ;
+	float F(Time, south_north, west_east) ;
+		F:FieldType = 104 ;
+		F:MemoryOrder = "XY " ;
+		F:description = "Coriolis sine latitude term" ;
+		F:units = "s-1" ;
+		F:stagger = "" ;
+		F:coordinates = "XLONG XLAT XTIME" ;
+	float E(Time, south_north, west_east) ;
+		E:FieldType = 104 ;
+		E:MemoryOrder = "XY " ;
+		E:description = "Coriolis cosine latitude term" ;
+		E:units = "s-1" ;
+		E:stagger = "" ;
+		E:coordinates = "XLONG XLAT XTIME" ;
+	float SINALPHA(Time, south_north, west_east) ;
+		SINALPHA:FieldType = 104 ;
+		SINALPHA:MemoryOrder = "XY " ;
+		SINALPHA:description = "Local sine of map rotation" ;
+		SINALPHA:units = "" ;
+		SINALPHA:stagger = "" ;
+		SINALPHA:coordinates = "XLONG XLAT XTIME" ;
+	float COSALPHA(Time, south_north, west_east) ;
+		COSALPHA:FieldType = 104 ;
+		COSALPHA:MemoryOrder = "XY " ;
+		COSALPHA:description = "Local cosine of map rotation" ;
+		COSALPHA:units = "" ;
+		COSALPHA:stagger = "" ;
+		COSALPHA:coordinates = "XLONG XLAT XTIME" ;
+	float HGT(Time, south_north, west_east) ;
+		HGT:FieldType = 104 ;
+		HGT:MemoryOrder = "XY " ;
+		HGT:description = "Terrain Height" ;
+		HGT:units = "m" ;
+		HGT:stagger = "" ;
+		HGT:coordinates = "XLONG XLAT XTIME" ;
+	float TSK(Time, south_north, west_east) ;
+		TSK:FieldType = 104 ;
+		TSK:MemoryOrder = "XY " ;
+		TSK:description = "SURFACE SKIN TEMPERATURE" ;
+		TSK:units = "K" ;
+		TSK:stagger = "" ;
+		TSK:coordinates = "XLONG XLAT XTIME" ;
+	float P_TOP(Time) ;
+		P_TOP:FieldType = 104 ;
+		P_TOP:MemoryOrder = "0  " ;
+		P_TOP:description = "PRESSURE TOP OF THE MODEL" ;
+		P_TOP:units = "Pa" ;
+		P_TOP:stagger = "" ;
+	float T00(Time) ;
+		T00:FieldType = 104 ;
+		T00:MemoryOrder = "0  " ;
+		T00:description = "BASE STATE TEMPERATURE" ;
+		T00:units = "K" ;
+		T00:stagger = "" ;
+	float P00(Time) ;
+		P00:FieldType = 104 ;
+		P00:MemoryOrder = "0  " ;
+		P00:description = "BASE STATE PRESURE" ;
+		P00:units = "Pa" ;
+		P00:stagger = "" ;
+	float TLP(Time) ;
+		TLP:FieldType = 104 ;
+		TLP:MemoryOrder = "0  " ;
+		TLP:description = "BASE STATE LAPSE RATE" ;
+		TLP:units = "" ;
+		TLP:stagger = "" ;
+	float TISO(Time) ;
+		TISO:FieldType = 104 ;
+		TISO:MemoryOrder = "0  " ;
+		TISO:description = "TEMP AT WHICH THE BASE T TURNS CONST" ;
+		TISO:units = "K" ;
+		TISO:stagger = "" ;
+	float TLP_STRAT(Time) ;
+		TLP_STRAT:FieldType = 104 ;
+		TLP_STRAT:MemoryOrder = "0  " ;
+		TLP_STRAT:description = "BASE STATE LAPSE RATE (DT/D(LN(P)) IN STRATOSPHERE" ;
+		TLP_STRAT:units = "K" ;
+		TLP_STRAT:stagger = "" ;
+	float P_STRAT(Time) ;
+		P_STRAT:FieldType = 104 ;
+		P_STRAT:MemoryOrder = "0  " ;
+		P_STRAT:description = "BASE STATE PRESSURE AT BOTTOM OF STRATOSPHERE" ;
+		P_STRAT:units = "Pa" ;
+		P_STRAT:stagger = "" ;
+	float MAX_MSTFX(Time) ;
+		MAX_MSTFX:FieldType = 104 ;
+		MAX_MSTFX:MemoryOrder = "0  " ;
+		MAX_MSTFX:description = "Max map factor in domain" ;
+		MAX_MSTFX:units = "" ;
+		MAX_MSTFX:stagger = "" ;
+	float MAX_MSTFY(Time) ;
+		MAX_MSTFY:FieldType = 104 ;
+		MAX_MSTFY:MemoryOrder = "0  " ;
+		MAX_MSTFY:description = "Max map factor in domain" ;
+		MAX_MSTFY:units = "" ;
+		MAX_MSTFY:stagger = "" ;
+	float RAINC(Time, south_north, west_east) ;
+		RAINC:FieldType = 104 ;
+		RAINC:MemoryOrder = "XY " ;
+		RAINC:description = "ACCUMULATED TOTAL CUMULUS PRECIPITATION" ;
+		RAINC:units = "mm" ;
+		RAINC:stagger = "" ;
+		RAINC:coordinates = "XLONG XLAT XTIME" ;
+	float RAINSH(Time, south_north, west_east) ;
+		RAINSH:FieldType = 104 ;
+		RAINSH:MemoryOrder = "XY " ;
+		RAINSH:description = "ACCUMULATED SHALLOW CUMULUS PRECIPITATION" ;
+		RAINSH:units = "mm" ;
+		RAINSH:stagger = "" ;
+		RAINSH:coordinates = "XLONG XLAT XTIME" ;
+	float RAINNC(Time, south_north, west_east) ;
+		RAINNC:FieldType = 104 ;
+		RAINNC:MemoryOrder = "XY " ;
+		RAINNC:description = "ACCUMULATED TOTAL GRID SCALE PRECIPITATION" ;
+		RAINNC:units = "mm" ;
+		RAINNC:stagger = "" ;
+		RAINNC:coordinates = "XLONG XLAT XTIME" ;
+	float SNOWNC(Time, south_north, west_east) ;
+		SNOWNC:FieldType = 104 ;
+		SNOWNC:MemoryOrder = "XY " ;
+		SNOWNC:description = "ACCUMULATED TOTAL GRID SCALE SNOW AND ICE" ;
+		SNOWNC:units = "mm" ;
+		SNOWNC:stagger = "" ;
+		SNOWNC:coordinates = "XLONG XLAT XTIME" ;
+	float GRAUPELNC(Time, south_north, west_east) ;
+		GRAUPELNC:FieldType = 104 ;
+		GRAUPELNC:MemoryOrder = "XY " ;
+		GRAUPELNC:description = "ACCUMULATED TOTAL GRID SCALE GRAUPEL" ;
+		GRAUPELNC:units = "mm" ;
+		GRAUPELNC:stagger = "" ;
+		GRAUPELNC:coordinates = "XLONG XLAT XTIME" ;
+	float HAILNC(Time, south_north, west_east) ;
+		HAILNC:FieldType = 104 ;
+		HAILNC:MemoryOrder = "XY " ;
+		HAILNC:description = "ACCUMULATED TOTAL GRID SCALE HAIL" ;
+		HAILNC:units = "mm" ;
+		HAILNC:stagger = "" ;
+		HAILNC:coordinates = "XLONG XLAT XTIME" ;
+	float CLDFRA(Time, bottom_top, south_north, west_east) ;
+		CLDFRA:FieldType = 104 ;
+		CLDFRA:MemoryOrder = "XYZ" ;
+		CLDFRA:description = "CLOUD FRACTION" ;
+		CLDFRA:units = "" ;
+		CLDFRA:stagger = "" ;
+		CLDFRA:coordinates = "XLONG XLAT XTIME" ;
+	float SWDOWN(Time, south_north, west_east) ;
+		SWDOWN:FieldType = 104 ;
+		SWDOWN:MemoryOrder = "XY " ;
+		SWDOWN:description = "DOWNWARD SHORT WAVE FLUX AT GROUND SURFACE" ;
+		SWDOWN:units = "W m-2" ;
+		SWDOWN:stagger = "" ;
+		SWDOWN:coordinates = "XLONG XLAT XTIME" ;
+	float GLW(Time, south_north, west_east) ;
+		GLW:FieldType = 104 ;
+		GLW:MemoryOrder = "XY " ;
+		GLW:description = "DOWNWARD LONG WAVE FLUX AT GROUND SURFACE" ;
+		GLW:units = "W m-2" ;
+		GLW:stagger = "" ;
+		GLW:coordinates = "XLONG XLAT XTIME" ;
+	float SWNORM(Time, south_north, west_east) ;
+		SWNORM:FieldType = 104 ;
+		SWNORM:MemoryOrder = "XY " ;
+		SWNORM:description = "NORMAL SHORT WAVE FLUX AT GROUND SURFACE (SLOPE-DEPENDENT)" ;
+		SWNORM:units = "W m-2" ;
+		SWNORM:stagger = "" ;
+		SWNORM:coordinates = "XLONG XLAT XTIME" ;
+	float DIFFUSE_FRAC(Time, south_north, west_east) ;
+		DIFFUSE_FRAC:FieldType = 104 ;
+		DIFFUSE_FRAC:MemoryOrder = "XY " ;
+		DIFFUSE_FRAC:description = "DIFFUSE FRACTION OF SURFACE SHORTWAVE IRRADIANCE" ;
+		DIFFUSE_FRAC:units = "" ;
+		DIFFUSE_FRAC:stagger = "" ;
+		DIFFUSE_FRAC:coordinates = "XLONG XLAT XTIME" ;
+	float ACSWUPT(Time, south_north, west_east) ;
+		ACSWUPT:FieldType = 104 ;
+		ACSWUPT:MemoryOrder = "XY " ;
+		ACSWUPT:description = "ACCUMULATED UPWELLING SHORTWAVE FLUX AT TOP" ;
+		ACSWUPT:units = "J m-2" ;
+		ACSWUPT:stagger = "" ;
+		ACSWUPT:coordinates = "XLONG XLAT XTIME" ;
+	float ACSWUPTC(Time, south_north, west_east) ;
+		ACSWUPTC:FieldType = 104 ;
+		ACSWUPTC:MemoryOrder = "XY " ;
+		ACSWUPTC:description = "ACCUMULATED UPWELLING CLEAR SKY SHORTWAVE FLUX AT TOP" ;
+		ACSWUPTC:units = "J m-2" ;
+		ACSWUPTC:stagger = "" ;
+		ACSWUPTC:coordinates = "XLONG XLAT XTIME" ;
+	float ACSWDNT(Time, south_north, west_east) ;
+		ACSWDNT:FieldType = 104 ;
+		ACSWDNT:MemoryOrder = "XY " ;
+		ACSWDNT:description = "ACCUMULATED DOWNWELLING SHORTWAVE FLUX AT TOP" ;
+		ACSWDNT:units = "J m-2" ;
+		ACSWDNT:stagger = "" ;
+		ACSWDNT:coordinates = "XLONG XLAT XTIME" ;
+	float ACSWDNTC(Time, south_north, west_east) ;
+		ACSWDNTC:FieldType = 104 ;
+		ACSWDNTC:MemoryOrder = "XY " ;
+		ACSWDNTC:description = "ACCUMULATED DOWNWELLING CLEAR SKY SHORTWAVE FLUX AT TOP" ;
+		ACSWDNTC:units = "J m-2" ;
+		ACSWDNTC:stagger = "" ;
+		ACSWDNTC:coordinates = "XLONG XLAT XTIME" ;
+	float ACSWUPB(Time, south_north, west_east) ;
+		ACSWUPB:FieldType = 104 ;
+		ACSWUPB:MemoryOrder = "XY " ;
+		ACSWUPB:description = "ACCUMULATED UPWELLING SHORTWAVE FLUX AT BOTTOM" ;
+		ACSWUPB:units = "J m-2" ;
+		ACSWUPB:stagger = "" ;
+		ACSWUPB:coordinates = "XLONG XLAT XTIME" ;
+	float ACSWUPBC(Time, south_north, west_east) ;
+		ACSWUPBC:FieldType = 104 ;
+		ACSWUPBC:MemoryOrder = "XY " ;
+		ACSWUPBC:description = "ACCUMULATED UPWELLING CLEAR SKY SHORTWAVE FLUX AT BOTTOM" ;
+		ACSWUPBC:units = "J m-2" ;
+		ACSWUPBC:stagger = "" ;
+		ACSWUPBC:coordinates = "XLONG XLAT XTIME" ;
+	float ACSWDNB(Time, south_north, west_east) ;
+		ACSWDNB:FieldType = 104 ;
+		ACSWDNB:MemoryOrder = "XY " ;
+		ACSWDNB:description = "ACCUMULATED DOWNWELLING SHORTWAVE FLUX AT BOTTOM" ;
+		ACSWDNB:units = "J m-2" ;
+		ACSWDNB:stagger = "" ;
+		ACSWDNB:coordinates = "XLONG XLAT XTIME" ;
+	float ACSWDNBC(Time, south_north, west_east) ;
+		ACSWDNBC:FieldType = 104 ;
+		ACSWDNBC:MemoryOrder = "XY " ;
+		ACSWDNBC:description = "ACCUMULATED DOWNWELLING CLEAR SKY SHORTWAVE FLUX AT BOTTOM" ;
+		ACSWDNBC:units = "J m-2" ;
+		ACSWDNBC:stagger = "" ;
+		ACSWDNBC:coordinates = "XLONG XLAT XTIME" ;
+	float ACLWUPT(Time, south_north, west_east) ;
+		ACLWUPT:FieldType = 104 ;
+		ACLWUPT:MemoryOrder = "XY " ;
+		ACLWUPT:description = "ACCUMULATED UPWELLING LONGWAVE FLUX AT TOP" ;
+		ACLWUPT:units = "J m-2" ;
+		ACLWUPT:stagger = "" ;
+		ACLWUPT:coordinates = "XLONG XLAT XTIME" ;
+	float ACLWUPTC(Time, south_north, west_east) ;
+		ACLWUPTC:FieldType = 104 ;
+		ACLWUPTC:MemoryOrder = "XY " ;
+		ACLWUPTC:description = "ACCUMULATED UPWELLING CLEAR SKY LONGWAVE FLUX AT TOP" ;
+		ACLWUPTC:units = "J m-2" ;
+		ACLWUPTC:stagger = "" ;
+		ACLWUPTC:coordinates = "XLONG XLAT XTIME" ;
+	float ACLWDNT(Time, south_north, west_east) ;
+		ACLWDNT:FieldType = 104 ;
+		ACLWDNT:MemoryOrder = "XY " ;
+		ACLWDNT:description = "ACCUMULATED DOWNWELLING LONGWAVE FLUX AT TOP" ;
+		ACLWDNT:units = "J m-2" ;
+		ACLWDNT:stagger = "" ;
+		ACLWDNT:coordinates = "XLONG XLAT XTIME" ;
+	float ACLWDNTC(Time, south_north, west_east) ;
+		ACLWDNTC:FieldType = 104 ;
+		ACLWDNTC:MemoryOrder = "XY " ;
+		ACLWDNTC:description = "ACCUMULATED DOWNWELLING CLEAR SKY LONGWAVE FLUX AT TOP" ;
+		ACLWDNTC:units = "J m-2" ;
+		ACLWDNTC:stagger = "" ;
+		ACLWDNTC:coordinates = "XLONG XLAT XTIME" ;
+	float ACLWUPB(Time, south_north, west_east) ;
+		ACLWUPB:FieldType = 104 ;
+		ACLWUPB:MemoryOrder = "XY " ;
+		ACLWUPB:description = "ACCUMULATED UPWELLING LONGWAVE FLUX AT BOTTOM" ;
+		ACLWUPB:units = "J m-2" ;
+		ACLWUPB:stagger = "" ;
+		ACLWUPB:coordinates = "XLONG XLAT XTIME" ;
+	float ACLWUPBC(Time, south_north, west_east) ;
+		ACLWUPBC:FieldType = 104 ;
+		ACLWUPBC:MemoryOrder = "XY " ;
+		ACLWUPBC:description = "ACCUMULATED UPWELLING CLEAR SKY LONGWAVE FLUX AT BOTTOM" ;
+		ACLWUPBC:units = "J m-2" ;
+		ACLWUPBC:stagger = "" ;
+		ACLWUPBC:coordinates = "XLONG XLAT XTIME" ;
+	float ACLWDNB(Time, south_north, west_east) ;
+		ACLWDNB:FieldType = 104 ;
+		ACLWDNB:MemoryOrder = "XY " ;
+		ACLWDNB:description = "ACCUMULATED DOWNWELLING LONGWAVE FLUX AT BOTTOM" ;
+		ACLWDNB:units = "J m-2" ;
+		ACLWDNB:stagger = "" ;
+		ACLWDNB:coordinates = "XLONG XLAT XTIME" ;
+	float ACLWDNBC(Time, south_north, west_east) ;
+		ACLWDNBC:FieldType = 104 ;
+		ACLWDNBC:MemoryOrder = "XY " ;
+		ACLWDNBC:description = "ACCUMULATED DOWNWELLING CLEAR SKY LONGWAVE FLUX AT BOTTOM" ;
+		ACLWDNBC:units = "J m-2" ;
+		ACLWDNBC:stagger = "" ;
+		ACLWDNBC:coordinates = "XLONG XLAT XTIME" ;
+	int I_ACSWUPT(Time, south_north, west_east) ;
+		I_ACSWUPT:FieldType = 106 ;
+		I_ACSWUPT:MemoryOrder = "XY " ;
+		I_ACSWUPT:description = "BUCKET FOR UPWELLING SHORTWAVE FLUX AT TOP" ;
+		I_ACSWUPT:units = "J m-2" ;
+		I_ACSWUPT:stagger = "" ;
+		I_ACSWUPT:coordinates = "XLONG XLAT XTIME" ;
+	int I_ACSWUPTC(Time, south_north, west_east) ;
+		I_ACSWUPTC:FieldType = 106 ;
+		I_ACSWUPTC:MemoryOrder = "XY " ;
+		I_ACSWUPTC:description = "BUCKET FOR UPWELLING CLEAR SKY SHORTWAVE FLUX AT TOP" ;
+		I_ACSWUPTC:units = "J m-2" ;
+		I_ACSWUPTC:stagger = "" ;
+		I_ACSWUPTC:coordinates = "XLONG XLAT XTIME" ;
+	int I_ACSWDNT(Time, south_north, west_east) ;
+		I_ACSWDNT:FieldType = 106 ;
+		I_ACSWDNT:MemoryOrder = "XY " ;
+		I_ACSWDNT:description = "BUCKET FOR DOWNWELLING SHORTWAVE FLUX AT TOP" ;
+		I_ACSWDNT:units = "J m-2" ;
+		I_ACSWDNT:stagger = "" ;
+		I_ACSWDNT:coordinates = "XLONG XLAT XTIME" ;
+	int I_ACSWDNTC(Time, south_north, west_east) ;
+		I_ACSWDNTC:FieldType = 106 ;
+		I_ACSWDNTC:MemoryOrder = "XY " ;
+		I_ACSWDNTC:description = "BUCKET FOR DOWNWELLING CLEAR SKY SHORTWAVE FLUX AT TOP" ;
+		I_ACSWDNTC:units = "J m-2" ;
+		I_ACSWDNTC:stagger = "" ;
+		I_ACSWDNTC:coordinates = "XLONG XLAT XTIME" ;
+	int I_ACSWUPB(Time, south_north, west_east) ;
+		I_ACSWUPB:FieldType = 106 ;
+		I_ACSWUPB:MemoryOrder = "XY " ;
+		I_ACSWUPB:description = "BUCKET FOR UPWELLING SHORTWAVE FLUX AT BOTTOM" ;
+		I_ACSWUPB:units = "J m-2" ;
+		I_ACSWUPB:stagger = "" ;
+		I_ACSWUPB:coordinates = "XLONG XLAT XTIME" ;
+	int I_ACSWUPBC(Time, south_north, west_east) ;
+		I_ACSWUPBC:FieldType = 106 ;
+		I_ACSWUPBC:MemoryOrder = "XY " ;
+		I_ACSWUPBC:description = "BUCKET FOR UPWELLING CLEAR SKY SHORTWAVE FLUX AT BOTTOM" ;
+		I_ACSWUPBC:units = "J m-2" ;
+		I_ACSWUPBC:stagger = "" ;
+		I_ACSWUPBC:coordinates = "XLONG XLAT XTIME" ;
+	int I_ACSWDNB(Time, south_north, west_east) ;
+		I_ACSWDNB:FieldType = 106 ;
+		I_ACSWDNB:MemoryOrder = "XY " ;
+		I_ACSWDNB:description = "BUCKET FOR DOWNWELLING SHORTWAVE FLUX AT BOTTOM" ;
+		I_ACSWDNB:units = "J m-2" ;
+		I_ACSWDNB:stagger = "" ;
+		I_ACSWDNB:coordinates = "XLONG XLAT XTIME" ;
+	int I_ACSWDNBC(Time, south_north, west_east) ;
+		I_ACSWDNBC:FieldType = 106 ;
+		I_ACSWDNBC:MemoryOrder = "XY " ;
+		I_ACSWDNBC:description = "BUCKET FOR DOWNWELLING CLEAR SKY SHORTWAVE FLUX AT BOTTOM" ;
+		I_ACSWDNBC:units = "J m-2" ;
+		I_ACSWDNBC:stagger = "" ;
+		I_ACSWDNBC:coordinates = "XLONG XLAT XTIME" ;
+	int I_ACLWUPT(Time, south_north, west_east) ;
+		I_ACLWUPT:FieldType = 106 ;
+		I_ACLWUPT:MemoryOrder = "XY " ;
+		I_ACLWUPT:description = "BUCKET FOR UPWELLING LONGWAVE FLUX AT TOP" ;
+		I_ACLWUPT:units = "J m-2" ;
+		I_ACLWUPT:stagger = "" ;
+		I_ACLWUPT:coordinates = "XLONG XLAT XTIME" ;
+	int I_ACLWUPTC(Time, south_north, west_east) ;
+		I_ACLWUPTC:FieldType = 106 ;
+		I_ACLWUPTC:MemoryOrder = "XY " ;
+		I_ACLWUPTC:description = "BUCKET FOR UPWELLING CLEAR SKY LONGWAVE FLUX AT TOP" ;
+		I_ACLWUPTC:units = "J m-2" ;
+		I_ACLWUPTC:stagger = "" ;
+		I_ACLWUPTC:coordinates = "XLONG XLAT XTIME" ;
+	int I_ACLWDNT(Time, south_north, west_east) ;
+		I_ACLWDNT:FieldType = 106 ;
+		I_ACLWDNT:MemoryOrder = "XY " ;
+		I_ACLWDNT:description = "BUCKET FOR DOWNWELLING LONGWAVE FLUX AT TOP" ;
+		I_ACLWDNT:units = "J m-2" ;
+		I_ACLWDNT:stagger = "" ;
+		I_ACLWDNT:coordinates = "XLONG XLAT XTIME" ;
+	int I_ACLWDNTC(Time, south_north, west_east) ;
+		I_ACLWDNTC:FieldType = 106 ;
+		I_ACLWDNTC:MemoryOrder = "XY " ;
+		I_ACLWDNTC:description = "BUCKET FOR DOWNWELLING CLEAR SKY LONGWAVE FLUX AT TOP" ;
+		I_ACLWDNTC:units = "J m-2" ;
+		I_ACLWDNTC:stagger = "" ;
+		I_ACLWDNTC:coordinates = "XLONG XLAT XTIME" ;
+	int I_ACLWUPB(Time, south_north, west_east) ;
+		I_ACLWUPB:FieldType = 106 ;
+		I_ACLWUPB:MemoryOrder = "XY " ;
+		I_ACLWUPB:description = "BUCKET FOR UPWELLING LONGWAVE FLUX AT BOTTOM" ;
+		I_ACLWUPB:units = "J m-2" ;
+		I_ACLWUPB:stagger = "" ;
+		I_ACLWUPB:coordinates = "XLONG XLAT XTIME" ;
+	int I_ACLWUPBC(Time, south_north, west_east) ;
+		I_ACLWUPBC:FieldType = 106 ;
+		I_ACLWUPBC:MemoryOrder = "XY " ;
+		I_ACLWUPBC:description = "BUCKET FOR UPWELLING CLEAR SKY LONGWAVE FLUX AT BOTTOM" ;
+		I_ACLWUPBC:units = "J m-2" ;
+		I_ACLWUPBC:stagger = "" ;
+		I_ACLWUPBC:coordinates = "XLONG XLAT XTIME" ;
+	int I_ACLWDNB(Time, south_north, west_east) ;
+		I_ACLWDNB:FieldType = 106 ;
+		I_ACLWDNB:MemoryOrder = "XY " ;
+		I_ACLWDNB:description = "BUCKET FOR DOWNWELLING LONGWAVE FLUX AT BOTTOM" ;
+		I_ACLWDNB:units = "J m-2" ;
+		I_ACLWDNB:stagger = "" ;
+		I_ACLWDNB:coordinates = "XLONG XLAT XTIME" ;
+	int I_ACLWDNBC(Time, south_north, west_east) ;
+		I_ACLWDNBC:FieldType = 106 ;
+		I_ACLWDNBC:MemoryOrder = "XY " ;
+		I_ACLWDNBC:description = "BUCKET FOR DOWNWELLING CLEAR SKY LONGWAVE FLUX AT BOTTOM" ;
+		I_ACLWDNBC:units = "J m-2" ;
+		I_ACLWDNBC:stagger = "" ;
+		I_ACLWDNBC:coordinates = "XLONG XLAT XTIME" ;
+	float SWUPT(Time, south_north, west_east) ;
+		SWUPT:FieldType = 104 ;
+		SWUPT:MemoryOrder = "XY " ;
+		SWUPT:description = "INSTANTANEOUS UPWELLING SHORTWAVE FLUX AT TOP" ;
+		SWUPT:units = "W m-2" ;
+		SWUPT:stagger = "" ;
+		SWUPT:coordinates = "XLONG XLAT XTIME" ;
+	float SWUPTC(Time, south_north, west_east) ;
+		SWUPTC:FieldType = 104 ;
+		SWUPTC:MemoryOrder = "XY " ;
+		SWUPTC:description = "INSTANTANEOUS UPWELLING CLEAR SKY SHORTWAVE FLUX AT TOP" ;
+		SWUPTC:units = "W m-2" ;
+		SWUPTC:stagger = "" ;
+		SWUPTC:coordinates = "XLONG XLAT XTIME" ;
+	float SWDNT(Time, south_north, west_east) ;
+		SWDNT:FieldType = 104 ;
+		SWDNT:MemoryOrder = "XY " ;
+		SWDNT:description = "INSTANTANEOUS DOWNWELLING SHORTWAVE FLUX AT TOP" ;
+		SWDNT:units = "W m-2" ;
+		SWDNT:stagger = "" ;
+		SWDNT:coordinates = "XLONG XLAT XTIME" ;
+	float SWDNTC(Time, south_north, west_east) ;
+		SWDNTC:FieldType = 104 ;
+		SWDNTC:MemoryOrder = "XY " ;
+		SWDNTC:description = "INSTANTANEOUS DOWNWELLING CLEAR SKY SHORTWAVE FLUX AT TOP" ;
+		SWDNTC:units = "W m-2" ;
+		SWDNTC:stagger = "" ;
+		SWDNTC:coordinates = "XLONG XLAT XTIME" ;
+	float SWUPB(Time, south_north, west_east) ;
+		SWUPB:FieldType = 104 ;
+		SWUPB:MemoryOrder = "XY " ;
+		SWUPB:description = "INSTANTANEOUS UPWELLING SHORTWAVE FLUX AT BOTTOM" ;
+		SWUPB:units = "W m-2" ;
+		SWUPB:stagger = "" ;
+		SWUPB:coordinates = "XLONG XLAT XTIME" ;
+	float SWUPBC(Time, south_north, west_east) ;
+		SWUPBC:FieldType = 104 ;
+		SWUPBC:MemoryOrder = "XY " ;
+		SWUPBC:description = "INSTANTANEOUS UPWELLING CLEAR SKY SHORTWAVE FLUX AT BOTTOM" ;
+		SWUPBC:units = "W m-2" ;
+		SWUPBC:stagger = "" ;
+		SWUPBC:coordinates = "XLONG XLAT XTIME" ;
+	float SWDNB(Time, south_north, west_east) ;
+		SWDNB:FieldType = 104 ;
+		SWDNB:MemoryOrder = "XY " ;
+		SWDNB:description = "INSTANTANEOUS DOWNWELLING SHORTWAVE FLUX AT BOTTOM" ;
+		SWDNB:units = "W m-2" ;
+		SWDNB:stagger = "" ;
+		SWDNB:coordinates = "XLONG XLAT XTIME" ;
+	float SWDNBC(Time, south_north, west_east) ;
+		SWDNBC:FieldType = 104 ;
+		SWDNBC:MemoryOrder = "XY " ;
+		SWDNBC:description = "INSTANTANEOUS DOWNWELLING CLEAR SKY SHORTWAVE FLUX AT BOTTOM" ;
+		SWDNBC:units = "W m-2" ;
+		SWDNBC:stagger = "" ;
+		SWDNBC:coordinates = "XLONG XLAT XTIME" ;
+	float LWUPT(Time, south_north, west_east) ;
+		LWUPT:FieldType = 104 ;
+		LWUPT:MemoryOrder = "XY " ;
+		LWUPT:description = "INSTANTANEOUS UPWELLING LONGWAVE FLUX AT TOP" ;
+		LWUPT:units = "W m-2" ;
+		LWUPT:stagger = "" ;
+		LWUPT:coordinates = "XLONG XLAT XTIME" ;
+	float LWUPTC(Time, south_north, west_east) ;
+		LWUPTC:FieldType = 104 ;
+		LWUPTC:MemoryOrder = "XY " ;
+		LWUPTC:description = "INSTANTANEOUS UPWELLING CLEAR SKY LONGWAVE FLUX AT TOP" ;
+		LWUPTC:units = "W m-2" ;
+		LWUPTC:stagger = "" ;
+		LWUPTC:coordinates = "XLONG XLAT XTIME" ;
+	float LWDNT(Time, south_north, west_east) ;
+		LWDNT:FieldType = 104 ;
+		LWDNT:MemoryOrder = "XY " ;
+		LWDNT:description = "INSTANTANEOUS DOWNWELLING LONGWAVE FLUX AT TOP" ;
+		LWDNT:units = "W m-2" ;
+		LWDNT:stagger = "" ;
+		LWDNT:coordinates = "XLONG XLAT XTIME" ;
+	float LWDNTC(Time, south_north, west_east) ;
+		LWDNTC:FieldType = 104 ;
+		LWDNTC:MemoryOrder = "XY " ;
+		LWDNTC:description = "INSTANTANEOUS DOWNWELLING CLEAR SKY LONGWAVE FLUX AT TOP" ;
+		LWDNTC:units = "W m-2" ;
+		LWDNTC:stagger = "" ;
+		LWDNTC:coordinates = "XLONG XLAT XTIME" ;
+	float LWUPB(Time, south_north, west_east) ;
+		LWUPB:FieldType = 104 ;
+		LWUPB:MemoryOrder = "XY " ;
+		LWUPB:description = "INSTANTANEOUS UPWELLING LONGWAVE FLUX AT BOTTOM" ;
+		LWUPB:units = "W m-2" ;
+		LWUPB:stagger = "" ;
+		LWUPB:coordinates = "XLONG XLAT XTIME" ;
+	float LWUPBC(Time, south_north, west_east) ;
+		LWUPBC:FieldType = 104 ;
+		LWUPBC:MemoryOrder = "XY " ;
+		LWUPBC:description = "INSTANTANEOUS UPWELLING CLEAR SKY LONGWAVE FLUX AT BOTTOM" ;
+		LWUPBC:units = "W m-2" ;
+		LWUPBC:stagger = "" ;
+		LWUPBC:coordinates = "XLONG XLAT XTIME" ;
+	float LWDNB(Time, south_north, west_east) ;
+		LWDNB:FieldType = 104 ;
+		LWDNB:MemoryOrder = "XY " ;
+		LWDNB:description = "INSTANTANEOUS DOWNWELLING LONGWAVE FLUX AT BOTTOM" ;
+		LWDNB:units = "W m-2" ;
+		LWDNB:stagger = "" ;
+		LWDNB:coordinates = "XLONG XLAT XTIME" ;
+	float LWDNBC(Time, south_north, west_east) ;
+		LWDNBC:FieldType = 104 ;
+		LWDNBC:MemoryOrder = "XY " ;
+		LWDNBC:description = "INSTANTANEOUS DOWNWELLING CLEAR SKY LONGWAVE FLUX AT BOTTOM" ;
+		LWDNBC:units = "W m-2" ;
+		LWDNBC:stagger = "" ;
+		LWDNBC:coordinates = "XLONG XLAT XTIME" ;
+	float OLR(Time, south_north, west_east) ;
+		OLR:FieldType = 104 ;
+		OLR:MemoryOrder = "XY " ;
+		OLR:description = "TOA OUTGOING LONG WAVE" ;
+		OLR:units = "W m-2" ;
+		OLR:stagger = "" ;
+		OLR:coordinates = "XLONG XLAT XTIME" ;
+	float XLAT_U(Time, south_north, west_east_stag) ;
+		XLAT_U:FieldType = 104 ;
+		XLAT_U:MemoryOrder = "XY " ;
+		XLAT_U:description = "LATITUDE, SOUTH IS NEGATIVE" ;
+		XLAT_U:units = "degree_north" ;
+		XLAT_U:stagger = "X" ;
+		XLAT_U:coordinates = "XLONG_U XLAT_U" ;
+	float XLONG_U(Time, south_north, west_east_stag) ;
+		XLONG_U:FieldType = 104 ;
+		XLONG_U:MemoryOrder = "XY " ;
+		XLONG_U:description = "LONGITUDE, WEST IS NEGATIVE" ;
+		XLONG_U:units = "degree_east" ;
+		XLONG_U:stagger = "X" ;
+		XLONG_U:coordinates = "XLONG_U XLAT_U" ;
+	float XLAT_V(Time, south_north_stag, west_east) ;
+		XLAT_V:FieldType = 104 ;
+		XLAT_V:MemoryOrder = "XY " ;
+		XLAT_V:description = "LATITUDE, SOUTH IS NEGATIVE" ;
+		XLAT_V:units = "degree_north" ;
+		XLAT_V:stagger = "Y" ;
+		XLAT_V:coordinates = "XLONG_V XLAT_V" ;
+	float XLONG_V(Time, south_north_stag, west_east) ;
+		XLONG_V:FieldType = 104 ;
+		XLONG_V:MemoryOrder = "XY " ;
+		XLONG_V:description = "LONGITUDE, WEST IS NEGATIVE" ;
+		XLONG_V:units = "degree_east" ;
+		XLONG_V:stagger = "Y" ;
+		XLONG_V:coordinates = "XLONG_V XLAT_V" ;
+	float ALBEDO(Time, south_north, west_east) ;
+		ALBEDO:FieldType = 104 ;
+		ALBEDO:MemoryOrder = "XY " ;
+		ALBEDO:description = "ALBEDO" ;
+		ALBEDO:units = "-" ;
+		ALBEDO:stagger = "" ;
+		ALBEDO:coordinates = "XLONG XLAT XTIME" ;
+	float CLAT(Time, south_north, west_east) ;
+		CLAT:FieldType = 104 ;
+		CLAT:MemoryOrder = "XY " ;
+		CLAT:description = "COMPUTATIONAL GRID LATITUDE, SOUTH IS NEGATIVE" ;
+		CLAT:units = "degree_north" ;
+		CLAT:stagger = "" ;
+		CLAT:coordinates = "XLONG XLAT XTIME" ;
+	float ALBBCK(Time, south_north, west_east) ;
+		ALBBCK:FieldType = 104 ;
+		ALBBCK:MemoryOrder = "XY " ;
+		ALBBCK:description = "BACKGROUND ALBEDO" ;
+		ALBBCK:units = "" ;
+		ALBBCK:stagger = "" ;
+		ALBBCK:coordinates = "XLONG XLAT XTIME" ;
+	float EMISS(Time, south_north, west_east) ;
+		EMISS:FieldType = 104 ;
+		EMISS:MemoryOrder = "XY " ;
+		EMISS:description = "SURFACE EMISSIVITY" ;
+		EMISS:units = "" ;
+		EMISS:stagger = "" ;
+		EMISS:coordinates = "XLONG XLAT XTIME" ;
+	float NOAHRES(Time, south_north, west_east) ;
+		NOAHRES:FieldType = 104 ;
+		NOAHRES:MemoryOrder = "XY " ;
+		NOAHRES:description = "RESIDUAL OF THE NOAH SURFACE ENERGY BUDGET" ;
+		NOAHRES:units = "W m{-2}" ;
+		NOAHRES:stagger = "" ;
+		NOAHRES:coordinates = "XLONG XLAT XTIME" ;
+	float TMN(Time, south_north, west_east) ;
+		TMN:FieldType = 104 ;
+		TMN:MemoryOrder = "XY " ;
+		TMN:description = "SOIL TEMPERATURE AT LOWER BOUNDARY" ;
+		TMN:units = "K" ;
+		TMN:stagger = "" ;
+		TMN:coordinates = "XLONG XLAT XTIME" ;
+	float XLAND(Time, south_north, west_east) ;
+		XLAND:FieldType = 104 ;
+		XLAND:MemoryOrder = "XY " ;
+		XLAND:description = "LAND MASK (1 FOR LAND, 2 FOR WATER)" ;
+		XLAND:units = "" ;
+		XLAND:stagger = "" ;
+		XLAND:coordinates = "XLONG XLAT XTIME" ;
+	float UST(Time, south_north, west_east) ;
+		UST:FieldType = 104 ;
+		UST:MemoryOrder = "XY " ;
+		UST:description = "U* IN SIMILARITY THEORY" ;
+		UST:units = "m s-1" ;
+		UST:stagger = "" ;
+		UST:coordinates = "XLONG XLAT XTIME" ;
+	float PBLH(Time, south_north, west_east) ;
+		PBLH:FieldType = 104 ;
+		PBLH:MemoryOrder = "XY " ;
+		PBLH:description = "PBL HEIGHT" ;
+		PBLH:units = "m" ;
+		PBLH:stagger = "" ;
+		PBLH:coordinates = "XLONG XLAT XTIME" ;
+	float HFX(Time, south_north, west_east) ;
+		HFX:FieldType = 104 ;
+		HFX:MemoryOrder = "XY " ;
+		HFX:description = "UPWARD HEAT FLUX AT THE SURFACE" ;
+		HFX:units = "W m-2" ;
+		HFX:stagger = "" ;
+		HFX:coordinates = "XLONG XLAT XTIME" ;
+	float QFX(Time, south_north, west_east) ;
+		QFX:FieldType = 104 ;
+		QFX:MemoryOrder = "XY " ;
+		QFX:description = "UPWARD MOISTURE FLUX AT THE SURFACE" ;
+		QFX:units = "kg m-2 s-1" ;
+		QFX:stagger = "" ;
+		QFX:coordinates = "XLONG XLAT XTIME" ;
+	float LH(Time, south_north, west_east) ;
+		LH:FieldType = 104 ;
+		LH:MemoryOrder = "XY " ;
+		LH:description = "LATENT HEAT FLUX AT THE SURFACE" ;
+		LH:units = "W m-2" ;
+		LH:stagger = "" ;
+		LH:coordinates = "XLONG XLAT XTIME" ;
+	float ACHFX(Time, south_north, west_east) ;
+		ACHFX:FieldType = 104 ;
+		ACHFX:MemoryOrder = "XY " ;
+		ACHFX:description = "ACCUMULATED UPWARD HEAT FLUX AT THE SURFACE" ;
+		ACHFX:units = "J m-2" ;
+		ACHFX:stagger = "" ;
+		ACHFX:coordinates = "XLONG XLAT XTIME" ;
+	float ACLHF(Time, south_north, west_east) ;
+		ACLHF:FieldType = 104 ;
+		ACLHF:MemoryOrder = "XY " ;
+		ACLHF:description = "ACCUMULATED UPWARD LATENT HEAT FLUX AT THE SURFACE" ;
+		ACLHF:units = "J m-2" ;
+		ACLHF:stagger = "" ;
+		ACLHF:coordinates = "XLONG XLAT XTIME" ;
+	float SNOWC(Time, south_north, west_east) ;
+		SNOWC:FieldType = 104 ;
+		SNOWC:MemoryOrder = "XY " ;
+		SNOWC:description = "FLAG INDICATING SNOW COVERAGE (1 FOR SNOW COVER)" ;
+		SNOWC:units = "" ;
+		SNOWC:stagger = "" ;
+		SNOWC:coordinates = "XLONG XLAT XTIME" ;
+	float SR(Time, south_north, west_east) ;
+		SR:FieldType = 104 ;
+		SR:MemoryOrder = "XY " ;
+		SR:description = "fraction of frozen precipitation" ;
+		SR:units = "-" ;
+		SR:stagger = "" ;
+		SR:coordinates = "XLONG XLAT XTIME" ;
+	int SAVE_TOPO_FROM_REAL(Time) ;
+		SAVE_TOPO_FROM_REAL:FieldType = 106 ;
+		SAVE_TOPO_FROM_REAL:MemoryOrder = "0  " ;
+		SAVE_TOPO_FROM_REAL:description = "1=original topo from real/0=topo modified by WRF" ;
+		SAVE_TOPO_FROM_REAL:units = "flag" ;
+		SAVE_TOPO_FROM_REAL:stagger = "" ;
+	int ISEEDARR_RAND_PERTURB(Time, bottom_top) ;
+		ISEEDARR_RAND_PERTURB:FieldType = 106 ;
+		ISEEDARR_RAND_PERTURB:MemoryOrder = "Z  " ;
+		ISEEDARR_RAND_PERTURB:description = "Array to hold seed for restart, RAND_PERT" ;
+		ISEEDARR_RAND_PERTURB:units = "" ;
+		ISEEDARR_RAND_PERTURB:stagger = "" ;
+	int ISEEDARR_SPPT(Time, bottom_top) ;
+		ISEEDARR_SPPT:FieldType = 106 ;
+		ISEEDARR_SPPT:MemoryOrder = "Z  " ;
+		ISEEDARR_SPPT:description = "Array to hold seed for restart, SPPT" ;
+		ISEEDARR_SPPT:units = "" ;
+		ISEEDARR_SPPT:stagger = "" ;
+	int ISEEDARR_SKEBS(Time, bottom_top) ;
+		ISEEDARR_SKEBS:FieldType = 106 ;
+		ISEEDARR_SKEBS:MemoryOrder = "Z  " ;
+		ISEEDARR_SKEBS:description = "Array to hold seed for restart, SKEBS" ;
+		ISEEDARR_SKEBS:units = "" ;
+		ISEEDARR_SKEBS:stagger = "" ;
+	float LANDMASK(Time, south_north, west_east) ;
+		LANDMASK:FieldType = 104 ;
+		LANDMASK:MemoryOrder = "XY " ;
+		LANDMASK:description = "LAND MASK (1 FOR LAND, 0 FOR WATER)" ;
+		LANDMASK:units = "" ;
+		LANDMASK:stagger = "" ;
+		LANDMASK:coordinates = "XLONG XLAT XTIME" ;
+	float LAKEMASK(Time, south_north, west_east) ;
+		LAKEMASK:FieldType = 104 ;
+		LAKEMASK:MemoryOrder = "XY " ;
+		LAKEMASK:description = "LAKE MASK (1 FOR LAKE, 0 FOR NON-LAKE)" ;
+		LAKEMASK:units = "" ;
+		LAKEMASK:stagger = "" ;
+		LAKEMASK:coordinates = "XLONG XLAT XTIME" ;
+	float SST(Time, south_north, west_east) ;
+		SST:FieldType = 104 ;
+		SST:MemoryOrder = "XY " ;
+		SST:description = "SEA SURFACE TEMPERATURE" ;
+		SST:units = "K" ;
+		SST:stagger = "" ;
+		SST:coordinates = "XLONG XLAT XTIME" ;
+	float SST_INPUT(Time, south_north, west_east) ;
+		SST_INPUT:FieldType = 104 ;
+		SST_INPUT:MemoryOrder = "XY " ;
+		SST_INPUT:description = "SEA SURFACE TEMPERATURE FROM WRFLOWINPUT FILE" ;
+		SST_INPUT:units = "K" ;
+		SST_INPUT:stagger = "" ;
+		SST_INPUT:coordinates = "XLONG XLAT XTIME" ;
+
+// global attributes:
+		:TITLE = " OUTPUT FROM WRF V3.7 MODEL" ;
+		:START_DATE = "2006-01-01_00:00:00" ;
+		:SIMULATION_START_DATE = "2006-01-01_00:00:00" ;
+		:WEST-EAST_GRID_DIMENSION = 420 ;
+		:SOUTH-NORTH_GRID_DIMENSION = 220 ;
+		:BOTTOM-TOP_GRID_DIMENSION = 27 ;
+		:DX = 30000.f ;
+		:DY = 30000.f ;
+		:SKEBS_ON = 0 ;
+		:SPEC_BDY_FINAL_MU = 0 ;
+		:USE_Q_DIABATIC = 0 ;
+		:GRIDTYPE = "C" ;
+		:DIFF_OPT = 1 ;
+		:KM_OPT = 4 ;
+		:DAMP_OPT = 3 ;
+		:DAMPCOEF = 0.2f ;
+		:KHDIF = 0.f ;
+		:KVDIF = 0.f ;
+		:MP_PHYSICS = 3 ;
+		:RA_LW_PHYSICS = 3 ;
+		:RA_SW_PHYSICS = 3 ;
+		:SF_SFCLAY_PHYSICS = 1 ;
+		:SF_SURFACE_PHYSICS = 2 ;
+		:BL_PBL_PHYSICS = 1 ;
+		:CU_PHYSICS = 1 ;
+		:SF_LAKE_PHYSICS = 0 ;
+		:SURFACE_INPUT_SOURCE = 1 ;
+		:SST_UPDATE = 1 ;
+		:GRID_FDDA = 2 ;
+		:GFDDA_INTERVAL_M = 360 ;
+		:GFDDA_END_H = 999999 ;
+		:GRID_SFDDA = 0 ;
+		:SGFDDA_INTERVAL_M = 0 ;
+		:SGFDDA_END_H = 0 ;
+		:HYPSOMETRIC_OPT = 2 ;
+		:USE_THETA_M = 0 ;
+		:SF_URBAN_PHYSICS = 0 ;
+		:SHCU_PHYSICS = 0 ;
+		:MFSHCONV = 0 ;
+		:FEEDBACK = 1 ;
+		:SMOOTH_OPTION = 0 ;
+		:SWRAD_SCAT = 1.f ;
+		:W_DAMPING = 0 ;
+		:DT = 180.f ;
+		:RADT = 10.f ;
+		:BLDT = 0.f ;
+		:CUDT = 0.f ;
+		:AER_OPT = 0 ;
+		:SWINT_OPT = 0 ;
+		:AER_TYPE = 1 ;
+		:AER_AOD550_OPT = 1 ;
+		:AER_ANGEXP_OPT = 1 ;
+		:AER_SSA_OPT = 1 ;
+		:AER_ASY_OPT = 1 ;
+		:AER_AOD550_VAL = 0.12f ;
+		:AER_ANGEXP_VAL = 1.3f ;
+		:AER_SSA_VAL = 1.401298e-045f ;
+		:AER_ASY_VAL = 1.401298e-045f ;
+		:MOIST_ADV_OPT = 1 ;
+		:SCALAR_ADV_OPT = 1 ;
+		:TKE_ADV_OPT = 1 ;
+		:DIFF_6TH_OPT = 0 ;
+		:DIFF_6TH_FACTOR = 0.12f ;
+		:FGDT = 30.f ;
+		:GUV = 0.0003f ;
+		:GT = 0.0003f ;
+		:GPH = 0.f ;
+		:IF_RAMPING = 0 ;
+		:DTRAMP_MIN = 60.f ;
+		:OBS_NUDGE_OPT = 0 ;
+		:BUCKET_MM = -1.f ;
+		:BUCKET_J = -1.f ;
+		:PREC_ACC_DT = 0.f ;
+		:SF_OCEAN_PHYSICS = 0 ;
+		:ISFTCFLX = 0 ;
+		:ISHALLOW = 0 ;
+		:ISFFLX = 1 ;
+		:ICLOUD = 1 ;
+		:ICLOUD_CU = 0 ;
+		:TRACER_PBLMIX = 1 ;
+		:SCALAR_PBLMIX = 0 ;
+		:YSU_TOPDOWN_PBLMIX = 0 ;
+		:GRAV_SETTLING = 0 ;
+		:DFI_OPT = 0 ;
+		:SIMULATION_INITIALIZATION_TYPE = "REAL-DATA CASE" ;
+		:WEST-EAST_PATCH_START_UNSTAG = 1 ;
+		:WEST-EAST_PATCH_END_UNSTAG = 419 ;
+		:WEST-EAST_PATCH_START_STAG = 1 ;
+		:WEST-EAST_PATCH_END_STAG = 420 ;
+		:SOUTH-NORTH_PATCH_START_UNSTAG = 1 ;
+		:SOUTH-NORTH_PATCH_END_UNSTAG = 219 ;
+		:SOUTH-NORTH_PATCH_START_STAG = 1 ;
+		:SOUTH-NORTH_PATCH_END_STAG = 220 ;
+		:BOTTOM-TOP_PATCH_START_UNSTAG = 1 ;
+		:BOTTOM-TOP_PATCH_END_UNSTAG = 26 ;
+		:BOTTOM-TOP_PATCH_START_STAG = 1 ;
+		:BOTTOM-TOP_PATCH_END_STAG = 27 ;
+		:GRID_ID = 1 ;
+		:PARENT_ID = 0 ;
+		:I_PARENT_START = 1 ;
+		:J_PARENT_START = 1 ;
+		:PARENT_GRID_RATIO = 1 ;
+		:CEN_LAT = 27.50001f ;
+		:CEN_LON = 135.f ;
+		:TRUELAT1 = 18.3f ;
+		:TRUELAT2 = 36.6f ;
+		:MOAD_CEN_LAT = 27.50001f ;
+		:STAND_LON = 135.f ;
+		:POLE_LAT = 90.f ;
+		:POLE_LON = 0.f ;
+		:GMT = 0.f ;
+		:JULYR = 2006 ;
+		:JULDAY = 1 ;
+		:MAP_PROJ = 1 ;
+		:MAP_PROJ_CHAR = "Lambert Conformal" ;
+		:MMINLU = "MODIFIED_IGBP_MODIS_NOAH" ;
+		:NUM_LAND_CAT = 20 ;
+		:ISWATER = 17 ;
+		:ISLAKE = -1 ;
+		:ISICE = 15 ;
+		:ISURBAN = 13 ;
+		:ISOILWATER = 14 ;
+data:
+
+ Times =
+  // Times(0, 0-18)
+    "2006-01-01_00:00:00",
+  // Times(1, 0-18)
+    "2006-01-01_06:00:00",
+  // Times(2, 0-18)
+    "2006-01-01_12:00:00",
+  // Times(3, 0-18)
+    "2006-01-01_18:00:00",
+  // Times(4, 0-18)
+    "2006-01-02_00:00:00",
+  // Times(5, 0-18)
+    "2006-01-02_06:00:00",
+  // Times(6, 0-18)
+    "2006-01-02_12:00:00",
+  // Times(7, 0-18)
+    "2006-01-02_18:00:00",
+  // Times(8, 0-18)
+    "2006-01-03_00:00:00",
+  // Times(9, 0-18)
+    "2006-01-03_06:00:00",
+  // Times(10, 0-18)
+    "2006-01-03_12:00:00",
+  // Times(11, 0-18)
+    "2006-01-03_18:00:00",
+  // Times(12, 0-18)
+    "2006-01-04_00:00:00",
+  // Times(13, 0-18)
+    "2006-01-04_06:00:00",
+  // Times(14, 0-18)
+    "2006-01-04_12:00:00",
+  // Times(15, 0-18)
+    "2006-01-04_18:00:00",
+  // Times(16, 0-18)
+    "2006-01-05_00:00:00",
+  // Times(17, 0-18)
+    "2006-01-05_06:00:00",
+  // Times(18, 0-18)
+    "2006-01-05_12:00:00",
+  // Times(19, 0-18)
+    "2006-01-05_18:00:00",
+  // Times(20, 0-18)
+    "2006-01-06_00:00:00",
+  // Times(21, 0-18)
+    "2006-01-06_06:00:00",
+  // Times(22, 0-18)
+    "2006-01-06_12:00:00",
+  // Times(23, 0-18)
+    "2006-01-06_18:00:00",
+  // Times(24, 0-18)
+    "2006-01-07_00:00:00",
+  // Times(25, 0-18)
+    "2006-01-07_06:00:00",
+  // Times(26, 0-18)
+    "2006-01-07_12:00:00",
+  // Times(27, 0-18)
+    "2006-01-07_18:00:00",
+  // Times(28, 0-18)
+    "2006-01-08_00:00:00",
+  // Times(29, 0-18)
+    "2006-01-08_06:00:00",
+  // Times(30, 0-18)
+    "2006-01-08_12:00:00",
+  // Times(31, 0-18)
+    "2006-01-08_18:00:00",
+  // Times(32, 0-18)
+    "2006-01-09_00:00:00",
+  // Times(33, 0-18)
+    "2006-01-09_06:00:00",
+  // Times(34, 0-18)
+    "2006-01-09_12:00:00",
+  // Times(35, 0-18)
+    "2006-01-09_18:00:00",
+  // Times(36, 0-18)
+    "2006-01-10_00:00:00",
+  // Times(37, 0-18)
+    "2006-01-10_06:00:00",
+  // Times(38, 0-18)
+    "2006-01-10_12:00:00",
+  // Times(39, 0-18)
+    "2006-01-10_18:00:00",
+  // Times(40, 0-18)
+    "2006-01-11_00:00:00",
+  // Times(41, 0-18)
+    "2006-01-11_06:00:00",
+  // Times(42, 0-18)
+    "2006-01-11_12:00:00",
+  // Times(43, 0-18)
+    "2006-01-11_18:00:00",
+  // Times(44, 0-18)
+    "2006-01-12_00:00:00",
+  // Times(45, 0-18)
+    "2006-01-12_06:00:00",
+  // Times(46, 0-18)
+    "2006-01-12_12:00:00",
+  // Times(47, 0-18)
+    "2006-01-12_18:00:00",
+  // Times(48, 0-18)
+    "2006-01-13_00:00:00",
+  // Times(49, 0-18)
+    "2006-01-13_06:00:00",
+  // Times(50, 0-18)
+    "2006-01-13_12:00:00",
+  // Times(51, 0-18)
+    "2006-01-13_18:00:00",
+  // Times(52, 0-18)
+    "2006-01-14_00:00:00",
+  // Times(53, 0-18)
+    "2006-01-14_06:00:00",
+  // Times(54, 0-18)
+    "2006-01-14_12:00:00",
+  // Times(55, 0-18)
+    "2006-01-14_18:00:00",
+  // Times(56, 0-18)
+    "2006-01-15_00:00:00",
+  // Times(57, 0-18)
+    "2006-01-15_06:00:00",
+  // Times(58, 0-18)
+    "2006-01-15_12:00:00",
+  // Times(59, 0-18)
+    "2006-01-15_18:00:00",
+  // Times(60, 0-18)
+    "2006-01-16_00:00:00",
+  // Times(61, 0-18)
+    "2006-01-16_06:00:00",
+  // Times(62, 0-18)
+    "2006-01-16_12:00:00",
+  // Times(63, 0-18)
+    "2006-01-16_18:00:00",
+  // Times(64, 0-18)
+    "2006-01-17_00:00:00",
+  // Times(65, 0-18)
+    "2006-01-17_06:00:00",
+  // Times(66, 0-18)
+    "2006-01-17_12:00:00",
+  // Times(67, 0-18)
+    "2006-01-17_18:00:00",
+  // Times(68, 0-18)
+    "2006-01-18_00:00:00",
+  // Times(69, 0-18)
+    "2006-01-18_06:00:00",
+  // Times(70, 0-18)
+    "2006-01-18_12:00:00",
+  // Times(71, 0-18)
+    "2006-01-18_18:00:00",
+  // Times(72, 0-18)
+    "2006-01-19_00:00:00",
+  // Times(73, 0-18)
+    "2006-01-19_06:00:00",
+  // Times(74, 0-18)
+    "2006-01-19_12:00:00",
+  // Times(75, 0-18)
+    "2006-01-19_18:00:00",
+  // Times(76, 0-18)
+    "2006-01-20_00:00:00",
+  // Times(77, 0-18)
+    "2006-01-20_06:00:00",
+  // Times(78, 0-18)
+    "2006-01-20_12:00:00",
+  // Times(79, 0-18)
+    "2006-01-20_18:00:00",
+  // Times(80, 0-18)
+    "2006-01-21_00:00:00",
+  // Times(81, 0-18)
+    "2006-01-21_06:00:00",
+  // Times(82, 0-18)
+    "2006-01-21_12:00:00",
+  // Times(83, 0-18)
+    "2006-01-21_18:00:00",
+  // Times(84, 0-18)
+    "2006-01-22_00:00:00",
+  // Times(85, 0-18)
+    "2006-01-22_06:00:00",
+  // Times(86, 0-18)
+    "2006-01-22_12:00:00",
+  // Times(87, 0-18)
+    "2006-01-22_18:00:00",
+  // Times(88, 0-18)
+    "2006-01-23_00:00:00",
+  // Times(89, 0-18)
+    "2006-01-23_06:00:00",
+  // Times(90, 0-18)
+    "2006-01-23_12:00:00",
+  // Times(91, 0-18)
+    "2006-01-23_18:00:00",
+  // Times(92, 0-18)
+    "2006-01-24_00:00:00",
+  // Times(93, 0-18)
+    "2006-01-24_06:00:00",
+  // Times(94, 0-18)
+    "2006-01-24_12:00:00",
+  // Times(95, 0-18)
+    "2006-01-24_18:00:00",
+  // Times(96, 0-18)
+    "2006-01-25_00:00:00",
+  // Times(97, 0-18)
+    "2006-01-25_06:00:00",
+  // Times(98, 0-18)
+    "2006-01-25_12:00:00",
+  // Times(99, 0-18)
+    "2006-01-25_18:00:00",
+  // Times(100, 0-18)
+    "2006-01-26_00:00:00",
+  // Times(101, 0-18)
+    "2006-01-26_06:00:00",
+  // Times(102, 0-18)
+    "2006-01-26_12:00:00",
+  // Times(103, 0-18)
+    "2006-01-26_18:00:00",
+  // Times(104, 0-18)
+    "2006-01-27_00:00:00",
+  // Times(105, 0-18)
+    "2006-01-27_06:00:00",
+  // Times(106, 0-18)
+    "2006-01-27_12:00:00",
+  // Times(107, 0-18)
+    "2006-01-27_18:00:00",
+  // Times(108, 0-18)
+    "2006-01-28_00:00:00",
+  // Times(109, 0-18)
+    "2006-01-28_06:00:00",
+  // Times(110, 0-18)
+    "2006-01-28_12:00:00",
+  // Times(111, 0-18)
+    "2006-01-28_18:00:00",
+  // Times(112, 0-18)
+    "2006-01-29_00:00:00",
+  // Times(113, 0-18)
+    "2006-01-29_06:00:00",
+  // Times(114, 0-18)
+    "2006-01-29_12:00:00",
+  // Times(115, 0-18)
+    "2006-01-29_18:00:00",
+  // Times(116, 0-18)
+    "2006-01-30_00:00:00",
+  // Times(117, 0-18)
+    "2006-01-30_06:00:00",
+  // Times(118, 0-18)
+    "2006-01-30_12:00:00",
+  // Times(119, 0-18)
+    "2006-01-30_18:00:00",
+  // Times(120, 0-18)
+    "2006-01-31_00:00:00",
+  // Times(121, 0-18)
+    "2006-01-31_06:00:00",
+  // Times(122, 0-18)
+    "2006-01-31_12:00:00",
+  // Times(123, 0-18)
+    "2006-01-31_18:00:00",
+  // Times(124, 0-18)
+    "2006-02-01_00:00:00",
+  // Times(125, 0-18)
+    "2006-02-01_06:00:00",
+  // Times(126, 0-18)
+    "2006-02-01_12:00:00",
+  // Times(127, 0-18)
+    "2006-02-01_18:00:00",
+  // Times(128, 0-18)
+    "2006-02-02_00:00:00",
+  // Times(129, 0-18)
+    "2006-02-02_06:00:00",
+  // Times(130, 0-18)
+    "2006-02-02_12:00:00",
+  // Times(131, 0-18)
+    "2006-02-02_18:00:00",
+  // Times(132, 0-18)
+    "2006-02-03_00:00:00",
+  // Times(133, 0-18)
+    "2006-02-03_06:00:00",
+  // Times(134, 0-18)
+    "2006-02-03_12:00:00",
+  // Times(135, 0-18)
+    "2006-02-03_18:00:00",
+  // Times(136, 0-18)
+    "2006-02-04_00:00:00",
+  // Times(137, 0-18)
+    "2006-02-04_06:00:00",
+  // Times(138, 0-18)
+    "2006-02-04_12:00:00",
+  // Times(139, 0-18)
+    "2006-02-04_18:00:00",
+  // Times(140, 0-18)
+    "2006-02-05_00:00:00",
+  // Times(141, 0-18)
+    "2006-02-05_06:00:00",
+  // Times(142, 0-18)
+    "2006-02-05_12:00:00",
+  // Times(143, 0-18)
+    "2006-02-05_18:00:00",
+  // Times(144, 0-18)
+    "2006-02-06_00:00:00",
+  // Times(145, 0-18)
+    "2006-02-06_06:00:00",
+  // Times(146, 0-18)
+    "2006-02-06_12:00:00",
+  // Times(147, 0-18)
+    "2006-02-06_18:00:00",
+  // Times(148, 0-18)
+    "2006-02-07_00:00:00",
+  // Times(149, 0-18)
+    "2006-02-07_06:00:00",
+  // Times(150, 0-18)
+    "2006-02-07_12:00:00",
+  // Times(151, 0-18)
+    "2006-02-07_18:00:00",
+  // Times(152, 0-18)
+    "2006-02-08_00:00:00",
+  // Times(153, 0-18)
+    "2006-02-08_06:00:00",
+  // Times(154, 0-18)
+    "2006-02-08_12:00:00",
+  // Times(155, 0-18)
+    "2006-02-08_18:00:00",
+  // Times(156, 0-18)
+    "2006-02-09_00:00:00",
+  // Times(157, 0-18)
+    "2006-02-09_06:00:00",
+  // Times(158, 0-18)
+    "2006-02-09_12:00:00",
+  // Times(159, 0-18)
+    "2006-02-09_18:00:00",
+  // Times(160, 0-18)
+    "2006-02-10_00:00:00",
+  // Times(161, 0-18)
+    "2006-02-10_06:00:00",
+  // Times(162, 0-18)
+    "2006-02-10_12:00:00",
+  // Times(163, 0-18)
+    "2006-02-10_18:00:00",
+  // Times(164, 0-18)
+    "2006-02-11_00:00:00",
+  // Times(165, 0-18)
+    "2006-02-11_06:00:00",
+  // Times(166, 0-18)
+    "2006-02-11_12:00:00",
+  // Times(167, 0-18)
+    "2006-02-11_18:00:00",
+  // Times(168, 0-18)
+    "2006-02-12_00:00:00",
+  // Times(169, 0-18)
+    "2006-02-12_06:00:00",
+  // Times(170, 0-18)
+    "2006-02-12_12:00:00",
+  // Times(171, 0-18)
+    "2006-02-12_18:00:00",
+  // Times(172, 0-18)
+    "2006-02-13_00:00:00",
+  // Times(173, 0-18)
+    "2006-02-13_06:00:00",
+  // Times(174, 0-18)
+    "2006-02-13_12:00:00",
+  // Times(175, 0-18)
+    "2006-02-13_18:00:00",
+  // Times(176, 0-18)
+    "2006-02-14_00:00:00",
+  // Times(177, 0-18)
+    "2006-02-14_06:00:00",
+  // Times(178, 0-18)
+    "2006-02-14_12:00:00",
+  // Times(179, 0-18)
+    "2006-02-14_18:00:00",
+  // Times(180, 0-18)
+    "2006-02-15_00:00:00",
+  // Times(181, 0-18)
+    "2006-02-15_06:00:00",
+  // Times(182, 0-18)
+    "2006-02-15_12:00:00",
+  // Times(183, 0-18)
+    "2006-02-15_18:00:00",
+  // Times(184, 0-18)
+    "2006-02-16_00:00:00",
+  // Times(185, 0-18)
+    "2006-02-16_06:00:00",
+  // Times(186, 0-18)
+    "2006-02-16_12:00:00",
+  // Times(187, 0-18)
+    "2006-02-16_18:00:00",
+  // Times(188, 0-18)
+    "2006-02-17_00:00:00",
+  // Times(189, 0-18)
+    "2006-02-17_06:00:00",
+  // Times(190, 0-18)
+    "2006-02-17_12:00:00",
+  // Times(191, 0-18)
+    "2006-02-17_18:00:00",
+  // Times(192, 0-18)
+    "2006-02-18_00:00:00",
+  // Times(193, 0-18)
+    "2006-02-18_06:00:00",
+  // Times(194, 0-18)
+    "2006-02-18_12:00:00",
+  // Times(195, 0-18)
+    "2006-02-18_18:00:00",
+  // Times(196, 0-18)
+    "2006-02-19_00:00:00",
+  // Times(197, 0-18)
+    "2006-02-19_06:00:00",
+  // Times(198, 0-18)
+    "2006-02-19_12:00:00",
+  // Times(199, 0-18)
+    "2006-02-19_18:00:00",
+  // Times(200, 0-18)
+    "2006-02-20_00:00:00",
+  // Times(201, 0-18)
+    "2006-02-20_06:00:00",
+  // Times(202, 0-18)
+    "2006-02-20_12:00:00",
+  // Times(203, 0-18)
+    "2006-02-20_18:00:00",
+  // Times(204, 0-18)
+    "2006-02-21_00:00:00",
+  // Times(205, 0-18)
+    "2006-02-21_06:00:00",
+  // Times(206, 0-18)
+    "2006-02-21_12:00:00",
+  // Times(207, 0-18)
+    "2006-02-21_18:00:00",
+  // Times(208, 0-18)
+    "2006-02-22_00:00:00",
+  // Times(209, 0-18)
+    "2006-02-22_06:00:00",
+  // Times(210, 0-18)
+    "2006-02-22_12:00:00",
+  // Times(211, 0-18)
+    "2006-02-22_18:00:00",
+  // Times(212, 0-18)
+    "2006-02-23_00:00:00",
+  // Times(213, 0-18)
+    "2006-02-23_06:00:00",
+  // Times(214, 0-18)
+    "2006-02-23_12:00:00",
+  // Times(215, 0-18)
+    "2006-02-23_18:00:00",
+  // Times(216, 0-18)
+    "2006-02-24_00:00:00",
+  // Times(217, 0-18)
+    "2006-02-24_06:00:00",
+  // Times(218, 0-18)
+    "2006-02-24_12:00:00",
+  // Times(219, 0-18)
+    "2006-02-24_18:00:00",
+  // Times(220, 0-18)
+    "2006-02-25_00:00:00",
+  // Times(221, 0-18)
+    "2006-02-25_06:00:00",
+  // Times(222, 0-18)
+    "2006-02-25_12:00:00",
+  // Times(223, 0-18)
+    "2006-02-25_18:00:00",
+  // Times(224, 0-18)
+    "2006-02-26_00:00:00",
+  // Times(225, 0-18)
+    "2006-02-26_06:00:00",
+  // Times(226, 0-18)
+    "2006-02-26_12:00:00",
+  // Times(227, 0-18)
+    "2006-02-26_18:00:00",
+  // Times(228, 0-18)
+    "2006-02-27_00:00:00",
+  // Times(229, 0-18)
+    "2006-02-27_06:00:00",
+  // Times(230, 0-18)
+    "2006-02-27_12:00:00",
+  // Times(231, 0-18)
+    "2006-02-27_18:00:00",
+  // Times(232, 0-18)
+    "2006-02-28_00:00:00",
+  // Times(233, 0-18)
+    "2006-02-28_06:00:00",
+  // Times(234, 0-18)
+    "2006-02-28_12:00:00",
+  // Times(235, 0-18)
+    "2006-02-28_18:00:00",
+  // Times(236, 0-18)
+    "2006-03-01_00:00:00",
+  // Times(237, 0-18)
+    "2006-03-01_06:00:00",
+  // Times(238, 0-18)
+    "2006-03-01_12:00:00",
+  // Times(239, 0-18)
+    "2006-03-01_18:00:00",
+  // Times(240, 0-18)
+    "2006-03-02_00:00:00",
+  // Times(241, 0-18)
+    "2006-03-02_06:00:00",
+  // Times(242, 0-18)
+    "2006-03-02_12:00:00",
+  // Times(243, 0-18)
+    "2006-03-02_18:00:00",
+  // Times(244, 0-18)
+    "2006-03-03_00:00:00",
+  // Times(245, 0-18)
+    "2006-03-03_06:00:00",
+  // Times(246, 0-18)
+    "2006-03-03_12:00:00",
+  // Times(247, 0-18)
+    "2006-03-03_18:00:00",
+  // Times(248, 0-18)
+    "2006-03-04_00:00:00",
+  // Times(249, 0-18)
+    "2006-03-04_06:00:00",
+  // Times(250, 0-18)
+    "2006-03-04_12:00:00",
+  // Times(251, 0-18)
+    "2006-03-04_18:00:00",
+  // Times(252, 0-18)
+    "2006-03-05_00:00:00",
+  // Times(253, 0-18)
+    "2006-03-05_06:00:00",
+  // Times(254, 0-18)
+    "2006-03-05_12:00:00",
+  // Times(255, 0-18)
+    "2006-03-05_18:00:00",
+  // Times(256, 0-18)
+    "2006-03-06_00:00:00",
+  // Times(257, 0-18)
+    "2006-03-06_06:00:00",
+  // Times(258, 0-18)
+    "2006-03-06_12:00:00",
+  // Times(259, 0-18)
+    "2006-03-06_18:00:00",
+  // Times(260, 0-18)
+    "2006-03-07_00:00:00",
+  // Times(261, 0-18)
+    "2006-03-07_06:00:00",
+  // Times(262, 0-18)
+    "2006-03-07_12:00:00",
+  // Times(263, 0-18)
+    "2006-03-07_18:00:00",
+  // Times(264, 0-18)
+    "2006-03-08_00:00:00",
+  // Times(265, 0-18)
+    "2006-03-08_06:00:00",
+  // Times(266, 0-18)
+    "2006-03-08_12:00:00",
+  // Times(267, 0-18)
+    "2006-03-08_18:00:00",
+  // Times(268, 0-18)
+    "2006-03-09_00:00:00",
+  // Times(269, 0-18)
+    "2006-03-09_06:00:00",
+  // Times(270, 0-18)
+    "2006-03-09_12:00:00",
+  // Times(271, 0-18)
+    "2006-03-09_18:00:00",
+  // Times(272, 0-18)
+    "2006-03-10_00:00:00",
+  // Times(273, 0-18)
+    "2006-03-10_06:00:00",
+  // Times(274, 0-18)
+    "2006-03-10_12:00:00",
+  // Times(275, 0-18)
+    "2006-03-10_18:00:00",
+  // Times(276, 0-18)
+    "2006-03-11_00:00:00",
+  // Times(277, 0-18)
+    "2006-03-11_06:00:00",
+  // Times(278, 0-18)
+    "2006-03-11_12:00:00",
+  // Times(279, 0-18)
+    "2006-03-11_18:00:00",
+  // Times(280, 0-18)
+    "2006-03-12_00:00:00",
+  // Times(281, 0-18)
+    "2006-03-12_06:00:00",
+  // Times(282, 0-18)
+    "2006-03-12_12:00:00",
+  // Times(283, 0-18)
+    "2006-03-12_18:00:00",
+  // Times(284, 0-18)
+    "2006-03-13_00:00:00",
+  // Times(285, 0-18)
+    "2006-03-13_06:00:00",
+  // Times(286, 0-18)
+    "2006-03-13_12:00:00",
+  // Times(287, 0-18)
+    "2006-03-13_18:00:00",
+  // Times(288, 0-18)
+    "2006-03-14_00:00:00",
+  // Times(289, 0-18)
+    "2006-03-14_06:00:00",
+  // Times(290, 0-18)
+    "2006-03-14_12:00:00",
+  // Times(291, 0-18)
+    "2006-03-14_18:00:00",
+  // Times(292, 0-18)
+    "2006-03-15_00:00:00",
+  // Times(293, 0-18)
+    "2006-03-15_06:00:00",
+  // Times(294, 0-18)
+    "2006-03-15_12:00:00",
+  // Times(295, 0-18)
+    "2006-03-15_18:00:00",
+  // Times(296, 0-18)
+    "2006-03-16_00:00:00",
+  // Times(297, 0-18)
+    "2006-03-16_06:00:00",
+  // Times(298, 0-18)
+    "2006-03-16_12:00:00",
+  // Times(299, 0-18)
+    "2006-03-16_18:00:00",
+  // Times(300, 0-18)
+    "2006-03-17_00:00:00",
+  // Times(301, 0-18)
+    "2006-03-17_06:00:00",
+  // Times(302, 0-18)
+    "2006-03-17_12:00:00",
+  // Times(303, 0-18)
+    "2006-03-17_18:00:00",
+  // Times(304, 0-18)
+    "2006-03-18_00:00:00",
+  // Times(305, 0-18)
+    "2006-03-18_06:00:00",
+  // Times(306, 0-18)
+    "2006-03-18_12:00:00",
+  // Times(307, 0-18)
+    "2006-03-18_18:00:00",
+  // Times(308, 0-18)
+    "2006-03-19_00:00:00",
+  // Times(309, 0-18)
+    "2006-03-19_06:00:00",
+  // Times(310, 0-18)
+    "2006-03-19_12:00:00",
+  // Times(311, 0-18)
+    "2006-03-19_18:00:00",
+  // Times(312, 0-18)
+    "2006-03-20_00:00:00",
+  // Times(313, 0-18)
+    "2006-03-20_06:00:00",
+  // Times(314, 0-18)
+    "2006-03-20_12:00:00",
+  // Times(315, 0-18)
+    "2006-03-20_18:00:00",
+  // Times(316, 0-18)
+    "2006-03-21_00:00:00",
+  // Times(317, 0-18)
+    "2006-03-21_06:00:00",
+  // Times(318, 0-18)
+    "2006-03-21_12:00:00",
+  // Times(319, 0-18)
+    "2006-03-21_18:00:00",
+  // Times(320, 0-18)
+    "2006-03-22_00:00:00",
+  // Times(321, 0-18)
+    "2006-03-22_06:00:00",
+  // Times(322, 0-18)
+    "2006-03-22_12:00:00",
+  // Times(323, 0-18)
+    "2006-03-22_18:00:00",
+  // Times(324, 0-18)
+    "2006-03-23_00:00:00",
+  // Times(325, 0-18)
+    "2006-03-23_06:00:00",
+  // Times(326, 0-18)
+    "2006-03-23_12:00:00",
+  // Times(327, 0-18)
+    "2006-03-23_18:00:00",
+  // Times(328, 0-18)
+    "2006-03-24_00:00:00",
+  // Times(329, 0-18)
+    "2006-03-24_06:00:00",
+  // Times(330, 0-18)
+    "2006-03-24_12:00:00",
+  // Times(331, 0-18)
+    "2006-03-24_18:00:00",
+  // Times(332, 0-18)
+    "2006-03-25_00:00:00",
+  // Times(333, 0-18)
+    "2006-03-25_06:00:00",
+  // Times(334, 0-18)
+    "2006-03-25_12:00:00",
+  // Times(335, 0-18)
+    "2006-03-25_18:00:00",
+  // Times(336, 0-18)
+    "2006-03-26_00:00:00",
+  // Times(337, 0-18)
+    "2006-03-26_06:00:00",
+  // Times(338, 0-18)
+    "2006-03-26_12:00:00",
+  // Times(339, 0-18)
+    "2006-03-26_18:00:00",
+  // Times(340, 0-18)
+    "2006-03-27_00:00:00",
+  // Times(341, 0-18)
+    "2006-03-27_06:00:00",
+  // Times(342, 0-18)
+    "2006-03-27_12:00:00",
+  // Times(343, 0-18)
+    "2006-03-27_18:00:00",
+  // Times(344, 0-18)
+    "2006-03-28_00:00:00",
+  // Times(345, 0-18)
+    "2006-03-28_06:00:00",
+  // Times(346, 0-18)
+    "2006-03-28_12:00:00",
+  // Times(347, 0-18)
+    "2006-03-28_18:00:00",
+  // Times(348, 0-18)
+    "2006-03-29_00:00:00",
+  // Times(349, 0-18)
+    "2006-03-29_06:00:00",
+  // Times(350, 0-18)
+    "2006-03-29_12:00:00",
+  // Times(351, 0-18)
+    "2006-03-29_18:00:00",
+  // Times(352, 0-18)
+    "2006-03-30_00:00:00",
+  // Times(353, 0-18)
+    "2006-03-30_06:00:00",
+  // Times(354, 0-18)
+    "2006-03-30_12:00:00",
+  // Times(355, 0-18)
+    "2006-03-30_18:00:00",
+  // Times(356, 0-18)
+    "2006-03-31_00:00:00",
+  // Times(357, 0-18)
+    "2006-03-31_06:00:00",
+  // Times(358, 0-18)
+    "2006-03-31_12:00:00",
+  // Times(359, 0-18)
+    "2006-03-31_18:00:00",
+  // Times(360, 0-18)
+    "2006-04-01_00:00:00",
+  // Times(361, 0-18)
+    "2006-04-01_06:00:00",
+  // Times(362, 0-18)
+    "2006-04-01_12:00:00",
+  // Times(363, 0-18)
+    "2006-04-01_18:00:00",
+  // Times(364, 0-18)
+    "2006-04-02_00:00:00",
+  // Times(365, 0-18)
+    "2006-04-02_06:00:00",
+  // Times(366, 0-18)
+    "2006-04-02_12:00:00",
+  // Times(367, 0-18)
+    "2006-04-02_18:00:00",
+  // Times(368, 0-18)
+    "2006-04-03_00:00:00",
+  // Times(369, 0-18)
+    "2006-04-03_06:00:00",
+  // Times(370, 0-18)
+    "2006-04-03_12:00:00",
+  // Times(371, 0-18)
+    "2006-04-03_18:00:00",
+  // Times(372, 0-18)
+    "2006-04-04_00:00:00",
+  // Times(373, 0-18)
+    "2006-04-04_06:00:00",
+  // Times(374, 0-18)
+    "2006-04-04_12:00:00",
+  // Times(375, 0-18)
+    "2006-04-04_18:00:00",
+  // Times(376, 0-18)
+    "2006-04-05_00:00:00",
+  // Times(377, 0-18)
+    "2006-04-05_06:00:00",
+  // Times(378, 0-18)
+    "2006-04-05_12:00:00",
+  // Times(379, 0-18)
+    "2006-04-05_18:00:00",
+  // Times(380, 0-18)
+    "2006-04-06_00:00:00",
+  // Times(381, 0-18)
+    "2006-04-06_06:00:00",
+  // Times(382, 0-18)
+    "2006-04-06_12:00:00",
+  // Times(383, 0-18)
+    "2006-04-06_18:00:00",
+  // Times(384, 0-18)
+    "2006-04-07_00:00:00",
+  // Times(385, 0-18)
+    "2006-04-07_06:00:00",
+  // Times(386, 0-18)
+    "2006-04-07_12:00:00",
+  // Times(387, 0-18)
+    "2006-04-07_18:00:00",
+  // Times(388, 0-18)
+    "2006-04-08_00:00:00",
+  // Times(389, 0-18)
+    "2006-04-08_06:00:00",
+  // Times(390, 0-18)
+    "2006-04-08_12:00:00",
+  // Times(391, 0-18)
+    "2006-04-08_18:00:00",
+  // Times(392, 0-18)
+    "2006-04-09_00:00:00",
+  // Times(393, 0-18)
+    "2006-04-09_06:00:00",
+  // Times(394, 0-18)
+    "2006-04-09_12:00:00",
+  // Times(395, 0-18)
+    "2006-04-09_18:00:00",
+  // Times(396, 0-18)
+    "2006-04-10_00:00:00",
+  // Times(397, 0-18)
+    "2006-04-10_06:00:00",
+  // Times(398, 0-18)
+    "2006-04-10_12:00:00",
+  // Times(399, 0-18)
+    "2006-04-10_18:00:00",
+  // Times(400, 0-18)
+    "2006-04-11_00:00:00",
+  // Times(401, 0-18)
+    "2006-04-11_06:00:00",
+  // Times(402, 0-18)
+    "2006-04-11_12:00:00",
+  // Times(403, 0-18)
+    "2006-04-11_18:00:00",
+  // Times(404, 0-18)
+    "2006-04-12_00:00:00",
+  // Times(405, 0-18)
+    "2006-04-12_06:00:00",
+  // Times(406, 0-18)
+    "2006-04-12_12:00:00",
+  // Times(407, 0-18)
+    "2006-04-12_18:00:00",
+  // Times(408, 0-18)
+    "2006-04-13_00:00:00",
+  // Times(409, 0-18)
+    "2006-04-13_06:00:00",
+  // Times(410, 0-18)
+    "2006-04-13_12:00:00",
+  // Times(411, 0-18)
+    "2006-04-13_18:00:00",
+  // Times(412, 0-18)
+    "2006-04-14_00:00:00",
+  // Times(413, 0-18)
+    "2006-04-14_06:00:00",
+  // Times(414, 0-18)
+    "2006-04-14_12:00:00",
+  // Times(415, 0-18)
+    "2006-04-14_18:00:00",
+  // Times(416, 0-18)
+    "2006-04-15_00:00:00",
+  // Times(417, 0-18)
+    "2006-04-15_06:00:00",
+  // Times(418, 0-18)
+    "2006-04-15_12:00:00",
+  // Times(419, 0-18)
+    "2006-04-15_18:00:00",
+  // Times(420, 0-18)
+    "2006-04-16_00:00:00",
+  // Times(421, 0-18)
+    "2006-04-16_06:00:00",
+  // Times(422, 0-18)
+    "2006-04-16_12:00:00",
+  // Times(423, 0-18)
+    "2006-04-16_18:00:00",
+  // Times(424, 0-18)
+    "2006-04-17_00:00:00",
+  // Times(425, 0-18)
+    "2006-04-17_06:00:00",
+  // Times(426, 0-18)
+    "2006-04-17_12:00:00",
+  // Times(427, 0-18)
+    "2006-04-17_18:00:00",
+  // Times(428, 0-18)
+    "2006-04-18_00:00:00",
+  // Times(429, 0-18)
+    "2006-04-18_06:00:00",
+  // Times(430, 0-18)
+    "2006-04-18_12:00:00",
+  // Times(431, 0-18)
+    "2006-04-18_18:00:00",
+  // Times(432, 0-18)
+    "2006-04-19_00:00:00",
+  // Times(433, 0-18)
+    "2006-04-19_06:00:00",
+  // Times(434, 0-18)
+    "2006-04-19_12:00:00",
+  // Times(435, 0-18)
+    "2006-04-19_18:00:00",
+  // Times(436, 0-18)
+    "2006-04-20_00:00:00",
+  // Times(437, 0-18)
+    "2006-04-20_06:00:00",
+  // Times(438, 0-18)
+    "2006-04-20_12:00:00",
+  // Times(439, 0-18)
+    "2006-04-20_18:00:00",
+  // Times(440, 0-18)
+    "2006-04-21_00:00:00",
+  // Times(441, 0-18)
+    "2006-04-21_06:00:00",
+  // Times(442, 0-18)
+    "2006-04-21_12:00:00",
+  // Times(443, 0-18)
+    "2006-04-21_18:00:00",
+  // Times(444, 0-18)
+    "2006-04-22_00:00:00",
+  // Times(445, 0-18)
+    "2006-04-22_06:00:00",
+  // Times(446, 0-18)
+    "2006-04-22_12:00:00",
+  // Times(447, 0-18)
+    "2006-04-22_18:00:00",
+  // Times(448, 0-18)
+    "2006-04-23_00:00:00",
+  // Times(449, 0-18)
+    "2006-04-23_06:00:00",
+  // Times(450, 0-18)
+    "2006-04-23_12:00:00",
+  // Times(451, 0-18)
+    "2006-04-23_18:00:00",
+  // Times(452, 0-18)
+    "2006-04-24_00:00:00",
+  // Times(453, 0-18)
+    "2006-04-24_06:00:00",
+  // Times(454, 0-18)
+    "2006-04-24_12:00:00",
+  // Times(455, 0-18)
+    "2006-04-24_18:00:00",
+  // Times(456, 0-18)
+    "2006-04-25_00:00:00",
+  // Times(457, 0-18)
+    "2006-04-25_06:00:00",
+  // Times(458, 0-18)
+    "2006-04-25_12:00:00",
+  // Times(459, 0-18)
+    "2006-04-25_18:00:00",
+  // Times(460, 0-18)
+    "2006-04-26_00:00:00",
+  // Times(461, 0-18)
+    "2006-04-26_06:00:00",
+  // Times(462, 0-18)
+    "2006-04-26_12:00:00",
+  // Times(463, 0-18)
+    "2006-04-26_18:00:00",
+  // Times(464, 0-18)
+    "2006-04-27_00:00:00",
+  // Times(465, 0-18)
+    "2006-04-27_06:00:00",
+  // Times(466, 0-18)
+    "2006-04-27_12:00:00",
+  // Times(467, 0-18)
+    "2006-04-27_18:00:00",
+  // Times(468, 0-18)
+    "2006-04-28_00:00:00",
+  // Times(469, 0-18)
+    "2006-04-28_06:00:00",
+  // Times(470, 0-18)
+    "2006-04-28_12:00:00",
+  // Times(471, 0-18)
+    "2006-04-28_18:00:00",
+  // Times(472, 0-18)
+    "2006-04-29_00:00:00",
+  // Times(473, 0-18)
+    "2006-04-29_06:00:00",
+  // Times(474, 0-18)
+    "2006-04-29_12:00:00",
+  // Times(475, 0-18)
+    "2006-04-29_18:00:00",
+  // Times(476, 0-18)
+    "2006-04-30_00:00:00",
+  // Times(477, 0-18)
+    "2006-04-30_06:00:00",
+  // Times(478, 0-18)
+    "2006-04-30_12:00:00",
+  // Times(479, 0-18)
+    "2006-04-30_18:00:00",
+  // Times(480, 0-18)
+    "2006-05-01_00:00:00",
+  // Times(481, 0-18)
+    "2006-05-01_06:00:00",
+  // Times(482, 0-18)
+    "2006-05-01_12:00:00",
+  // Times(483, 0-18)
+    "2006-05-01_18:00:00",
+  // Times(484, 0-18)
+    "2006-05-02_00:00:00",
+  // Times(485, 0-18)
+    "2006-05-02_06:00:00",
+  // Times(486, 0-18)
+    "2006-05-02_12:00:00",
+  // Times(487, 0-18)
+    "2006-05-02_18:00:00",
+  // Times(488, 0-18)
+    "2006-05-03_00:00:00",
+  // Times(489, 0-18)
+    "2006-05-03_06:00:00",
+  // Times(490, 0-18)
+    "2006-05-03_12:00:00",
+  // Times(491, 0-18)
+    "2006-05-03_18:00:00",
+  // Times(492, 0-18)
+    "2006-05-04_00:00:00",
+  // Times(493, 0-18)
+    "2006-05-04_06:00:00",
+  // Times(494, 0-18)
+    "2006-05-04_12:00:00",
+  // Times(495, 0-18)
+    "2006-05-04_18:00:00",
+  // Times(496, 0-18)
+    "2006-05-05_00:00:00",
+  // Times(497, 0-18)
+    "2006-05-05_06:00:00",
+  // Times(498, 0-18)
+    "2006-05-05_12:00:00",
+  // Times(499, 0-18)
+    "2006-05-05_18:00:00",
+  // Times(500, 0-18)
+    "2006-05-06_00:00:00",
+  // Times(501, 0-18)
+    "2006-05-06_06:00:00",
+  // Times(502, 0-18)
+    "2006-05-06_12:00:00",
+  // Times(503, 0-18)
+    "2006-05-06_18:00:00",
+  // Times(504, 0-18)
+    "2006-05-07_00:00:00",
+  // Times(505, 0-18)
+    "2006-05-07_06:00:00",
+  // Times(506, 0-18)
+    "2006-05-07_12:00:00",
+  // Times(507, 0-18)
+    "2006-05-07_18:00:00",
+  // Times(508, 0-18)
+    "2006-05-08_00:00:00",
+  // Times(509, 0-18)
+    "2006-05-08_06:00:00",
+  // Times(510, 0-18)
+    "2006-05-08_12:00:00",
+  // Times(511, 0-18)
+    "2006-05-08_18:00:00",
+  // Times(512, 0-18)
+    "2006-05-09_00:00:00",
+  // Times(513, 0-18)
+    "2006-05-09_06:00:00",
+  // Times(514, 0-18)
+    "2006-05-09_12:00:00",
+  // Times(515, 0-18)
+    "2006-05-09_18:00:00",
+  // Times(516, 0-18)
+    "2006-05-10_00:00:00",
+  // Times(517, 0-18)
+    "2006-05-10_06:00:00",
+  // Times(518, 0-18)
+    "2006-05-10_12:00:00",
+  // Times(519, 0-18)
+    "2006-05-10_18:00:00",
+  // Times(520, 0-18)
+    "2006-05-11_00:00:00",
+  // Times(521, 0-18)
+    "2006-05-11_06:00:00",
+  // Times(522, 0-18)
+    "2006-05-11_12:00:00",
+  // Times(523, 0-18)
+    "2006-05-11_18:00:00",
+  // Times(524, 0-18)
+    "2006-05-12_00:00:00",
+  // Times(525, 0-18)
+    "2006-05-12_06:00:00",
+  // Times(526, 0-18)
+    "2006-05-12_12:00:00",
+  // Times(527, 0-18)
+    "2006-05-12_18:00:00",
+  // Times(528, 0-18)
+    "2006-05-13_00:00:00",
+  // Times(529, 0-18)
+    "2006-05-13_06:00:00",
+  // Times(530, 0-18)
+    "2006-05-13_12:00:00",
+  // Times(531, 0-18)
+    "2006-05-13_18:00:00",
+  // Times(532, 0-18)
+    "2006-05-14_00:00:00",
+  // Times(533, 0-18)
+    "2006-05-14_06:00:00",
+  // Times(534, 0-18)
+    "2006-05-14_12:00:00",
+  // Times(535, 0-18)
+    "2006-05-14_18:00:00",
+  // Times(536, 0-18)
+    "2006-05-15_00:00:00",
+  // Times(537, 0-18)
+    "2006-05-15_06:00:00",
+  // Times(538, 0-18)
+    "2006-05-15_12:00:00",
+  // Times(539, 0-18)
+    "2006-05-15_18:00:00",
+  // Times(540, 0-18)
+    "2006-05-16_00:00:00",
+  // Times(541, 0-18)
+    "2006-05-16_06:00:00",
+  // Times(542, 0-18)
+    "2006-05-16_12:00:00",
+  // Times(543, 0-18)
+    "2006-05-16_18:00:00",
+  // Times(544, 0-18)
+    "2006-05-17_00:00:00",
+  // Times(545, 0-18)
+    "2006-05-17_06:00:00",
+  // Times(546, 0-18)
+    "2006-05-17_12:00:00",
+  // Times(547, 0-18)
+    "2006-05-17_18:00:00",
+  // Times(548, 0-18)
+    "2006-05-18_00:00:00",
+  // Times(549, 0-18)
+    "2006-05-18_06:00:00",
+  // Times(550, 0-18)
+    "2006-05-18_12:00:00",
+  // Times(551, 0-18)
+    "2006-05-18_18:00:00",
+  // Times(552, 0-18)
+    "2006-05-19_00:00:00",
+  // Times(553, 0-18)
+    "2006-05-19_06:00:00",
+  // Times(554, 0-18)
+    "2006-05-19_12:00:00",
+  // Times(555, 0-18)
+    "2006-05-19_18:00:00",
+  // Times(556, 0-18)
+    "2006-05-20_00:00:00",
+  // Times(557, 0-18)
+    "2006-05-20_06:00:00",
+  // Times(558, 0-18)
+    "2006-05-20_12:00:00",
+  // Times(559, 0-18)
+    "2006-05-20_18:00:00",
+  // Times(560, 0-18)
+    "2006-05-21_00:00:00",
+  // Times(561, 0-18)
+    "2006-05-21_06:00:00",
+  // Times(562, 0-18)
+    "2006-05-21_12:00:00",
+  // Times(563, 0-18)
+    "2006-05-21_18:00:00",
+  // Times(564, 0-18)
+    "2006-05-22_00:00:00",
+  // Times(565, 0-18)
+    "2006-05-22_06:00:00",
+  // Times(566, 0-18)
+    "2006-05-22_12:00:00",
+  // Times(567, 0-18)
+    "2006-05-22_18:00:00",
+  // Times(568, 0-18)
+    "2006-05-23_00:00:00",
+  // Times(569, 0-18)
+    "2006-05-23_06:00:00",
+  // Times(570, 0-18)
+    "2006-05-23_12:00:00",
+  // Times(571, 0-18)
+    "2006-05-23_18:00:00",
+  // Times(572, 0-18)
+    "2006-05-24_00:00:00",
+  // Times(573, 0-18)
+    "2006-05-24_06:00:00",
+  // Times(574, 0-18)
+    "2006-05-24_12:00:00",
+  // Times(575, 0-18)
+    "2006-05-24_18:00:00",
+  // Times(576, 0-18)
+    "2006-05-25_00:00:00",
+  // Times(577, 0-18)
+    "2006-05-25_06:00:00",
+  // Times(578, 0-18)
+    "2006-05-25_12:00:00",
+  // Times(579, 0-18)
+    "2006-05-25_18:00:00",
+  // Times(580, 0-18)
+    "2006-05-26_00:00:00",
+  // Times(581, 0-18)
+    "2006-05-26_06:00:00",
+  // Times(582, 0-18)
+    "2006-05-26_12:00:00",
+  // Times(583, 0-18)
+    "2006-05-26_18:00:00",
+  // Times(584, 0-18)
+    "2006-05-27_00:00:00",
+  // Times(585, 0-18)
+    "2006-05-27_06:00:00",
+  // Times(586, 0-18)
+    "2006-05-27_12:00:00",
+  // Times(587, 0-18)
+    "2006-05-27_18:00:00",
+  // Times(588, 0-18)
+    "2006-05-28_00:00:00",
+  // Times(589, 0-18)
+    "2006-05-28_06:00:00",
+  // Times(590, 0-18)
+    "2006-05-28_12:00:00",
+  // Times(591, 0-18)
+    "2006-05-28_18:00:00",
+  // Times(592, 0-18)
+    "2006-05-29_00:00:00",
+  // Times(593, 0-18)
+    "2006-05-29_06:00:00",
+  // Times(594, 0-18)
+    "2006-05-29_12:00:00",
+  // Times(595, 0-18)
+    "2006-05-29_18:00:00",
+  // Times(596, 0-18)
+    "2006-05-30_00:00:00",
+  // Times(597, 0-18)
+    "2006-05-30_06:00:00",
+  // Times(598, 0-18)
+    "2006-05-30_12:00:00",
+  // Times(599, 0-18)
+    "2006-05-30_18:00:00",
+  // Times(600, 0-18)
+    "2006-05-31_00:00:00",
+  // Times(601, 0-18)
+    "2006-05-31_06:00:00",
+  // Times(602, 0-18)
+    "2006-05-31_12:00:00",
+  // Times(603, 0-18)
+    "2006-05-31_18:00:00",
+  // Times(604, 0-18)
+    "2006-06-01_00:00:00",
+  // Times(605, 0-18)
+    "2006-06-01_06:00:00",
+  // Times(606, 0-18)
+    "2006-06-01_12:00:00",
+  // Times(607, 0-18)
+    "2006-06-01_18:00:00",
+  // Times(608, 0-18)
+    "2006-06-02_00:00:00",
+  // Times(609, 0-18)
+    "2006-06-02_06:00:00",
+  // Times(610, 0-18)
+    "2006-06-02_12:00:00",
+  // Times(611, 0-18)
+    "2006-06-02_18:00:00",
+  // Times(612, 0-18)
+    "2006-06-03_00:00:00",
+  // Times(613, 0-18)
+    "2006-06-03_06:00:00",
+  // Times(614, 0-18)
+    "2006-06-03_12:00:00",
+  // Times(615, 0-18)
+    "2006-06-03_18:00:00",
+  // Times(616, 0-18)
+    "2006-06-04_00:00:00",
+  // Times(617, 0-18)
+    "2006-06-04_06:00:00",
+  // Times(618, 0-18)
+    "2006-06-04_12:00:00",
+  // Times(619, 0-18)
+    "2006-06-04_18:00:00",
+  // Times(620, 0-18)
+    "2006-06-05_00:00:00",
+  // Times(621, 0-18)
+    "2006-06-05_06:00:00",
+  // Times(622, 0-18)
+    "2006-06-05_12:00:00",
+  // Times(623, 0-18)
+    "2006-06-05_18:00:00",
+  // Times(624, 0-18)
+    "2006-06-06_00:00:00",
+  // Times(625, 0-18)
+    "2006-06-06_06:00:00",
+  // Times(626, 0-18)
+    "2006-06-06_12:00:00",
+  // Times(627, 0-18)
+    "2006-06-06_18:00:00",
+  // Times(628, 0-18)
+    "2006-06-07_00:00:00",
+  // Times(629, 0-18)
+    "2006-06-07_06:00:00",
+  // Times(630, 0-18)
+    "2006-06-07_12:00:00",
+  // Times(631, 0-18)
+    "2006-06-07_18:00:00",
+  // Times(632, 0-18)
+    "2006-06-08_00:00:00",
+  // Times(633, 0-18)
+    "2006-06-08_06:00:00",
+  // Times(634, 0-18)
+    "2006-06-08_12:00:00",
+  // Times(635, 0-18)
+    "2006-06-08_18:00:00",
+  // Times(636, 0-18)
+    "2006-06-09_00:00:00",
+  // Times(637, 0-18)
+    "2006-06-09_06:00:00",
+  // Times(638, 0-18)
+    "2006-06-09_12:00:00",
+  // Times(639, 0-18)
+    "2006-06-09_18:00:00",
+  // Times(640, 0-18)
+    "2006-06-10_00:00:00",
+  // Times(641, 0-18)
+    "2006-06-10_06:00:00",
+  // Times(642, 0-18)
+    "2006-06-10_12:00:00",
+  // Times(643, 0-18)
+    "2006-06-10_18:00:00",
+  // Times(644, 0-18)
+    "2006-06-11_00:00:00",
+  // Times(645, 0-18)
+    "2006-06-11_06:00:00",
+  // Times(646, 0-18)
+    "2006-06-11_12:00:00",
+  // Times(647, 0-18)
+    "2006-06-11_18:00:00",
+  // Times(648, 0-18)
+    "2006-06-12_00:00:00",
+  // Times(649, 0-18)
+    "2006-06-12_06:00:00",
+  // Times(650, 0-18)
+    "2006-06-12_12:00:00",
+  // Times(651, 0-18)
+    "2006-06-12_18:00:00",
+  // Times(652, 0-18)
+    "2006-06-13_00:00:00",
+  // Times(653, 0-18)
+    "2006-06-13_06:00:00",
+  // Times(654, 0-18)
+    "2006-06-13_12:00:00",
+  // Times(655, 0-18)
+    "2006-06-13_18:00:00",
+  // Times(656, 0-18)
+    "2006-06-14_00:00:00",
+  // Times(657, 0-18)
+    "2006-06-14_06:00:00",
+  // Times(658, 0-18)
+    "2006-06-14_12:00:00",
+  // Times(659, 0-18)
+    "2006-06-14_18:00:00",
+  // Times(660, 0-18)
+    "2006-06-15_00:00:00",
+  // Times(661, 0-18)
+    "2006-06-15_06:00:00",
+  // Times(662, 0-18)
+    "2006-06-15_12:00:00",
+  // Times(663, 0-18)
+    "2006-06-15_18:00:00",
+  // Times(664, 0-18)
+    "2006-06-16_00:00:00",
+  // Times(665, 0-18)
+    "2006-06-16_06:00:00",
+  // Times(666, 0-18)
+    "2006-06-16_12:00:00",
+  // Times(667, 0-18)
+    "2006-06-16_18:00:00",
+  // Times(668, 0-18)
+    "2006-06-17_00:00:00",
+  // Times(669, 0-18)
+    "2006-06-17_06:00:00",
+  // Times(670, 0-18)
+    "2006-06-17_12:00:00",
+  // Times(671, 0-18)
+    "2006-06-17_18:00:00",
+  // Times(672, 0-18)
+    "2006-06-18_00:00:00",
+  // Times(673, 0-18)
+    "2006-06-18_06:00:00",
+  // Times(674, 0-18)
+    "2006-06-18_12:00:00",
+  // Times(675, 0-18)
+    "2006-06-18_18:00:00",
+  // Times(676, 0-18)
+    "2006-06-19_00:00:00",
+  // Times(677, 0-18)
+    "2006-06-19_06:00:00",
+  // Times(678, 0-18)
+    "2006-06-19_12:00:00",
+  // Times(679, 0-18)
+    "2006-06-19_18:00:00",
+  // Times(680, 0-18)
+    "2006-06-20_00:00:00",
+  // Times(681, 0-18)
+    "2006-06-20_06:00:00",
+  // Times(682, 0-18)
+    "2006-06-20_12:00:00",
+  // Times(683, 0-18)
+    "2006-06-20_18:00:00",
+  // Times(684, 0-18)
+    "2006-06-21_00:00:00",
+  // Times(685, 0-18)
+    "2006-06-21_06:00:00",
+  // Times(686, 0-18)
+    "2006-06-21_12:00:00",
+  // Times(687, 0-18)
+    "2006-06-21_18:00:00",
+  // Times(688, 0-18)
+    "2006-06-22_00:00:00",
+  // Times(689, 0-18)
+    "2006-06-22_06:00:00",
+  // Times(690, 0-18)
+    "2006-06-22_12:00:00",
+  // Times(691, 0-18)
+    "2006-06-22_18:00:00",
+  // Times(692, 0-18)
+    "2006-06-23_00:00:00",
+  // Times(693, 0-18)
+    "2006-06-23_06:00:00",
+  // Times(694, 0-18)
+    "2006-06-23_12:00:00",
+  // Times(695, 0-18)
+    "2006-06-23_18:00:00",
+  // Times(696, 0-18)
+    "2006-06-24_00:00:00",
+  // Times(697, 0-18)
+    "2006-06-24_06:00:00",
+  // Times(698, 0-18)
+    "2006-06-24_12:00:00",
+  // Times(699, 0-18)
+    "2006-06-24_18:00:00",
+  // Times(700, 0-18)
+    "2006-06-25_00:00:00",
+  // Times(701, 0-18)
+    "2006-06-25_06:00:00",
+  // Times(702, 0-18)
+    "2006-06-25_12:00:00",
+  // Times(703, 0-18)
+    "2006-06-25_18:00:00",
+  // Times(704, 0-18)
+    "2006-06-26_00:00:00",
+  // Times(705, 0-18)
+    "2006-06-26_06:00:00",
+  // Times(706, 0-18)
+    "2006-06-26_12:00:00",
+  // Times(707, 0-18)
+    "2006-06-26_18:00:00",
+  // Times(708, 0-18)
+    "2006-06-27_00:00:00",
+  // Times(709, 0-18)
+    "2006-06-27_06:00:00",
+  // Times(710, 0-18)
+    "2006-06-27_12:00:00",
+  // Times(711, 0-18)
+    "2006-06-27_18:00:00",
+  // Times(712, 0-18)
+    "2006-06-28_00:00:00",
+  // Times(713, 0-18)
+    "2006-06-28_06:00:00",
+  // Times(714, 0-18)
+    "2006-06-28_12:00:00",
+  // Times(715, 0-18)
+    "2006-06-28_18:00:00",
+  // Times(716, 0-18)
+    "2006-06-29_00:00:00",
+  // Times(717, 0-18)
+    "2006-06-29_06:00:00",
+  // Times(718, 0-18)
+    "2006-06-29_12:00:00",
+  // Times(719, 0-18)
+    "2006-06-29_18:00:00",
+  // Times(720, 0-18)
+    "2006-06-30_00:00:00",
+  // Times(721, 0-18)
+    "2006-06-30_06:00:00",
+  // Times(722, 0-18)
+    "2006-06-30_12:00:00",
+  // Times(723, 0-18)
+    "2006-06-30_18:00:00",
+  // Times(724, 0-18)
+    "2006-07-01_00:00:00",
+  // Times(725, 0-18)
+    "2006-07-01_06:00:00",
+  // Times(726, 0-18)
+    "2006-07-01_12:00:00",
+  // Times(727, 0-18)
+    "2006-07-01_18:00:00",
+  // Times(728, 0-18)
+    "2006-07-02_00:00:00",
+  // Times(729, 0-18)
+    "2006-07-02_06:00:00",
+  // Times(730, 0-18)
+    "2006-07-02_12:00:00",
+  // Times(731, 0-18)
+    "2006-07-02_18:00:00",
+  // Times(732, 0-18)
+    "2006-07-03_00:00:00",
+  // Times(733, 0-18)
+    "2006-07-03_06:00:00",
+  // Times(734, 0-18)
+    "2006-07-03_12:00:00",
+  // Times(735, 0-18)
+    "2006-07-03_18:00:00",
+  // Times(736, 0-18)
+    "2006-07-04_00:00:00",
+  // Times(737, 0-18)
+    "2006-07-04_06:00:00",
+  // Times(738, 0-18)
+    "2006-07-04_12:00:00",
+  // Times(739, 0-18)
+    "2006-07-04_18:00:00",
+  // Times(740, 0-18)
+    "2006-07-05_00:00:00",
+  // Times(741, 0-18)
+    "2006-07-05_06:00:00",
+  // Times(742, 0-18)
+    "2006-07-05_12:00:00",
+  // Times(743, 0-18)
+    "2006-07-05_18:00:00",
+  // Times(744, 0-18)
+    "2006-07-06_00:00:00",
+  // Times(745, 0-18)
+    "2006-07-06_06:00:00",
+  // Times(746, 0-18)
+    "2006-07-06_12:00:00",
+  // Times(747, 0-18)
+    "2006-07-06_18:00:00",
+  // Times(748, 0-18)
+    "2006-07-07_00:00:00",
+  // Times(749, 0-18)
+    "2006-07-07_06:00:00",
+  // Times(750, 0-18)
+    "2006-07-07_12:00:00",
+  // Times(751, 0-18)
+    "2006-07-07_18:00:00",
+  // Times(752, 0-18)
+    "2006-07-08_00:00:00",
+  // Times(753, 0-18)
+    "2006-07-08_06:00:00",
+  // Times(754, 0-18)
+    "2006-07-08_12:00:00",
+  // Times(755, 0-18)
+    "2006-07-08_18:00:00",
+  // Times(756, 0-18)
+    "2006-07-09_00:00:00",
+  // Times(757, 0-18)
+    "2006-07-09_06:00:00",
+  // Times(758, 0-18)
+    "2006-07-09_12:00:00",
+  // Times(759, 0-18)
+    "2006-07-09_18:00:00",
+  // Times(760, 0-18)
+    "2006-07-10_00:00:00",
+  // Times(761, 0-18)
+    "2006-07-10_06:00:00",
+  // Times(762, 0-18)
+    "2006-07-10_12:00:00",
+  // Times(763, 0-18)
+    "2006-07-10_18:00:00",
+  // Times(764, 0-18)
+    "2006-07-11_00:00:00",
+  // Times(765, 0-18)
+    "2006-07-11_06:00:00",
+  // Times(766, 0-18)
+    "2006-07-11_12:00:00",
+  // Times(767, 0-18)
+    "2006-07-11_18:00:00",
+  // Times(768, 0-18)
+    "2006-07-12_00:00:00",
+  // Times(769, 0-18)
+    "2006-07-12_06:00:00",
+  // Times(770, 0-18)
+    "2006-07-12_12:00:00",
+  // Times(771, 0-18)
+    "2006-07-12_18:00:00",
+  // Times(772, 0-18)
+    "2006-07-13_00:00:00",
+  // Times(773, 0-18)
+    "2006-07-13_06:00:00",
+  // Times(774, 0-18)
+    "2006-07-13_12:00:00",
+  // Times(775, 0-18)
+    "2006-07-13_18:00:00",
+  // Times(776, 0-18)
+    "2006-07-14_00:00:00",
+  // Times(777, 0-18)
+    "2006-07-14_06:00:00",
+  // Times(778, 0-18)
+    "2006-07-14_12:00:00",
+  // Times(779, 0-18)
+    "2006-07-14_18:00:00",
+  // Times(780, 0-18)
+    "2006-07-15_00:00:00",
+  // Times(781, 0-18)
+    "2006-07-15_06:00:00",
+  // Times(782, 0-18)
+    "2006-07-15_12:00:00",
+  // Times(783, 0-18)
+    "2006-07-15_18:00:00",
+  // Times(784, 0-18)
+    "2006-07-16_00:00:00",
+  // Times(785, 0-18)
+    "2006-07-16_06:00:00",
+  // Times(786, 0-18)
+    "2006-07-16_12:00:00",
+  // Times(787, 0-18)
+    "2006-07-16_18:00:00",
+  // Times(788, 0-18)
+    "2006-07-17_00:00:00",
+  // Times(789, 0-18)
+    "2006-07-17_06:00:00",
+  // Times(790, 0-18)
+    "2006-07-17_12:00:00",
+  // Times(791, 0-18)
+    "2006-07-17_18:00:00",
+  // Times(792, 0-18)
+    "2006-07-18_00:00:00",
+  // Times(793, 0-18)
+    "2006-07-18_06:00:00",
+  // Times(794, 0-18)
+    "2006-07-18_12:00:00",
+  // Times(795, 0-18)
+    "2006-07-18_18:00:00",
+  // Times(796, 0-18)
+    "2006-07-19_00:00:00",
+  // Times(797, 0-18)
+    "2006-07-19_06:00:00",
+  // Times(798, 0-18)
+    "2006-07-19_12:00:00",
+  // Times(799, 0-18)
+    "2006-07-19_18:00:00",
+  // Times(800, 0-18)
+    "2006-07-20_00:00:00",
+  // Times(801, 0-18)
+    "2006-07-20_06:00:00",
+  // Times(802, 0-18)
+    "2006-07-20_12:00:00",
+  // Times(803, 0-18)
+    "2006-07-20_18:00:00",
+  // Times(804, 0-18)
+    "2006-07-21_00:00:00",
+  // Times(805, 0-18)
+    "2006-07-21_06:00:00",
+  // Times(806, 0-18)
+    "2006-07-21_12:00:00",
+  // Times(807, 0-18)
+    "2006-07-21_18:00:00",
+  // Times(808, 0-18)
+    "2006-07-22_00:00:00",
+  // Times(809, 0-18)
+    "2006-07-22_06:00:00",
+  // Times(810, 0-18)
+    "2006-07-22_12:00:00",
+  // Times(811, 0-18)
+    "2006-07-22_18:00:00",
+  // Times(812, 0-18)
+    "2006-07-23_00:00:00",
+  // Times(813, 0-18)
+    "2006-07-23_06:00:00",
+  // Times(814, 0-18)
+    "2006-07-23_12:00:00",
+  // Times(815, 0-18)
+    "2006-07-23_18:00:00",
+  // Times(816, 0-18)
+    "2006-07-24_00:00:00",
+  // Times(817, 0-18)
+    "2006-07-24_06:00:00",
+  // Times(818, 0-18)
+    "2006-07-24_12:00:00",
+  // Times(819, 0-18)
+    "2006-07-24_18:00:00",
+  // Times(820, 0-18)
+    "2006-07-25_00:00:00",
+  // Times(821, 0-18)
+    "2006-07-25_06:00:00",
+  // Times(822, 0-18)
+    "2006-07-25_12:00:00",
+  // Times(823, 0-18)
+    "2006-07-25_18:00:00",
+  // Times(824, 0-18)
+    "2006-07-26_00:00:00",
+  // Times(825, 0-18)
+    "2006-07-26_06:00:00",
+  // Times(826, 0-18)
+    "2006-07-26_12:00:00",
+  // Times(827, 0-18)
+    "2006-07-26_18:00:00",
+  // Times(828, 0-18)
+    "2006-07-27_00:00:00",
+  // Times(829, 0-18)
+    "2006-07-27_06:00:00",
+  // Times(830, 0-18)
+    "2006-07-27_12:00:00",
+  // Times(831, 0-18)
+    "2006-07-27_18:00:00",
+  // Times(832, 0-18)
+    "2006-07-28_00:00:00",
+  // Times(833, 0-18)
+    "2006-07-28_06:00:00",
+  // Times(834, 0-18)
+    "2006-07-28_12:00:00",
+  // Times(835, 0-18)
+    "2006-07-28_18:00:00",
+  // Times(836, 0-18)
+    "2006-07-29_00:00:00",
+  // Times(837, 0-18)
+    "2006-07-29_06:00:00",
+  // Times(838, 0-18)
+    "2006-07-29_12:00:00",
+  // Times(839, 0-18)
+    "2006-07-29_18:00:00",
+  // Times(840, 0-18)
+    "2006-07-30_00:00:00",
+  // Times(841, 0-18)
+    "2006-07-30_06:00:00",
+  // Times(842, 0-18)
+    "2006-07-30_12:00:00",
+  // Times(843, 0-18)
+    "2006-07-30_18:00:00",
+  // Times(844, 0-18)
+    "2006-07-31_00:00:00",
+  // Times(845, 0-18)
+    "2006-07-31_06:00:00",
+  // Times(846, 0-18)
+    "2006-07-31_12:00:00",
+  // Times(847, 0-18)
+    "2006-07-31_18:00:00",
+  // Times(848, 0-18)
+    "2006-08-01_00:00:00",
+  // Times(849, 0-18)
+    "2006-08-01_06:00:00",
+  // Times(850, 0-18)
+    "2006-08-01_12:00:00",
+  // Times(851, 0-18)
+    "2006-08-01_18:00:00",
+  // Times(852, 0-18)
+    "2006-08-02_00:00:00",
+  // Times(853, 0-18)
+    "2006-08-02_06:00:00",
+  // Times(854, 0-18)
+    "2006-08-02_12:00:00",
+  // Times(855, 0-18)
+    "2006-08-02_18:00:00",
+  // Times(856, 0-18)
+    "2006-08-03_00:00:00",
+  // Times(857, 0-18)
+    "2006-08-03_06:00:00",
+  // Times(858, 0-18)
+    "2006-08-03_12:00:00",
+  // Times(859, 0-18)
+    "2006-08-03_18:00:00",
+  // Times(860, 0-18)
+    "2006-08-04_00:00:00",
+  // Times(861, 0-18)
+    "2006-08-04_06:00:00",
+  // Times(862, 0-18)
+    "2006-08-04_12:00:00",
+  // Times(863, 0-18)
+    "2006-08-04_18:00:00",
+  // Times(864, 0-18)
+    "2006-08-05_00:00:00",
+  // Times(865, 0-18)
+    "2006-08-05_06:00:00",
+  // Times(866, 0-18)
+    "2006-08-05_12:00:00",
+  // Times(867, 0-18)
+    "2006-08-05_18:00:00",
+  // Times(868, 0-18)
+    "2006-08-06_00:00:00",
+  // Times(869, 0-18)
+    "2006-08-06_06:00:00",
+  // Times(870, 0-18)
+    "2006-08-06_12:00:00",
+  // Times(871, 0-18)
+    "2006-08-06_18:00:00",
+  // Times(872, 0-18)
+    "2006-08-07_00:00:00",
+  // Times(873, 0-18)
+    "2006-08-07_06:00:00",
+  // Times(874, 0-18)
+    "2006-08-07_12:00:00",
+  // Times(875, 0-18)
+    "2006-08-07_18:00:00",
+  // Times(876, 0-18)
+    "2006-08-08_00:00:00",
+  // Times(877, 0-18)
+    "2006-08-08_06:00:00",
+  // Times(878, 0-18)
+    "2006-08-08_12:00:00",
+  // Times(879, 0-18)
+    "2006-08-08_18:00:00",
+  // Times(880, 0-18)
+    "2006-08-09_00:00:00",
+  // Times(881, 0-18)
+    "2006-08-09_06:00:00",
+  // Times(882, 0-18)
+    "2006-08-09_12:00:00",
+  // Times(883, 0-18)
+    "2006-08-09_18:00:00",
+  // Times(884, 0-18)
+    "2006-08-10_00:00:00",
+  // Times(885, 0-18)
+    "2006-08-10_06:00:00",
+  // Times(886, 0-18)
+    "2006-08-10_12:00:00",
+  // Times(887, 0-18)
+    "2006-08-10_18:00:00",
+  // Times(888, 0-18)
+    "2006-08-11_00:00:00",
+  // Times(889, 0-18)
+    "2006-08-11_06:00:00",
+  // Times(890, 0-18)
+    "2006-08-11_12:00:00",
+  // Times(891, 0-18)
+    "2006-08-11_18:00:00",
+  // Times(892, 0-18)
+    "2006-08-12_00:00:00",
+  // Times(893, 0-18)
+    "2006-08-12_06:00:00",
+  // Times(894, 0-18)
+    "2006-08-12_12:00:00",
+  // Times(895, 0-18)
+    "2006-08-12_18:00:00",
+  // Times(896, 0-18)
+    "2006-08-13_00:00:00",
+  // Times(897, 0-18)
+    "2006-08-13_06:00:00",
+  // Times(898, 0-18)
+    "2006-08-13_12:00:00",
+  // Times(899, 0-18)
+    "2006-08-13_18:00:00",
+  // Times(900, 0-18)
+    "2006-08-14_00:00:00",
+  // Times(901, 0-18)
+    "2006-08-14_06:00:00",
+  // Times(902, 0-18)
+    "2006-08-14_12:00:00",
+  // Times(903, 0-18)
+    "2006-08-14_18:00:00",
+  // Times(904, 0-18)
+    "2006-08-15_00:00:00",
+  // Times(905, 0-18)
+    "2006-08-15_06:00:00",
+  // Times(906, 0-18)
+    "2006-08-15_12:00:00",
+  // Times(907, 0-18)
+    "2006-08-15_18:00:00",
+  // Times(908, 0-18)
+    "2006-08-16_00:00:00",
+  // Times(909, 0-18)
+    "2006-08-16_06:00:00",
+  // Times(910, 0-18)
+    "2006-08-16_12:00:00",
+  // Times(911, 0-18)
+    "2006-08-16_18:00:00",
+  // Times(912, 0-18)
+    "2006-08-17_00:00:00",
+  // Times(913, 0-18)
+    "2006-08-17_06:00:00",
+  // Times(914, 0-18)
+    "2006-08-17_12:00:00",
+  // Times(915, 0-18)
+    "2006-08-17_18:00:00",
+  // Times(916, 0-18)
+    "2006-08-18_00:00:00",
+  // Times(917, 0-18)
+    "2006-08-18_06:00:00",
+  // Times(918, 0-18)
+    "2006-08-18_12:00:00",
+  // Times(919, 0-18)
+    "2006-08-18_18:00:00",
+  // Times(920, 0-18)
+    "2006-08-19_00:00:00",
+  // Times(921, 0-18)
+    "2006-08-19_06:00:00",
+  // Times(922, 0-18)
+    "2006-08-19_12:00:00",
+  // Times(923, 0-18)
+    "2006-08-19_18:00:00",
+  // Times(924, 0-18)
+    "2006-08-20_00:00:00",
+  // Times(925, 0-18)
+    "2006-08-20_06:00:00",
+  // Times(926, 0-18)
+    "2006-08-20_12:00:00",
+  // Times(927, 0-18)
+    "2006-08-20_18:00:00",
+  // Times(928, 0-18)
+    "2006-08-21_00:00:00",
+  // Times(929, 0-18)
+    "2006-08-21_06:00:00",
+  // Times(930, 0-18)
+    "2006-08-21_12:00:00",
+  // Times(931, 0-18)
+    "2006-08-21_18:00:00",
+  // Times(932, 0-18)
+    "2006-08-22_00:00:00",
+  // Times(933, 0-18)
+    "2006-08-22_06:00:00",
+  // Times(934, 0-18)
+    "2006-08-22_12:00:00",
+  // Times(935, 0-18)
+    "2006-08-22_18:00:00",
+  // Times(936, 0-18)
+    "2006-08-23_00:00:00",
+  // Times(937, 0-18)
+    "2006-08-23_06:00:00",
+  // Times(938, 0-18)
+    "2006-08-23_12:00:00",
+  // Times(939, 0-18)
+    "2006-08-23_18:00:00",
+  // Times(940, 0-18)
+    "2006-08-24_00:00:00",
+  // Times(941, 0-18)
+    "2006-08-24_06:00:00",
+  // Times(942, 0-18)
+    "2006-08-24_12:00:00",
+  // Times(943, 0-18)
+    "2006-08-24_18:00:00",
+  // Times(944, 0-18)
+    "2006-08-25_00:00:00",
+  // Times(945, 0-18)
+    "2006-08-25_06:00:00",
+  // Times(946, 0-18)
+    "2006-08-25_12:00:00",
+  // Times(947, 0-18)
+    "2006-08-25_18:00:00",
+  // Times(948, 0-18)
+    "2006-08-26_00:00:00",
+  // Times(949, 0-18)
+    "2006-08-26_06:00:00",
+  // Times(950, 0-18)
+    "2006-08-26_12:00:00",
+  // Times(951, 0-18)
+    "2006-08-26_18:00:00",
+  // Times(952, 0-18)
+    "2006-08-27_00:00:00",
+  // Times(953, 0-18)
+    "2006-08-27_06:00:00",
+  // Times(954, 0-18)
+    "2006-08-27_12:00:00",
+  // Times(955, 0-18)
+    "2006-08-27_18:00:00",
+  // Times(956, 0-18)
+    "2006-08-28_00:00:00",
+  // Times(957, 0-18)
+    "2006-08-28_06:00:00",
+  // Times(958, 0-18)
+    "2006-08-28_12:00:00",
+  // Times(959, 0-18)
+    "2006-08-28_18:00:00",
+  // Times(960, 0-18)
+    "2006-08-29_00:00:00",
+  // Times(961, 0-18)
+    "2006-08-29_06:00:00",
+  // Times(962, 0-18)
+    "2006-08-29_12:00:00",
+  // Times(963, 0-18)
+    "2006-08-29_18:00:00",
+  // Times(964, 0-18)
+    "2006-08-30_00:00:00",
+  // Times(965, 0-18)
+    "2006-08-30_06:00:00",
+  // Times(966, 0-18)
+    "2006-08-30_12:00:00",
+  // Times(967, 0-18)
+    "2006-08-30_18:00:00",
+  // Times(968, 0-18)
+    "2006-08-31_00:00:00",
+  // Times(969, 0-18)
+    "2006-08-31_06:00:00",
+  // Times(970, 0-18)
+    "2006-08-31_12:00:00",
+  // Times(971, 0-18)
+    "2006-08-31_18:00:00",
+  // Times(972, 0-18)
+    "2006-09-01_00:00:00",
+  // Times(973, 0-18)
+    "2006-09-01_06:00:00",
+  // Times(974, 0-18)
+    "2006-09-01_12:00:00",
+  // Times(975, 0-18)
+    "2006-09-01_18:00:00",
+  // Times(976, 0-18)
+    "2006-09-02_00:00:00",
+  // Times(977, 0-18)
+    "2006-09-02_06:00:00",
+  // Times(978, 0-18)
+    "2006-09-02_12:00:00",
+  // Times(979, 0-18)
+    "2006-09-02_18:00:00",
+  // Times(980, 0-18)
+    "2006-09-03_00:00:00",
+  // Times(981, 0-18)
+    "2006-09-03_06:00:00",
+  // Times(982, 0-18)
+    "2006-09-03_12:00:00",
+  // Times(983, 0-18)
+    "2006-09-03_18:00:00",
+  // Times(984, 0-18)
+    "2006-09-04_00:00:00",
+  // Times(985, 0-18)
+    "2006-09-04_06:00:00",
+  // Times(986, 0-18)
+    "2006-09-04_12:00:00",
+  // Times(987, 0-18)
+    "2006-09-04_18:00:00",
+  // Times(988, 0-18)
+    "2006-09-05_00:00:00",
+  // Times(989, 0-18)
+    "2006-09-05_06:00:00",
+  // Times(990, 0-18)
+    "2006-09-05_12:00:00",
+  // Times(991, 0-18)
+    "2006-09-05_18:00:00",
+  // Times(992, 0-18)
+    "2006-09-06_00:00:00",
+  // Times(993, 0-18)
+    "2006-09-06_06:00:00",
+  // Times(994, 0-18)
+    "2006-09-06_12:00:00",
+  // Times(995, 0-18)
+    "2006-09-06_18:00:00",
+  // Times(996, 0-18)
+    "2006-09-07_00:00:00",
+  // Times(997, 0-18)
+    "2006-09-07_06:00:00",
+  // Times(998, 0-18)
+    "2006-09-07_12:00:00",
+  // Times(999, 0-18)
+    "2006-09-07_18:00:00",
+  // Times(1000, 0-18)
+    "2006-09-08_00:00:00",
+  // Times(1001, 0-18)
+    "2006-09-08_06:00:00",
+  // Times(1002, 0-18)
+    "2006-09-08_12:00:00",
+  // Times(1003, 0-18)
+    "2006-09-08_18:00:00",
+  // Times(1004, 0-18)
+    "2006-09-09_00:00:00",
+  // Times(1005, 0-18)
+    "2006-09-09_06:00:00",
+  // Times(1006, 0-18)
+    "2006-09-09_12:00:00",
+  // Times(1007, 0-18)
+    "2006-09-09_18:00:00",
+  // Times(1008, 0-18)
+    "2006-09-10_00:00:00",
+  // Times(1009, 0-18)
+    "2006-09-10_06:00:00",
+  // Times(1010, 0-18)
+    "2006-09-10_12:00:00",
+  // Times(1011, 0-18)
+    "2006-09-10_18:00:00",
+  // Times(1012, 0-18)
+    "2006-09-11_00:00:00",
+  // Times(1013, 0-18)
+    "2006-09-11_06:00:00",
+  // Times(1014, 0-18)
+    "2006-09-11_12:00:00",
+  // Times(1015, 0-18)
+    "2006-09-11_18:00:00",
+  // Times(1016, 0-18)
+    "2006-09-12_00:00:00",
+  // Times(1017, 0-18)
+    "2006-09-12_06:00:00",
+  // Times(1018, 0-18)
+    "2006-09-12_12:00:00",
+  // Times(1019, 0-18)
+    "2006-09-12_18:00:00",
+  // Times(1020, 0-18)
+    "2006-09-13_00:00:00",
+  // Times(1021, 0-18)
+    "2006-09-13_06:00:00",
+  // Times(1022, 0-18)
+    "2006-09-13_12:00:00",
+  // Times(1023, 0-18)
+    "2006-09-13_18:00:00",
+  // Times(1024, 0-18)
+    "2006-09-14_00:00:00",
+  // Times(1025, 0-18)
+    "2006-09-14_06:00:00",
+  // Times(1026, 0-18)
+    "2006-09-14_12:00:00",
+  // Times(1027, 0-18)
+    "2006-09-14_18:00:00",
+  // Times(1028, 0-18)
+    "2006-09-15_00:00:00",
+  // Times(1029, 0-18)
+    "2006-09-15_06:00:00",
+  // Times(1030, 0-18)
+    "2006-09-15_12:00:00",
+  // Times(1031, 0-18)
+    "2006-09-15_18:00:00",
+  // Times(1032, 0-18)
+    "2006-09-16_00:00:00",
+  // Times(1033, 0-18)
+    "2006-09-16_06:00:00",
+  // Times(1034, 0-18)
+    "2006-09-16_12:00:00",
+  // Times(1035, 0-18)
+    "2006-09-16_18:00:00",
+  // Times(1036, 0-18)
+    "2006-09-17_00:00:00",
+  // Times(1037, 0-18)
+    "2006-09-17_06:00:00",
+  // Times(1038, 0-18)
+    "2006-09-17_12:00:00",
+  // Times(1039, 0-18)
+    "2006-09-17_18:00:00",
+  // Times(1040, 0-18)
+    "2006-09-18_00:00:00",
+  // Times(1041, 0-18)
+    "2006-09-18_06:00:00",
+  // Times(1042, 0-18)
+    "2006-09-18_12:00:00",
+  // Times(1043, 0-18)
+    "2006-09-18_18:00:00",
+  // Times(1044, 0-18)
+    "2006-09-19_00:00:00",
+  // Times(1045, 0-18)
+    "2006-09-19_06:00:00",
+  // Times(1046, 0-18)
+    "2006-09-19_12:00:00",
+  // Times(1047, 0-18)
+    "2006-09-19_18:00:00",
+  // Times(1048, 0-18)
+    "2006-09-20_00:00:00",
+  // Times(1049, 0-18)
+    "2006-09-20_06:00:00",
+  // Times(1050, 0-18)
+    "2006-09-20_12:00:00",
+  // Times(1051, 0-18)
+    "2006-09-20_18:00:00",
+  // Times(1052, 0-18)
+    "2006-09-21_00:00:00",
+  // Times(1053, 0-18)
+    "2006-09-21_06:00:00",
+  // Times(1054, 0-18)
+    "2006-09-21_12:00:00",
+  // Times(1055, 0-18)
+    "2006-09-21_18:00:00",
+  // Times(1056, 0-18)
+    "2006-09-22_00:00:00",
+  // Times(1057, 0-18)
+    "2006-09-22_06:00:00",
+  // Times(1058, 0-18)
+    "2006-09-22_12:00:00",
+  // Times(1059, 0-18)
+    "2006-09-22_18:00:00",
+  // Times(1060, 0-18)
+    "2006-09-23_00:00:00",
+  // Times(1061, 0-18)
+    "2006-09-23_06:00:00",
+  // Times(1062, 0-18)
+    "2006-09-23_12:00:00",
+  // Times(1063, 0-18)
+    "2006-09-23_18:00:00",
+  // Times(1064, 0-18)
+    "2006-09-24_00:00:00",
+  // Times(1065, 0-18)
+    "2006-09-24_06:00:00",
+  // Times(1066, 0-18)
+    "2006-09-24_12:00:00",
+  // Times(1067, 0-18)
+    "2006-09-24_18:00:00",
+  // Times(1068, 0-18)
+    "2006-09-25_00:00:00",
+  // Times(1069, 0-18)
+    "2006-09-25_06:00:00",
+  // Times(1070, 0-18)
+    "2006-09-25_12:00:00",
+  // Times(1071, 0-18)
+    "2006-09-25_18:00:00",
+  // Times(1072, 0-18)
+    "2006-09-26_00:00:00",
+  // Times(1073, 0-18)
+    "2006-09-26_06:00:00",
+  // Times(1074, 0-18)
+    "2006-09-26_12:00:00",
+  // Times(1075, 0-18)
+    "2006-09-26_18:00:00",
+  // Times(1076, 0-18)
+    "2006-09-27_00:00:00",
+  // Times(1077, 0-18)
+    "2006-09-27_06:00:00",
+  // Times(1078, 0-18)
+    "2006-09-27_12:00:00",
+  // Times(1079, 0-18)
+    "2006-09-27_18:00:00",
+  // Times(1080, 0-18)
+    "2006-09-28_00:00:00",
+  // Times(1081, 0-18)
+    "2006-09-28_06:00:00",
+  // Times(1082, 0-18)
+    "2006-09-28_12:00:00",
+  // Times(1083, 0-18)
+    "2006-09-28_18:00:00",
+  // Times(1084, 0-18)
+    "2006-09-29_00:00:00",
+  // Times(1085, 0-18)
+    "2006-09-29_06:00:00",
+  // Times(1086, 0-18)
+    "2006-09-29_12:00:00",
+  // Times(1087, 0-18)
+    "2006-09-29_18:00:00",
+  // Times(1088, 0-18)
+    "2006-09-30_00:00:00",
+  // Times(1089, 0-18)
+    "2006-09-30_06:00:00",
+  // Times(1090, 0-18)
+    "2006-09-30_12:00:00",
+  // Times(1091, 0-18)
+    "2006-09-30_18:00:00",
+  // Times(1092, 0-18)
+    "2006-10-01_00:00:00",
+  // Times(1093, 0-18)
+    "2006-10-01_06:00:00",
+  // Times(1094, 0-18)
+    "2006-10-01_12:00:00",
+  // Times(1095, 0-18)
+    "2006-10-01_18:00:00",
+  // Times(1096, 0-18)
+    "2006-10-02_00:00:00",
+  // Times(1097, 0-18)
+    "2006-10-02_06:00:00",
+  // Times(1098, 0-18)
+    "2006-10-02_12:00:00",
+  // Times(1099, 0-18)
+    "2006-10-02_18:00:00",
+  // Times(1100, 0-18)
+    "2006-10-03_00:00:00",
+  // Times(1101, 0-18)
+    "2006-10-03_06:00:00",
+  // Times(1102, 0-18)
+    "2006-10-03_12:00:00",
+  // Times(1103, 0-18)
+    "2006-10-03_18:00:00",
+  // Times(1104, 0-18)
+    "2006-10-04_00:00:00",
+  // Times(1105, 0-18)
+    "2006-10-04_06:00:00",
+  // Times(1106, 0-18)
+    "2006-10-04_12:00:00",
+  // Times(1107, 0-18)
+    "2006-10-04_18:00:00",
+  // Times(1108, 0-18)
+    "2006-10-05_00:00:00",
+  // Times(1109, 0-18)
+    "2006-10-05_06:00:00",
+  // Times(1110, 0-18)
+    "2006-10-05_12:00:00",
+  // Times(1111, 0-18)
+    "2006-10-05_18:00:00",
+  // Times(1112, 0-18)
+    "2006-10-06_00:00:00",
+  // Times(1113, 0-18)
+    "2006-10-06_06:00:00",
+  // Times(1114, 0-18)
+    "2006-10-06_12:00:00",
+  // Times(1115, 0-18)
+    "2006-10-06_18:00:00",
+  // Times(1116, 0-18)
+    "2006-10-07_00:00:00",
+  // Times(1117, 0-18)
+    "2006-10-07_06:00:00",
+  // Times(1118, 0-18)
+    "2006-10-07_12:00:00",
+  // Times(1119, 0-18)
+    "2006-10-07_18:00:00",
+  // Times(1120, 0-18)
+    "2006-10-08_00:00:00",
+  // Times(1121, 0-18)
+    "2006-10-08_06:00:00",
+  // Times(1122, 0-18)
+    "2006-10-08_12:00:00",
+  // Times(1123, 0-18)
+    "2006-10-08_18:00:00",
+  // Times(1124, 0-18)
+    "2006-10-09_00:00:00",
+  // Times(1125, 0-18)
+    "2006-10-09_06:00:00",
+  // Times(1126, 0-18)
+    "2006-10-09_12:00:00",
+  // Times(1127, 0-18)
+    "2006-10-09_18:00:00",
+  // Times(1128, 0-18)
+    "2006-10-10_00:00:00",
+  // Times(1129, 0-18)
+    "2006-10-10_06:00:00",
+  // Times(1130, 0-18)
+    "2006-10-10_12:00:00",
+  // Times(1131, 0-18)
+    "2006-10-10_18:00:00",
+  // Times(1132, 0-18)
+    "2006-10-11_00:00:00",
+  // Times(1133, 0-18)
+    "2006-10-11_06:00:00",
+  // Times(1134, 0-18)
+    "2006-10-11_12:00:00",
+  // Times(1135, 0-18)
+    "2006-10-11_18:00:00",
+  // Times(1136, 0-18)
+    "2006-10-12_00:00:00",
+  // Times(1137, 0-18)
+    "2006-10-12_06:00:00",
+  // Times(1138, 0-18)
+    "2006-10-12_12:00:00",
+  // Times(1139, 0-18)
+    "2006-10-12_18:00:00",
+  // Times(1140, 0-18)
+    "2006-10-13_00:00:00",
+  // Times(1141, 0-18)
+    "2006-10-13_06:00:00",
+  // Times(1142, 0-18)
+    "2006-10-13_12:00:00",
+  // Times(1143, 0-18)
+    "2006-10-13_18:00:00",
+  // Times(1144, 0-18)
+    "2006-10-14_00:00:00",
+  // Times(1145, 0-18)
+    "2006-10-14_06:00:00",
+  // Times(1146, 0-18)
+    "2006-10-14_12:00:00",
+  // Times(1147, 0-18)
+    "2006-10-14_18:00:00",
+  // Times(1148, 0-18)
+    "2006-10-15_00:00:00",
+  // Times(1149, 0-18)
+    "2006-10-15_06:00:00",
+  // Times(1150, 0-18)
+    "2006-10-15_12:00:00",
+  // Times(1151, 0-18)
+    "2006-10-15_18:00:00",
+  // Times(1152, 0-18)
+    "2006-10-16_00:00:00",
+  // Times(1153, 0-18)
+    "2006-10-16_06:00:00",
+  // Times(1154, 0-18)
+    "2006-10-16_12:00:00",
+  // Times(1155, 0-18)
+    "2006-10-16_18:00:00",
+  // Times(1156, 0-18)
+    "2006-10-17_00:00:00",
+  // Times(1157, 0-18)
+    "2006-10-17_06:00:00",
+  // Times(1158, 0-18)
+    "2006-10-17_12:00:00",
+  // Times(1159, 0-18)
+    "2006-10-17_18:00:00",
+  // Times(1160, 0-18)
+    "2006-10-18_00:00:00",
+  // Times(1161, 0-18)
+    "2006-10-18_06:00:00",
+  // Times(1162, 0-18)
+    "2006-10-18_12:00:00",
+  // Times(1163, 0-18)
+    "2006-10-18_18:00:00",
+  // Times(1164, 0-18)
+    "2006-10-19_00:00:00",
+  // Times(1165, 0-18)
+    "2006-10-19_06:00:00",
+  // Times(1166, 0-18)
+    "2006-10-19_12:00:00",
+  // Times(1167, 0-18)
+    "2006-10-19_18:00:00",
+  // Times(1168, 0-18)
+    "2006-10-20_00:00:00",
+  // Times(1169, 0-18)
+    "2006-10-20_06:00:00",
+  // Times(1170, 0-18)
+    "2006-10-20_12:00:00",
+  // Times(1171, 0-18)
+    "2006-10-20_18:00:00",
+  // Times(1172, 0-18)
+    "2006-10-21_00:00:00",
+  // Times(1173, 0-18)
+    "2006-10-21_06:00:00",
+  // Times(1174, 0-18)
+    "2006-10-21_12:00:00",
+  // Times(1175, 0-18)
+    "2006-10-21_18:00:00",
+  // Times(1176, 0-18)
+    "2006-10-22_00:00:00",
+  // Times(1177, 0-18)
+    "2006-10-22_06:00:00",
+  // Times(1178, 0-18)
+    "2006-10-22_12:00:00",
+  // Times(1179, 0-18)
+    "2006-10-22_18:00:00",
+  // Times(1180, 0-18)
+    "2006-10-23_00:00:00",
+  // Times(1181, 0-18)
+    "2006-10-23_06:00:00",
+  // Times(1182, 0-18)
+    "2006-10-23_12:00:00",
+  // Times(1183, 0-18)
+    "2006-10-23_18:00:00",
+  // Times(1184, 0-18)
+    "2006-10-24_00:00:00",
+  // Times(1185, 0-18)
+    "2006-10-24_06:00:00",
+  // Times(1186, 0-18)
+    "2006-10-24_12:00:00",
+  // Times(1187, 0-18)
+    "2006-10-24_18:00:00",
+  // Times(1188, 0-18)
+    "2006-10-25_00:00:00",
+  // Times(1189, 0-18)
+    "2006-10-25_06:00:00",
+  // Times(1190, 0-18)
+    "2006-10-25_12:00:00",
+  // Times(1191, 0-18)
+    "2006-10-25_18:00:00",
+  // Times(1192, 0-18)
+    "2006-10-26_00:00:00",
+  // Times(1193, 0-18)
+    "2006-10-26_06:00:00",
+  // Times(1194, 0-18)
+    "2006-10-26_12:00:00",
+  // Times(1195, 0-18)
+    "2006-10-26_18:00:00",
+  // Times(1196, 0-18)
+    "2006-10-27_00:00:00",
+  // Times(1197, 0-18)
+    "2006-10-27_06:00:00",
+  // Times(1198, 0-18)
+    "2006-10-27_12:00:00",
+  // Times(1199, 0-18)
+    "2006-10-27_18:00:00",
+  // Times(1200, 0-18)
+    "2006-10-28_00:00:00",
+  // Times(1201, 0-18)
+    "2006-10-28_06:00:00",
+  // Times(1202, 0-18)
+    "2006-10-28_12:00:00",
+  // Times(1203, 0-18)
+    "2006-10-28_18:00:00",
+  // Times(1204, 0-18)
+    "2006-10-29_00:00:00",
+  // Times(1205, 0-18)
+    "2006-10-29_06:00:00",
+  // Times(1206, 0-18)
+    "2006-10-29_12:00:00",
+  // Times(1207, 0-18)
+    "2006-10-29_18:00:00",
+  // Times(1208, 0-18)
+    "2006-10-30_00:00:00",
+  // Times(1209, 0-18)
+    "2006-10-30_06:00:00",
+  // Times(1210, 0-18)
+    "2006-10-30_12:00:00",
+  // Times(1211, 0-18)
+    "2006-10-30_18:00:00",
+  // Times(1212, 0-18)
+    "2006-10-31_00:00:00",
+  // Times(1213, 0-18)
+    "2006-10-31_06:00:00",
+  // Times(1214, 0-18)
+    "2006-10-31_12:00:00",
+  // Times(1215, 0-18)
+    "2006-10-31_18:00:00",
+  // Times(1216, 0-18)
+    "2006-11-01_00:00:00",
+  // Times(1217, 0-18)
+    "2006-11-01_06:00:00",
+  // Times(1218, 0-18)
+    "2006-11-01_12:00:00",
+  // Times(1219, 0-18)
+    "2006-11-01_18:00:00",
+  // Times(1220, 0-18)
+    "2006-11-02_00:00:00",
+  // Times(1221, 0-18)
+    "2006-11-02_06:00:00",
+  // Times(1222, 0-18)
+    "2006-11-02_12:00:00",
+  // Times(1223, 0-18)
+    "2006-11-02_18:00:00",
+  // Times(1224, 0-18)
+    "2006-11-03_00:00:00",
+  // Times(1225, 0-18)
+    "2006-11-03_06:00:00",
+  // Times(1226, 0-18)
+    "2006-11-03_12:00:00",
+  // Times(1227, 0-18)
+    "2006-11-03_18:00:00",
+  // Times(1228, 0-18)
+    "2006-11-04_00:00:00",
+  // Times(1229, 0-18)
+    "2006-11-04_06:00:00",
+  // Times(1230, 0-18)
+    "2006-11-04_12:00:00",
+  // Times(1231, 0-18)
+    "2006-11-04_18:00:00",
+  // Times(1232, 0-18)
+    "2006-11-05_00:00:00",
+  // Times(1233, 0-18)
+    "2006-11-05_06:00:00",
+  // Times(1234, 0-18)
+    "2006-11-05_12:00:00",
+  // Times(1235, 0-18)
+    "2006-11-05_18:00:00",
+  // Times(1236, 0-18)
+    "2006-11-06_00:00:00",
+  // Times(1237, 0-18)
+    "2006-11-06_06:00:00",
+  // Times(1238, 0-18)
+    "2006-11-06_12:00:00",
+  // Times(1239, 0-18)
+    "2006-11-06_18:00:00",
+  // Times(1240, 0-18)
+    "2006-11-07_00:00:00",
+  // Times(1241, 0-18)
+    "2006-11-07_06:00:00",
+  // Times(1242, 0-18)
+    "2006-11-07_12:00:00",
+  // Times(1243, 0-18)
+    "2006-11-07_18:00:00",
+  // Times(1244, 0-18)
+    "2006-11-08_00:00:00",
+  // Times(1245, 0-18)
+    "2006-11-08_06:00:00",
+  // Times(1246, 0-18)
+    "2006-11-08_12:00:00",
+  // Times(1247, 0-18)
+    "2006-11-08_18:00:00",
+  // Times(1248, 0-18)
+    "2006-11-09_00:00:00",
+  // Times(1249, 0-18)
+    "2006-11-09_06:00:00",
+  // Times(1250, 0-18)
+    "2006-11-09_12:00:00",
+  // Times(1251, 0-18)
+    "2006-11-09_18:00:00",
+  // Times(1252, 0-18)
+    "2006-11-10_00:00:00",
+  // Times(1253, 0-18)
+    "2006-11-10_06:00:00",
+  // Times(1254, 0-18)
+    "2006-11-10_12:00:00",
+  // Times(1255, 0-18)
+    "2006-11-10_18:00:00",
+  // Times(1256, 0-18)
+    "2006-11-11_00:00:00",
+  // Times(1257, 0-18)
+    "2006-11-11_06:00:00",
+  // Times(1258, 0-18)
+    "2006-11-11_12:00:00",
+  // Times(1259, 0-18)
+    "2006-11-11_18:00:00",
+  // Times(1260, 0-18)
+    "2006-11-12_00:00:00",
+  // Times(1261, 0-18)
+    "2006-11-12_06:00:00",
+  // Times(1262, 0-18)
+    "2006-11-12_12:00:00",
+  // Times(1263, 0-18)
+    "2006-11-12_18:00:00",
+  // Times(1264, 0-18)
+    "2006-11-13_00:00:00",
+  // Times(1265, 0-18)
+    "2006-11-13_06:00:00",
+  // Times(1266, 0-18)
+    "2006-11-13_12:00:00",
+  // Times(1267, 0-18)
+    "2006-11-13_18:00:00",
+  // Times(1268, 0-18)
+    "2006-11-14_00:00:00",
+  // Times(1269, 0-18)
+    "2006-11-14_06:00:00",
+  // Times(1270, 0-18)
+    "2006-11-14_12:00:00",
+  // Times(1271, 0-18)
+    "2006-11-14_18:00:00",
+  // Times(1272, 0-18)
+    "2006-11-15_00:00:00",
+  // Times(1273, 0-18)
+    "2006-11-15_06:00:00",
+  // Times(1274, 0-18)
+    "2006-11-15_12:00:00",
+  // Times(1275, 0-18)
+    "2006-11-15_18:00:00",
+  // Times(1276, 0-18)
+    "2006-11-16_00:00:00",
+  // Times(1277, 0-18)
+    "2006-11-16_06:00:00",
+  // Times(1278, 0-18)
+    "2006-11-16_12:00:00",
+  // Times(1279, 0-18)
+    "2006-11-16_18:00:00",
+  // Times(1280, 0-18)
+    "2006-11-17_00:00:00",
+  // Times(1281, 0-18)
+    "2006-11-17_06:00:00",
+  // Times(1282, 0-18)
+    "2006-11-17_12:00:00",
+  // Times(1283, 0-18)
+    "2006-11-17_18:00:00",
+  // Times(1284, 0-18)
+    "2006-11-18_00:00:00",
+  // Times(1285, 0-18)
+    "2006-11-18_06:00:00",
+  // Times(1286, 0-18)
+    "2006-11-18_12:00:00",
+  // Times(1287, 0-18)
+    "2006-11-18_18:00:00",
+  // Times(1288, 0-18)
+    "2006-11-19_00:00:00",
+  // Times(1289, 0-18)
+    "2006-11-19_06:00:00",
+  // Times(1290, 0-18)
+    "2006-11-19_12:00:00",
+  // Times(1291, 0-18)
+    "2006-11-19_18:00:00",
+  // Times(1292, 0-18)
+    "2006-11-20_00:00:00",
+  // Times(1293, 0-18)
+    "2006-11-20_06:00:00",
+  // Times(1294, 0-18)
+    "2006-11-20_12:00:00",
+  // Times(1295, 0-18)
+    "2006-11-20_18:00:00",
+  // Times(1296, 0-18)
+    "2006-11-21_00:00:00",
+  // Times(1297, 0-18)
+    "2006-11-21_06:00:00",
+  // Times(1298, 0-18)
+    "2006-11-21_12:00:00",
+  // Times(1299, 0-18)
+    "2006-11-21_18:00:00",
+  // Times(1300, 0-18)
+    "2006-11-22_00:00:00",
+  // Times(1301, 0-18)
+    "2006-11-22_06:00:00",
+  // Times(1302, 0-18)
+    "2006-11-22_12:00:00",
+  // Times(1303, 0-18)
+    "2006-11-22_18:00:00",
+  // Times(1304, 0-18)
+    "2006-11-23_00:00:00",
+  // Times(1305, 0-18)
+    "2006-11-23_06:00:00",
+  // Times(1306, 0-18)
+    "2006-11-23_12:00:00",
+  // Times(1307, 0-18)
+    "2006-11-23_18:00:00",
+  // Times(1308, 0-18)
+    "2006-11-24_00:00:00",
+  // Times(1309, 0-18)
+    "2006-11-24_06:00:00",
+  // Times(1310, 0-18)
+    "2006-11-24_12:00:00",
+  // Times(1311, 0-18)
+    "2006-11-24_18:00:00",
+  // Times(1312, 0-18)
+    "2006-11-25_00:00:00",
+  // Times(1313, 0-18)
+    "2006-11-25_06:00:00",
+  // Times(1314, 0-18)
+    "2006-11-25_12:00:00",
+  // Times(1315, 0-18)
+    "2006-11-25_18:00:00",
+  // Times(1316, 0-18)
+    "2006-11-26_00:00:00",
+  // Times(1317, 0-18)
+    "2006-11-26_06:00:00",
+  // Times(1318, 0-18)
+    "2006-11-26_12:00:00",
+  // Times(1319, 0-18)
+    "2006-11-26_18:00:00",
+  // Times(1320, 0-18)
+    "2006-11-27_00:00:00",
+  // Times(1321, 0-18)
+    "2006-11-27_06:00:00",
+  // Times(1322, 0-18)
+    "2006-11-27_12:00:00",
+  // Times(1323, 0-18)
+    "2006-11-27_18:00:00",
+  // Times(1324, 0-18)
+    "2006-11-28_00:00:00",
+  // Times(1325, 0-18)
+    "2006-11-28_06:00:00",
+  // Times(1326, 0-18)
+    "2006-11-28_12:00:00",
+  // Times(1327, 0-18)
+    "2006-11-28_18:00:00",
+  // Times(1328, 0-18)
+    "2006-11-29_00:00:00",
+  // Times(1329, 0-18)
+    "2006-11-29_06:00:00",
+  // Times(1330, 0-18)
+    "2006-11-29_12:00:00",
+  // Times(1331, 0-18)
+    "2006-11-29_18:00:00",
+  // Times(1332, 0-18)
+    "2006-11-30_00:00:00",
+  // Times(1333, 0-18)
+    "2006-11-30_06:00:00",
+  // Times(1334, 0-18)
+    "2006-11-30_12:00:00",
+  // Times(1335, 0-18)
+    "2006-11-30_18:00:00",
+  // Times(1336, 0-18)
+    "2006-12-01_00:00:00",
+  // Times(1337, 0-18)
+    "2006-12-01_06:00:00",
+  // Times(1338, 0-18)
+    "2006-12-01_12:00:00",
+  // Times(1339, 0-18)
+    "2006-12-01_18:00:00",
+  // Times(1340, 0-18)
+    "2006-12-02_00:00:00",
+  // Times(1341, 0-18)
+    "2006-12-02_06:00:00",
+  // Times(1342, 0-18)
+    "2006-12-02_12:00:00",
+  // Times(1343, 0-18)
+    "2006-12-02_18:00:00",
+  // Times(1344, 0-18)
+    "2006-12-03_00:00:00",
+  // Times(1345, 0-18)
+    "2006-12-03_06:00:00",
+  // Times(1346, 0-18)
+    "2006-12-03_12:00:00",
+  // Times(1347, 0-18)
+    "2006-12-03_18:00:00",
+  // Times(1348, 0-18)
+    "2006-12-04_00:00:00",
+  // Times(1349, 0-18)
+    "2006-12-04_06:00:00",
+  // Times(1350, 0-18)
+    "2006-12-04_12:00:00",
+  // Times(1351, 0-18)
+    "2006-12-04_18:00:00",
+  // Times(1352, 0-18)
+    "2006-12-05_00:00:00",
+  // Times(1353, 0-18)
+    "2006-12-05_06:00:00",
+  // Times(1354, 0-18)
+    "2006-12-05_12:00:00",
+  // Times(1355, 0-18)
+    "2006-12-05_18:00:00",
+  // Times(1356, 0-18)
+    "2006-12-06_00:00:00",
+  // Times(1357, 0-18)
+    "2006-12-06_06:00:00",
+  // Times(1358, 0-18)
+    "2006-12-06_12:00:00",
+  // Times(1359, 0-18)
+    "2006-12-06_18:00:00",
+  // Times(1360, 0-18)
+    "2006-12-07_00:00:00",
+  // Times(1361, 0-18)
+    "2006-12-07_06:00:00",
+  // Times(1362, 0-18)
+    "2006-12-07_12:00:00",
+  // Times(1363, 0-18)
+    "2006-12-07_18:00:00",
+  // Times(1364, 0-18)
+    "2006-12-08_00:00:00",
+  // Times(1365, 0-18)
+    "2006-12-08_06:00:00",
+  // Times(1366, 0-18)
+    "2006-12-08_12:00:00",
+  // Times(1367, 0-18)
+    "2006-12-08_18:00:00",
+  // Times(1368, 0-18)
+    "2006-12-09_00:00:00",
+  // Times(1369, 0-18)
+    "2006-12-09_06:00:00",
+  // Times(1370, 0-18)
+    "2006-12-09_12:00:00",
+  // Times(1371, 0-18)
+    "2006-12-09_18:00:00",
+  // Times(1372, 0-18)
+    "2006-12-10_00:00:00",
+  // Times(1373, 0-18)
+    "2006-12-10_06:00:00",
+  // Times(1374, 0-18)
+    "2006-12-10_12:00:00",
+  // Times(1375, 0-18)
+    "2006-12-10_18:00:00",
+  // Times(1376, 0-18)
+    "2006-12-11_00:00:00",
+  // Times(1377, 0-18)
+    "2006-12-11_06:00:00",
+  // Times(1378, 0-18)
+    "2006-12-11_12:00:00",
+  // Times(1379, 0-18)
+    "2006-12-11_18:00:00",
+  // Times(1380, 0-18)
+    "2006-12-12_00:00:00",
+  // Times(1381, 0-18)
+    "2006-12-12_06:00:00",
+  // Times(1382, 0-18)
+    "2006-12-12_12:00:00",
+  // Times(1383, 0-18)
+    "2006-12-12_18:00:00",
+  // Times(1384, 0-18)
+    "2006-12-13_00:00:00",
+  // Times(1385, 0-18)
+    "2006-12-13_06:00:00",
+  // Times(1386, 0-18)
+    "2006-12-13_12:00:00",
+  // Times(1387, 0-18)
+    "2006-12-13_18:00:00",
+  // Times(1388, 0-18)
+    "2006-12-14_00:00:00",
+  // Times(1389, 0-18)
+    "2006-12-14_06:00:00",
+  // Times(1390, 0-18)
+    "2006-12-14_12:00:00",
+  // Times(1391, 0-18)
+    "2006-12-14_18:00:00",
+  // Times(1392, 0-18)
+    "2006-12-15_00:00:00",
+  // Times(1393, 0-18)
+    "2006-12-15_06:00:00",
+  // Times(1394, 0-18)
+    "2006-12-15_12:00:00",
+  // Times(1395, 0-18)
+    "2006-12-15_18:00:00",
+  // Times(1396, 0-18)
+    "2006-12-16_00:00:00",
+  // Times(1397, 0-18)
+    "2006-12-16_06:00:00",
+  // Times(1398, 0-18)
+    "2006-12-16_12:00:00",
+  // Times(1399, 0-18)
+    "2006-12-16_18:00:00",
+  // Times(1400, 0-18)
+    "2006-12-17_00:00:00",
+  // Times(1401, 0-18)
+    "2006-12-17_06:00:00",
+  // Times(1402, 0-18)
+    "2006-12-17_12:00:00",
+  // Times(1403, 0-18)
+    "2006-12-17_18:00:00",
+  // Times(1404, 0-18)
+    "2006-12-18_00:00:00",
+  // Times(1405, 0-18)
+    "2006-12-18_06:00:00",
+  // Times(1406, 0-18)
+    "2006-12-18_12:00:00",
+  // Times(1407, 0-18)
+    "2006-12-18_18:00:00",
+  // Times(1408, 0-18)
+    "2006-12-19_00:00:00",
+  // Times(1409, 0-18)
+    "2006-12-19_06:00:00",
+  // Times(1410, 0-18)
+    "2006-12-19_12:00:00",
+  // Times(1411, 0-18)
+    "2006-12-19_18:00:00",
+  // Times(1412, 0-18)
+    "2006-12-20_00:00:00",
+  // Times(1413, 0-18)
+    "2006-12-20_06:00:00",
+  // Times(1414, 0-18)
+    "2006-12-20_12:00:00",
+  // Times(1415, 0-18)
+    "2006-12-20_18:00:00",
+  // Times(1416, 0-18)
+    "2006-12-21_00:00:00",
+  // Times(1417, 0-18)
+    "2006-12-21_06:00:00",
+  // Times(1418, 0-18)
+    "2006-12-21_12:00:00",
+  // Times(1419, 0-18)
+    "2006-12-21_18:00:00",
+  // Times(1420, 0-18)
+    "2006-12-22_00:00:00",
+  // Times(1421, 0-18)
+    "2006-12-22_06:00:00",
+  // Times(1422, 0-18)
+    "2006-12-22_12:00:00",
+  // Times(1423, 0-18)
+    "2006-12-22_18:00:00",
+  // Times(1424, 0-18)
+    "2006-12-23_00:00:00",
+  // Times(1425, 0-18)
+    "2006-12-23_06:00:00",
+  // Times(1426, 0-18)
+    "2006-12-23_12:00:00",
+  // Times(1427, 0-18)
+    "2006-12-23_18:00:00",
+  // Times(1428, 0-18)
+    "2006-12-24_00:00:00",
+  // Times(1429, 0-18)
+    "2006-12-24_06:00:00",
+  // Times(1430, 0-18)
+    "2006-12-24_12:00:00",
+  // Times(1431, 0-18)
+    "2006-12-24_18:00:00",
+  // Times(1432, 0-18)
+    "2006-12-25_00:00:00",
+  // Times(1433, 0-18)
+    "2006-12-25_06:00:00",
+  // Times(1434, 0-18)
+    "2006-12-25_12:00:00",
+  // Times(1435, 0-18)
+    "2006-12-25_18:00:00",
+  // Times(1436, 0-18)
+    "2006-12-26_00:00:00",
+  // Times(1437, 0-18)
+    "2006-12-26_06:00:00",
+  // Times(1438, 0-18)
+    "2006-12-26_12:00:00",
+  // Times(1439, 0-18)
+    "2006-12-26_18:00:00",
+  // Times(1440, 0-18)
+    "2006-12-27_00:00:00",
+  // Times(1441, 0-18)
+    "2006-12-27_06:00:00",
+  // Times(1442, 0-18)
+    "2006-12-27_12:00:00",
+  // Times(1443, 0-18)
+    "2006-12-27_18:00:00",
+  // Times(1444, 0-18)
+    "2006-12-28_00:00:00",
+  // Times(1445, 0-18)
+    "2006-12-28_06:00:00",
+  // Times(1446, 0-18)
+    "2006-12-28_12:00:00",
+  // Times(1447, 0-18)
+    "2006-12-28_18:00:00",
+  // Times(1448, 0-18)
+    "2006-12-29_00:00:00",
+  // Times(1449, 0-18)
+    "2006-12-29_06:00:00",
+  // Times(1450, 0-18)
+    "2006-12-29_12:00:00",
+  // Times(1451, 0-18)
+    "2006-12-29_18:00:00",
+  // Times(1452, 0-18)
+    "2006-12-30_00:00:00",
+  // Times(1453, 0-18)
+    "2006-12-30_06:00:00",
+  // Times(1454, 0-18)
+    "2006-12-30_12:00:00",
+  // Times(1455, 0-18)
+    "2006-12-30_18:00:00",
+  // Times(1456, 0-18)
+    "2006-12-31_00:00:00",
+  // Times(1457, 0-18)
+    "2006-12-31_06:00:00",
+  // Times(1458, 0-18)
+    "2006-12-31_12:00:00",
+  // Times(1459, 0-18)
+    "2006-12-31_18:00:00" ;
+}
