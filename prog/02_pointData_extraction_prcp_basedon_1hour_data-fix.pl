@@ -232,7 +232,7 @@ sub process {
 									say $fh join( ",",
                                         $xlong{$y_coordinate_ref}{$x_coordinate_ref},
                                         $xlat{$y_coordinate_ref}{$x_coordinate_ref},
-                                        $prcp);
+                                        sprintf("%.1f",$prcp) );
 										
 									$rain_day{$day}{$y_coordinate_ref}{$x_coordinate_ref} += $prcp;
                                 }
@@ -280,7 +280,7 @@ sub process {
 								say $fh join( ",",
                                     $xlong{$y_coordinate_ref}{$x_coordinate_ref},
                                     $xlat{$y_coordinate_ref}{$x_coordinate_ref},
-                                    $rain_day{$day}{$y_coordinate_ref}{$x_coordinate_ref} );
+                                    sprintf("%.1f",$rain_day{$day}{$y_coordinate_ref}{$x_coordinate_ref}) );
                             }
                         }
                     close $fh;
