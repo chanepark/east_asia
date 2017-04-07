@@ -89,6 +89,7 @@ my (%check);
 find({preprocess => sub { return sort @_ }, wanted => \&checking, no_chdir => 1}, $check_folder);
 find({preprocess => sub { return sort @_ }, wanted => \&process, no_chdir => 1, follow_fast => 1 }, $input_dir );
 
+# sub { return grep { -d } @_ }
 
 sub checking {
 	return unless -f $File::Find::name;
@@ -125,7 +126,7 @@ sub process {
 	
     my $variable_data_line  = 0;
     my $hourly_count_perDay; 
-	if ($timeScale == "validation"){
+	if ($timeScale eq "validation"){
 		$hourly_count_perDay = 24;
 	}else{
 		$hourly_count_perDay = 4;
@@ -199,8 +200,7 @@ sub process {
                 # for hourly analysis
                 {
                     warn "hourly before outer for and sort\n";
-                    for my $day ( sort { $a <=> $b } keys(%rain_hour) ) {
-                        warn "hourly before inner for and sort\n";
+
                         for my $hour ( sort { $a <=> $b } keys( %{ $rain_hour{$day} } ) ) {
                             my $hour_str = sprintf( '%02s', $hour );
                             warn "hourly analysis: $day - $hour_str\n";
@@ -239,20 +239,18 @@ sub process {
                             }
                             close $fh;
                         }
-                    }
                 }
-				if {$day > = 2}{
+				if ($day >= 2){
 					delete $rain_hour{$day-1};
 				}
 				
                 # for daily analysis
-                warn "daily analysis: $day - $hour\n";
+                warn "..............................  daily analysis: $day ......\n";
                 {
                     my $file = "$dir_of{daily}/SSP2_${rainType}_daily_${year}-${day_name}_pointData.txt";
                     open my $fh, ">", $file or die "cannot open file to write: $file: $!\n";
                     say $fh "x,y,values";
                     warn "daily before for and sort\n";
-                    for my $day ( sort { $a <=> $b } keys(%rain_day) ) {
                         for my $y_coordinate_ref ( sort { $a <=> $b } keys( %{ $rain_day{$day} } ) ) {
                             for my $x_coordinate_ref (
                                 sort { $a <=> $b }
@@ -285,7 +283,6 @@ sub process {
                                     $rain_day{$day}{$y_coordinate_ref}{$x_coordinate_ref} );
                             }
                         }
-                    }
                     close $fh;
                 }
 				

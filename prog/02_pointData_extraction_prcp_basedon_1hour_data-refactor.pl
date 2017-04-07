@@ -86,8 +86,8 @@ close $xlat_file;
 
 
 my (%check);
-find({wanted => \&checking, no_chdir => 1}, $check_folder);
-find( { wanted => \&process, no_chdir => 1, follow_fast => 1 }, $input_dir );
+find({preprocess => sub { return sort @_ }, wanted => \&checking, no_chdir => 1}, $check_folder);
+find({preprocess => sub { return sort @_ }, wanted => \&process, no_chdir => 1, follow_fast => 1 }, $input_dir );
 
 
 sub checking {
@@ -124,7 +124,13 @@ sub process {
 	say $File::Find::name;
 	
     my $variable_data_line  = 0;
-    my $hourly_count_perDay = 24;
+    my $hourly_count_perDay; 
+	if ($timeScale == "validation"){
+		$hourly_count_perDay = 24;
+	}else{
+		$hourly_count_perDay = 4;
+	}
+	
     my $day_change_check    = 0;
 
     my ( %rain_day, %rain_hour, @variable_west_east, $day, $hour, $time_total,
@@ -228,17 +234,27 @@ sub process {
                                 next if ( $xlat{$y_coordinate_ref}{$x_coordinate_ref} - 1 > $domain{"top"} );
                                 next if ( $xlong{$y_coordinate_ref}{$x_coordinate_ref} + 1 < $domain{"left"} );
                                 next if ( $xlong{$y_coordinate_ref}{$x_coordinate_ref} - 1 > $domain{"right"} );
-                                say $fh join( ",",
+                                
+								my $prcp;
+								if ($day >= 2){
+									$prcp = $rain_day{$day}{$y_coordinate_ref}{$x_coordinate_ref} - $rain_day{$day-1}{$y_coordinate_ref}{$x_coordinate_ref};
+								}else{
+									$prcp = $rain_day{$day}{$y_coordinate_ref}{$x_coordinate_ref};
+								}
+								
+								say $fh join( ",",
                                     $xlong{$y_coordinate_ref}{$x_coordinate_ref},
                                     $xlat{$y_coordinate_ref}{$x_coordinate_ref},
-                                    $rain_day{$day}{$y_coordinate_ref}{$x_coordinate_ref} );
+                                    $prcp );
                             }
                         }
                     }
                     close $fh;
                 }
-
-                %rain_day = ();
+				if {$day > = 2}{
+					delete $rain_day{$day-1};
+				}
+                
 
                 # for hourly analysis
                 {
@@ -263,18 +279,29 @@ sub process {
                                     next if ( $xlat{$y_coordinate_ref}{$x_coordinate_ref} - 1 > $domain{"top"} );
                                     next if ( $xlong{$y_coordinate_ref}{$x_coordinate_ref} + 1 < $domain{"left"} );
                                     next if ( $xlong{$y_coordinate_ref}{$x_coordinate_ref} - 1 > $domain{"right"} );
-                                    say $fh join( ",",
+                                 	my $prcp;
+									if ($day == 1 and $hour == 0){
+										$prcp = $rain_hour{$day}{$hour}{$y_coordinate_ref}{$x_coordinate_ref};
+									}elsif ($day == 1 and $hour > 0){
+										$prcp = $rain_hour{$day}{$hour}{$y_coordinate_ref}{$x_coordinate_ref} - $rain_hour{$day}{$hour-1}{$y_coordinate_ref}{$x_coordinate_ref};
+									}elsif ($day > 1 and $hour == 0){
+										$prcp = $rain_hour{$day}{$hour}{$y_coordinate_ref}{$x_coordinate_ref} - $rain_hour{$day-1}{23}{$y_coordinate_ref}{$x_coordinate_ref};
+									}else{
+										$prcp = $rain_hour{$day}{$hour}{$y_coordinate_ref}{$x_coordinate_ref} - $rain_hour{$day}{$hour-1}{$y_coordinate_ref}{$x_coordinate_ref};
+									}
+									say $fh join( ",",
                                         $xlong{$y_coordinate_ref}{$x_coordinate_ref},
                                         $xlat{$y_coordinate_ref}{$x_coordinate_ref},
-                                        $rain_hour{$day}{$hour}{$y_coordinate_ref}{$x_coordinate_ref} );
+                                        $prcp);
                                 }
                             }
                             close $fh;
                         }
                     }
                 }
-
-                %rain_hour = ();
+				if {$day > = 2}{
+					delete $rain_hour{$day-1};
+				}
             }
         }
 
