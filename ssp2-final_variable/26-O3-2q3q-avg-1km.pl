@@ -20,26 +20,11 @@ die "Usage: $0 <log_file>\n" unless $log_file;
 my $LOG = SSP2::Log->new( file => $log_file );
 
 my @years = (
-    2006 .. 2025,
-    2046 .. 2065,
-    2080 .. 2099,
+    2006,
+    # 2046 .. 2065,
+    # 2080 .. 2099,
 );
 
-for my $year (@years) {
-    for my $month ( 1 .. 12 ) {
-        $LOG->info("processing %04d-%02d", $year, $month );
-        my $t0 = Benchmark->new;
-        try {
-            doit( $year, $month );
-        }
-        catch {
-            $LOG->warn("caught error: $_");
-        };
-        my $t1 = Benchmark->new;
-        my $td = timediff( $t1, $t0 );
-        $LOG->info( "elapsed time: %s", timestr($td) );
-    }
-}
 for my $year (@years) {
     $LOG->info("processing $year");
     my $t0 = Benchmark->new;
@@ -59,13 +44,13 @@ sub doit {
 
     return unless $year;
 
-    my $data_dir = "W:/grid1kmData_ascii";
+    my $data_dir = "../grid1kmData_ascii";
     my $term     = "daily";
-    my $var      = "prcp";
+    my $var      = "O3";
     my $ndays    = 365;
     my $ncols    = 751;
     my $nrows    = 601;
-    my $output   = "W:/ssp2/result/26-${var}-2q3q-avg/SSP2_${var}-2q3q-avg_yearly_1km_${year}_sub.txt";
+    my $output   = "../final_results/26-${var}-2q3q-avg/SSP2_${var}-2q3q-avg_yearly_1km_${year}_sub.txt";
     my $encoding = "cp949";
 
     if ( path($output)->is_file ) {
@@ -76,26 +61,24 @@ sub doit {
     my @files;
     {
         my $file_fmt = sprintf(
-            "%s/%s/%s/%d/ssp2_%s_%s_%d-%%03d_1kmgrid.txt",
+            "%s/%s/%s/%d/ssp2_%s_%s_%d%%s_1kmgrid.txt",
             $data_dir,
             $term,
             $var,
             $year,
-            $var,
+            lc($var),
             $term,
             $year,
         );
 
-        for ( my $i = 1; $i <= $ndays; ++$i ) {
-           
- 		    # skip unless 4 ~ 9 month
-            #           
-			my $start = 0;
-            my $end   = 0;
-            map { $start += $_ } SSP2::Util::month_days( 1 .. 3 );
-            map { $end   += $_ } SSP2::Util::month_days( 1 .. 9 );
+        for my $md ( SSP2::Util::normalize_days("%02d%02d") ) {
+			
+			my $i = $md + 0;
+			my $start = 401;
+            my $end   = 1001;
             next unless ( $start <= $i && $i < $end );
-			my $file = sprintf( $file_fmt, $i );
+			# print "$md\n";
+			my $file = sprintf( $file_fmt, $md );
             push @files, $file;
         }
     }
@@ -157,6 +140,7 @@ sub doit {
                 $result[$row] = [];
                 for ( my $col = 0; $col < $self->ncols; ++$col ) {
                     my $sum = undef;
+                    my $cnt = 0;
                     for ( my $i = 0; $i < @{ $self->files }; ++$i ) {
                         my $item = $self->result->[$i][$row][$col];
                         next unless defined $item;
@@ -164,8 +148,14 @@ sub doit {
 
                         $sum = 0 unless defined $sum;
                         $sum += $item;
+                        ++$cnt;
                     }
-                    $result[$row][$col] = $sum;
+                    if ( $cnt > 0 ) {
+                        $result[$row][$col] = $sum / $cnt;
+                    }
+                    else {
+                        $result[$row][$col] = undef;
+                    }
                 }
             }
 
@@ -182,7 +172,7 @@ sub doit {
                 for ( my $col = 0; $col < $self->ncols; ++$col ) {
                     my $val = $result[$row][$col];
                     if ( defined $val ) {
-                        printf $fh "%f", $val;
+                        printf $fh "%.2f", $val;
                     }
                     else {
                         print $fh $self->ndv;
